@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
+import { Footer } from '../Footer/Footer'
 
 function LandingPage(props){
     const [rendered, setRendered] = useState(false);
@@ -16,9 +17,10 @@ function LandingPage(props){
                     <div className="uxArea">
                         <NavBar/>
                         <div className="uxContent">
-
+                            <p style={{marginTop:'100px'}}> hi </p>
                         </div>
                     </div>
+                    <Footer/>
                 </>
             )
             return result;

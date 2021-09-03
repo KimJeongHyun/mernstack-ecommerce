@@ -46,12 +46,6 @@ body{
     margin-left:13px;
 }
 
-.rowBarContainer{
-    position:relative;
-    width:100%;
-    margin:0 0 0 350px;
-}
-
 .rowBar{
     position:absolute;
     font-size:11px;
@@ -75,6 +69,45 @@ body{
     color:#8d8d8d;
 }
 
+
 .uxArea{
-    width:990px;
+    width:1000px;
+}
+
+@media screen and (max-width:1500px) {
+    .rowBarContainer{
+        position:relative;
+        width:100%;
+        margin-left:350px;
+    }
+
+    .uxContent{
+        position:relative;
+        display:block;
+        text-align:center;
+        padding-top:100px;
+        left:210px;
+    }
+}
+
+@media screen and (min-width:1501px) {
+    .rowBarContainer{
+        position:relative;
+        width:100%;
+        margin-left:800px;
+    }
+    .uxContent{
+        position:relative;
+        display:block;
+        text-align:center;
+        padding-top:100px;
+        left:420px
+    }
+}
+
+.footer{
+    background-color: black;
+    position:absolute;
+    width:100%;
+    top:100%;
 }
