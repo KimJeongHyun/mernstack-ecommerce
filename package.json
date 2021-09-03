@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"node index.js\" \"npm run start --prefix client \"",
+    "backend": "node server/index.js",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client \"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "mongoose": "^6.0.4",
     "mongoose-auto-increment": "^5.0.1",
     "multer": "^1.4.3",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "redux": "^4.1.1"
   }
 }

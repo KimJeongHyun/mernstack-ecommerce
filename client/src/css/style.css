@@ -1,0 +1,80 @@
+body{
+    min-width:1200px;
+    font:0.75em Arial,Dotum,AppleGothic,sans-serif;
+}
+
+#commerceTitle a{
+    text-decoration: none;
+    color:#676767;
+}
+
+#commerceTitle h1{
+    position:fixed;
+    font:3em Times New Roman;
+    font-weight:bold;
+    width:95px;
+    height:40px;
+    top:20px;
+    left:40px;
+    z-index:9999;
+}
+
+.sideBar{
+    position:fixed;
+    width:170px;
+    height:100%;
+    top:130px;
+    left:40px;
+    display:flex;
+    flex-direction:column;
+    margin:0;
+    padding:0;
+    background:#fff;
+    list-style-type:none;
+}
+
+.sideBar a{
+    text-decoration: none;
+    color:#8d8d8d;
+}
+
+.sideBar li{
+    line-height: 25px;
+}
+
+.sub{
+    margin-left:13px;
+}
+
+.rowBarContainer{
+    position:relative;
+    width:100%;
+    margin:0 0 0 350px;
+}
+
+.rowBar{
+    position:absolute;
+    font-size:11px;
+    right:10px;
+    top:43px;
+    display:flex;
+    flex-direction:row;
+    margin:0;
+    padding:0;
+    background:#fff;
+    list-style-type:none;
+}
+
+.rowBar li{
+    display:inline-block;
+    padding:0 11px;
+}
+
+.rowBar li a{
+    text-decoration: none;
+    color:#8d8d8d;
+}
+
+.uxArea{
+    width:990px;
+}
