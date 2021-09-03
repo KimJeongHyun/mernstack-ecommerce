@@ -14,10 +14,12 @@ function LandingPage(props){
             result.push(
                 <>
                     <NavSideBar/>
+                    <NavBar/>
                     <div className="uxArea">
-                        <NavBar/>
-                        <div className="uxContent">
-                            <p style={{marginTop:'100px'}}> hi </p>
+                        <div className="contentContainer">
+                            <div className="uxContent">
+                                <p style={{marginTop:'100px'}}> hi </p>
+                            </div>
                         </div>
                     </div>
                     <Footer/>

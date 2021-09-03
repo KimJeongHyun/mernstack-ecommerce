@@ -16,7 +16,6 @@ body{
     height:40px;
     top:20px;
     left:40px;
-    z-index:9999;
 }
 
 .sideBar{
@@ -69,40 +68,58 @@ body{
     color:#8d8d8d;
 }
 
-
 .uxArea{
-    width:1000px;
+    width:88%;
 }
 
-@media screen and (max-width:1500px) {
-    .rowBarContainer{
-        position:relative;
-        width:100%;
-        margin-left:350px;
-    }
-
-    .uxContent{
-        position:relative;
-        display:block;
-        text-align:center;
-        padding-top:100px;
-        left:210px;
-    }
+.rowBarContainer{
+    position:relative;
+    width:100%;
+    right:80px;
 }
 
-@media screen and (min-width:1501px) {
-    .rowBarContainer{
-        position:relative;
-        width:100%;
-        margin-left:800px;
-    }
-    .uxContent{
-        position:relative;
-        display:block;
-        text-align:center;
-        padding-top:100px;
-        left:420px
-    }
+.uxContent{
+    position:relative;
+    display:block;
+    text-align:center;
+    padding-top:100px;
+}
+
+.uxContent .loginDiv{
+    width:410px;
+    margin:50px 33%;
+}
+
+.uxContent .loginDiv .loginForm input{
+    height:30px;
+    margin-bottom:10px;
+    padding-left:10px;
+}
+
+.uxContent .loginDiv .loginForm input::placeholder{
+    color:#8d8d8d;
+}
+
+.uxContent .loginDiv .loginForm button{
+    height:30px;
+    background-color:#676767;
+    color:white;
+    border:none;
+    margin-top:30px;
+}
+
+.uxContent .loginDiv .loginForm a{
+    color:#676767;
+    text-decoration: none;
+    margin-top:20px;
+}
+
+.contentContainer{
+    position:relative;
+    width:100%;
+    left:10%;
+    display:block;
+    top:100px;
 }
 
 .footer{
