@@ -85,30 +85,31 @@ body{
     padding-top:100px;
 }
 
-.uxContent .loginDiv{
+.uxContent .inputDiv{
     width:410px;
-    margin:50px 33%;
+    margin:0px 33%;
 }
 
-.uxContent .loginDiv .loginForm input{
+.uxContent .inputDiv .inputForm input{
     height:30px;
     margin-bottom:10px;
     padding-left:10px;
 }
 
-.uxContent .loginDiv .loginForm input::placeholder{
+.uxContent .inputDiv .inputForm input::placeholder{
     color:#8d8d8d;
 }
 
-.uxContent .loginDiv .loginForm button{
+.uxContent .inputDiv .inputForm button{
     height:30px;
-    background-color:#676767;
+    background-color:#8d8d8d;
     color:white;
     border:none;
     margin-top:30px;
+    cursor:pointer;
 }
 
-.uxContent .loginDiv .loginForm a{
+.uxContent .inputDiv .inputForm a{
     color:#676767;
     text-decoration: none;
     margin-top:20px;
@@ -117,6 +118,8 @@ body{
 .contentContainer{
     position:relative;
     width:100%;
+    height:850px;
+    max-height:1500px;
     left:10%;
     display:block;
     top:100px;
@@ -124,7 +127,16 @@ body{
 
 .footer{
     background-color: black;
-    position:absolute;
+    position:fixed;
     width:100%;
-    top:100%;
+    top:93%;
+    height:65px;
+}
+
+.footer .active{
+    background-color: black;
+    position:fixed;
+    width:100%;
+    top:70%;
+    height:500px;
 }

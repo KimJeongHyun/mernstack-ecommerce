@@ -7,16 +7,16 @@ export function NavBar(){
             <nav>
                 <ul className="rowBar">
                     <li>
-                        <a href="/login">LOGIN</a>
+                        <a href="/Login">LOGIN</a>
                     </li>
                     <li>
-                        <a href="#">JOIN</a>
+                        <a href="/Join">JOIN</a>
                     </li>
                     <li>
                         <a href="#">MY PAGE</a>
                     </li>
                     <li>
-                        <a href="#">SHOPPING BAG</a>
+                        <a href="/Cart">SHOPPING BAG</a>
                     </li>
                     <li>
                         <a href="#">Q&amp;A</a>

@@ -11,6 +11,9 @@ import LandingPage from './component/LandingPage/LandingPage'
 import About from './component/About/About'
 import Store from "./component/Store/Store";
 import Login from "./component/RowbarMenu/Login/Login";
+import Join from "./component/RowbarMenu/Join/Join";
+import CheckPw from "./component/CheckPw/CheckPw";
+import Cart from "./component/RowbarMenu/Cart/Cart";
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path="/About" component={About}/>
         <Route path="/Store" component={Store}/>
         <Route path="/Login" component={Login}/>
+        <Route path="/Join" component={Join}/>
+        <Route path="/CheckPw" component={CheckPw}/>
+        <Route path="/Cart" component={Cart}/>
       </Switch>
     </Router>
   );

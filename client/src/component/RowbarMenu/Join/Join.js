@@ -7,7 +7,7 @@ import '../../../css/style.css'
 
 
 
-function Login(props){
+function Join(props){
     return(
         <div id='container'>
             <>
@@ -19,13 +19,16 @@ function Login(props){
                             <div className="inputDiv">
                                 <form className="inputForm">
                                     <fieldset style={{border:'none'}}>
-                                        <legend style={{visibility:'hidden'}}>Login Form</legend>
+                                        <legend style={{visibility:'hidden'}}>Join Form</legend>
                                         <div style={{display:'flex', flexDirection:'column'}}>
-                                            <input placeholder="ID" maxLength="20"></input>
-                                            <input type="password" placeholder="PASSWORD"></input>
-                                            <a href="#">Forgot?</a>
-                                            <a href="#">Join Us</a>
-                                            <button>Login</button>
+                                            <input placeholder="NAME" required></input>
+                                            <input placeholder="ID" maxLength="20" required></input>
+                                            <input type="password" placeholder="PASSWORD" required></input>
+                                            <input type="password" placeholder="CONFIRM PASSWORD" required></input>
+                                            <input placeholder="E-mail" required></input>
+                                            <input placeholder="PHONE" required></input>
+                                            
+                                            <button>Join</button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -40,4 +43,4 @@ function Login(props){
     )
 }
 
-export default Login
+export default Join
