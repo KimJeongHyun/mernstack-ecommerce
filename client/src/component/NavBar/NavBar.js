@@ -13,19 +13,19 @@ export function NavBar(){
                         <a href="/Join">JOIN</a>
                     </li>
                     <li>
-                        <a href="#">MY PAGE</a>
+                        <a href="/MyPage">MY PAGE</a>
                     </li>
                     <li>
                         <a href="/Cart">SHOPPING BAG</a>
                     </li>
                     <li>
-                        <a href="#">Q&amp;A</a>
+                        <a href="/QnA">Q&amp;A</a>
                     </li>
                     <li>
-                        <a href="#">REVIEW</a>
+                        <a href="/Review">REVIEW</a>
                     </li>
                     <li>
-                        <a href="#">NOTICE</a>
+                        <a href="/Notice">NOTICE</a>
                     </li>
                 </ul>
             </nav>

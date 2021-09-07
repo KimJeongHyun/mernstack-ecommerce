@@ -3,6 +3,7 @@ body{
     font:0.75em Arial,Dotum,AppleGothic,sans-serif;
 }
 
+
 #commerceTitle a{
     text-decoration: none;
     color:#676767;
@@ -46,6 +47,7 @@ body{
 }
 
 .rowBar{
+    box-shadow: 0 2px 1px 0 rgba(0,0,0,.2);
     position:absolute;
     font-size:11px;
     right:10px;
@@ -124,6 +126,103 @@ body{
     display:block;
     top:100px;
 }
+
+.CartDiv table tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.QnADiv table tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.ReviewDiv table tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.NoticeDiv table tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+
+.myPageButtonDiv button{
+    background-color:#fff;
+    border:0.5px solid gainsboro;
+    padding:10px 15px 10px 15px;
+    font:1em Arial,Dotum,AppleGothic,sans-serif;
+    color:#838383;
+    cursor:pointer;
+}
+
+.myPageButtonDiv .active{
+    background-color:#8d8d8d;
+    border:0.5px solid gainsboro;
+    padding:10px 15px 10px 15px;
+    font:1em Arial,Dotum,AppleGothic,sans-serif;
+    color:#fff;
+    cursor:pointer;
+}
+
+.myPageContent{
+    margin-top: 50px;
+}
+
+.myPageContent .selectTable tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.myPageContent .selectTable tbody tr td:nth-child(1){
+    width:10%;
+}
+
+.myPageContent .selectTable tbody tr td:nth-child(2){
+    width:10%;
+}
+
+.myPageContent .selectTable tbody tr td:nth-child(3){
+    width:50%;
+}
+
+.myPageContent .accumTable tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.myPageContent .accumTable tbody tr td:nth-child(1){
+    width:10%;
+}
+
+.myPageContent .accumTable tbody tr td:nth-child(3){
+    font-weight: bold;
+    color:red;
+}
+
+.myPageContent .couponTable tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.myPageContent .couponTable tbody tr td:nth-child(1){
+    width:10%;
+}
+
+.myPageContent .couponTable tbody tr td:nth-child(2){
+    width:50%;
+}
+
+.myPageContent .writtenTable tbody tr{
+    border-bottom:0.5px solid lightgray;
+}
+
+.myPageContent .writtenTable tbody tr td:nth-child(1){
+    width:10%;
+}
+
+.myPageContent .writtenTable tbody tr td:nth-child(2){
+    width:10%;
+}
+
+.myPageContent .writtenTable tbody tr td:nth-child(3){
+    width:60%;
+}
+
 
 .footer{
     background-color: black;
