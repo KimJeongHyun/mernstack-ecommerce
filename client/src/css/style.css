@@ -243,6 +243,14 @@ body{
     width:60%;
 }
 
+.joinBtn{
+    background-color:black !important;
+}
+
+.joinBtn.notEnough{
+    background-color:#8d8d8d !important;
+}
+
 
 .footer{
     background-color: black;

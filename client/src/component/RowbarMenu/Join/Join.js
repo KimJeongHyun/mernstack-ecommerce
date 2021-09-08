@@ -12,6 +12,9 @@ import axios from 'axios'
 
 
 function Join(props){
+
+    const joinBtn = useRef();
+
     const dispatch = useDispatch();
 
     const [Name,setName] = useState("")
@@ -42,11 +45,22 @@ function Join(props){
     }
 
     const onPhoneHandler = (event) =>{
-        setPhone(event.target.value);
+        if (event.target.value.length<=11){
+            setPhone(event.target.value);
+        }
     }
 
     const onSubmitHandler = (event) =>{
         event.preventDefault();
+
+        if (Phone.length<11){
+            alert('핸드폰 번호를 정확히 입력해주시기 바랍니다.')
+        }
+
+        if (Email.includes('@')){
+            alert('안뇽!')
+        }
+
         let body={
             Name:Name,
             ID:ID,
@@ -60,6 +74,23 @@ function Join(props){
             console.log('hi');
         })
     }
+
+    useEffect(()=>{
+        if (Name!='' && ID!='' && Password!='' && Password2!='' && Email!='' && Phone!=''){
+            if (Phone.length==11 && Email.includes('@')){
+                joinBtn.current.classList.remove('notEnough');
+                joinBtn.current.removeAttribute('disabled');
+            }
+            
+        }
+
+        if (Name=='' || ID=='' || Password=='' || Password2=='' || Email=='' || Phone==''){
+            joinBtn.current.classList.add('notEnough');
+            joinBtn.current.setAttribute('disabled',true);
+        }
+
+
+    },[Name,ID,Password,Password2,Email,Phone])
 
     return(
         <div id='container'>
@@ -75,13 +106,12 @@ function Join(props){
                                         <legend style={{visibility:'hidden'}}>Join Form</legend>
                                         <div style={{display:'flex', flexDirection:'column'}}>
                                             <input placeholder="NAME" value={Name} onChange={onNameHandler} required></input>
-                                            <input placeholder="ID" onChange={onIDHandler} maxLength="20" required></input>
-                                            <input type="password" onChange={onPasswordHandler} placeholder="PASSWORD" required></input>
-                                            <input type="password" onChange={onPassword2Handler} placeholder="CONFIRM PASSWORD" required></input>
-                                            <input placeholder="E-mail" onChange={onEmailHandler} required></input>
-                                            <input type="number" placeholder="PHONE" onChange={onPhoneHandler} required></input>
-                                            
-                                            <button>Join</button>
+                                            <input placeholder="ID" value={ID} onChange={onIDHandler} maxLength="20" required></input>
+                                            <input type="password" value={Password} onChange={onPasswordHandler} placeholder="PASSWORD" required></input>
+                                            <input type="password" value={Password2} onChange={onPassword2Handler} placeholder="CONFIRM PASSWORD" required></input>
+                                            <input placeholder="E-mail" value={Email} onChange={onEmailHandler} required></input>
+                                            <input type="number" placeholder="PHONE" value={Phone} onChange={onPhoneHandler} required></input>
+                                            <button className="joinBtn notEnough" ref={joinBtn} disabled>Join</button>
                                         </div>
                                     </fieldset>
                                 </form>
