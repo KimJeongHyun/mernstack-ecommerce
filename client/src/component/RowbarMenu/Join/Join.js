@@ -57,10 +57,6 @@ function Join(props){
             alert('핸드폰 번호를 정확히 입력해주시기 바랍니다.')
         }
 
-        if (Email.includes('@')){
-            alert('안뇽!')
-        }
-
         let body={
             Name:Name,
             ID:ID,
@@ -71,7 +67,17 @@ function Join(props){
         }
         dispatch(registerUser(body))
         .then(response=>{
-            console.log('hi');
+            if (response.payload.registerSuccess){
+                alert('환영합니다!')
+                props.history.push({
+                    pathname:"/"
+                })
+            }else{
+                alert('다시 시도해주시기 바랍니다.')
+                props.histroy.push({
+                    pathname:"/Join"
+                })
+            }
         })
     }
 
