@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/KimJeongHyun/mernstack-ecommerce#readme",
   "dependencies": {
+    "antd": "^4.16.13",
     "axios": "^0.21.1",
     "concurrently": "^6.2.1",
+    "crypto": "^1.0.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -29,7 +31,6 @@
     "mongoose": "^6.0.4",
     "mongoose-auto-increment": "^5.0.1",
     "multer": "^1.4.3",
-    "path": "^0.12.7",
-    "redux": "^4.1.1"
+    "path": "^0.12.7"
   }
 }
