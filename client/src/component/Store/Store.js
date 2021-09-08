@@ -17,8 +17,64 @@ function Store(props){
                     <NavBar/>
                     <div className="uxArea">
                         <div className="contentContainer">
-                            <div className="uxContent">
+                            <div className="uxContent" style={{paddingTop:'20px'}}>
+                                <table className="storeGrid">
+                                    <tr>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                        <td>
+                                            <img src="/images/jacket.jpg"/>
+                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
+                                            <span className="itemPrice">100,000원</span>
+                                        </td>
+                                    </tr>
 
+                                </table>
                             </div>
                         </div>
                     </div>

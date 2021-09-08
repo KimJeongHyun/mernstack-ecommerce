@@ -21,8 +21,7 @@ function Notice(props){
                                     <thead style={{lineHeight:'50px',borderBottom:'0.5px solid black'}}>
                                         <tr>
                                             <td>번호</td>
-                                            <td>품명</td>
-                                            <td>제목</td>
+                                            <td>공지</td>
                                             <td>이름</td>
                                             <td>날짜</td>
                                         </tr>
@@ -33,17 +32,14 @@ function Notice(props){
                                             <td>asdf</td>
                                             <td>asdf</td>
                                             <td>asdf</td>
-                                            <td>asdf</td>
                                         </tr>
                                         <tr>
                                             <td>asdf</td>
                                             <td>asdf</td>
                                             <td>asdf</td>
                                             <td>asdf</td>
-                                            <td>asdf</td>
                                         </tr>
                                         <tr>
-                                            <td>asdf</td>
                                             <td>asdf</td>
                                             <td>asdf</td>
                                             <td>asdf</td>
@@ -51,7 +47,7 @@ function Notice(props){
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button style={{width:'170px',height:'50px', marginTop:'10px', marginLeft:'79%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
+                                <button style={{width:'170px',height:'50px', marginTop:'10px', marginLeft:'73%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
                             </div>
                         </div>
                     </div>
