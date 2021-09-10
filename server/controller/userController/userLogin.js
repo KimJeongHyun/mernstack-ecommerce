@@ -20,7 +20,8 @@ router.post('/api/login',(req,res)=>{
                 crypto.pbkdf2(Password,salt,108326,64,'sha512',(err,key)=>{
                     const hashedPw = key.toString('base64');
                     if (dtPW==hashedPw){
-                        // 세션값 저장 필요
+                        req.session.userID = ID;
+                        console.log(req.session.userID);
                         res.send({loginSuccess:true});
                     }else{
                         res.send({loginSuccess:false});
