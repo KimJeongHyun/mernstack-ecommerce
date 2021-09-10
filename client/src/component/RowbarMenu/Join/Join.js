@@ -73,8 +73,8 @@ function Join(props){
                     pathname:"/"
                 })
             }else{
-                alert('다시 시도해주시기 바랍니다.')
-                props.histroy.push({
+                alert('이미 등록된 아이디입니다.')
+                props.history.push({
                     pathname:"/Join"
                 })
             }

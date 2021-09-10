@@ -3,7 +3,9 @@ const app = express();
 const http = require('http');
 const path = require('path');
 
+const userLogin = require('./controller/userController/userLogin')
 const userRegister = require('./controller/userController/userRegister');
+
 
 const port = 5000;
 
@@ -20,6 +22,7 @@ app.use(express.urlencoded({
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
+app.use(userLogin);
 app.use(userRegister);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))

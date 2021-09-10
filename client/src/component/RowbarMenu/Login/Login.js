@@ -1,4 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { withRouter } from 'react-router'
+import { loginUser } from '../../../_actions/user_action'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
@@ -8,6 +11,46 @@ import '../../../css/style.css'
 
 
 function Login(props){
+    const loginBtn = useRef();
+
+    const dispatch = useDispatch();
+
+    const [ID, setID] = useState("")
+    const [Password,setPassword] = useState("")
+
+
+    const onIDHandler = (event) =>{
+        setID(event.target.value);
+    }
+
+    const onPasswordHandler = (event) =>{
+        setPassword(event.target.value);
+    }
+
+    const onSubmitHandler = (event) =>{
+        event.preventDefault();
+
+        let body={
+            ID:ID,
+            Password:Password
+        }
+
+        dispatch(loginUser(body))
+        .then(response=>{
+            if(response.payload.loginSuccess){
+                alert('반갑습니다 ' + ID + '님!')
+                props.history.push({
+                    pathname:"/"
+                })
+            }else{
+                alert('없는 아이디이거나 비밀번호가 일치하지 않습니다.')
+                props.history.push({
+                    pathname:"/login"
+                })
+            }
+        })
+    }
+
     return(
         <div id='container'>
             <>
@@ -17,12 +60,12 @@ function Login(props){
                     <div className="contentContainer">
                         <div className="uxContent">
                             <div className="inputDiv">
-                                <form className="inputForm">
+                                <form className="inputForm" onSubmit={onSubmitHandler}>
                                     <fieldset style={{border:'none'}}>
                                         <legend style={{visibility:'hidden'}}>Login Form</legend>
                                         <div style={{display:'flex', flexDirection:'column'}}>
-                                            <input placeholder="ID" maxLength="20"></input>
-                                            <input type="password" placeholder="PASSWORD"></input>
+                                            <input placeholder="ID" maxLength="20" value={ID} onChange={onIDHandler}></input>
+                                            <input type="password" placeholder="PASSWORD" value={Password} onChange={onPasswordHandler}></input>
                                             <a href="#">Forgot?</a>
                                             <a href="#">Join Us</a>
                                             <button>Login</button>
