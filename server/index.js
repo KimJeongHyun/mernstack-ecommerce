@@ -5,6 +5,7 @@ const path = require('path');
 const config = require('./config/config.json')
 
 const userLogin = require('./controller/userController/userLogin')
+const userLogout = require('./controller/userController/userLogout')
 const userRegister = require('./controller/userController/userRegister');
 
 
@@ -34,6 +35,7 @@ app.use(express_session({
 }))
 
 app.use(userLogin);
+app.use(userLogout);
 app.use(userRegister);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))

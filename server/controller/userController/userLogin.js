@@ -21,7 +21,6 @@ router.post('/api/login',(req,res)=>{
                     const hashedPw = key.toString('base64');
                     if (dtPW==hashedPw){
                         req.session.userID = ID;
-                        console.log(req.session.userID);
                         res.send({loginSuccess:true});
                     }else{
                         res.send({loginSuccess:false});

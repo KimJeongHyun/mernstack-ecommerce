@@ -2,9 +2,18 @@ import React,{useEffect,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-export function NavBar(){
+export function NavBar(props){
 
     const rowBarRef = useRef();
+
+    const onLogout = () =>{
+        axios.get("/api/logout")
+        .then(response=>{
+            alert('로그아웃 되었습니다.');
+            window.location.href='/';
+        })
+    }
+
 
     useEffect(async ()=>{
 
@@ -53,7 +62,7 @@ export function NavBar(){
                             <nav>
                                 <ul className="rowBar">
                                     <li>
-                                        <a href="#">LOGOUT</a>
+                                        <a onClick={onLogout} style={{cursor:'pointer'}}>LOGOUT</a>
                                     </li>
                                     <li>
                                         <a href="/MyPage">MY PAGE</a>
