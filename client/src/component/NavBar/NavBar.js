@@ -15,7 +15,7 @@ export function NavBar(props){
     }
 
 
-    useEffect(async ()=>{
+    useEffect(()=>{
 
         const getSession = () =>{
             let len='';
