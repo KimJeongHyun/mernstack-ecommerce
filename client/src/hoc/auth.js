@@ -13,9 +13,6 @@ export default function (SpecificComponent, option, adminRoute = null){
                     if (option==false){
                         alert('으악!');
                     }
-                    if (SpecificComponent.name=='MyPage'){
-                        alert('접근 금지!');
-                    }
                 }else{
                     if (option==true && SpecificComponent.name!=='Logout'){
                         alert('로그인을 먼저 해주시기 바랍니다.')
