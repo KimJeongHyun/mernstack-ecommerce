@@ -40,7 +40,11 @@ app.use(userRegister);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{
-    res.send(req.session.userID);
+    if (typeof req.session.userID!=='undefined'){
+        res.send({isAuth:true,ID:req.session.userID,length:1});
+    }else{
+        res.send({isAuth:false,ID:req.session.userID,length:0});
+    }
 })
 
 const server = http.createServer(app);

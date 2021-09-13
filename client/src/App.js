@@ -7,6 +7,7 @@ import {
   HashRouter
 } from "react-router-dom"
 
+import Auth from './hoc/auth'
 import LandingPage from './component/LandingPage/LandingPage'
 import About from './component/About/About'
 import Store from "./component/Store/Store";
@@ -29,12 +30,11 @@ function App() {
         <Route path="/Login" component={Login}/>
         <Route path="/Join" component={Join}/>
         <Route path="/CheckPw" component={CheckPw}/>
-        <Route path="/MyPage" component={MyPage}/>
+        <Route path="/MyPage" component={Auth(MyPage,true)}/>
         <Route path="/Cart" component={Cart}/>
         <Route path="/Notice" component={Notice}/>
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>
-
       </Switch>
     </Router>
   );

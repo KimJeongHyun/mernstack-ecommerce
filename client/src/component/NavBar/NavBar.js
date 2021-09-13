@@ -16,12 +16,12 @@ export function NavBar(props){
 
 
     useEffect(()=>{
-
         const getSession = () =>{
             let len='';
             axios.get('/api/getSession')
             .then(response=>{
                 len = response.data.length;
+                
                 if (len==0){
                     const guestRendering = () =>{
                         const result = [];
