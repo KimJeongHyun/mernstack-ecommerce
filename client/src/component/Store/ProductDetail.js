@@ -8,6 +8,10 @@ import {Footer} from '../Footer/Footer'
 function ProductDetail(props){
     const [detailUpdate, setDetailUpdate] = useState(false);
 
+    const productBodyRef = useRef();
+    const productMoreBtnRef = useRef();
+    const productShortBtnRef = useRef();
+
     useEffect(()=>{
         // 상품의 정보를 받아오는 공간.
         // URL은 아마.. /Store/Product/:idx 로 해야될듯?
@@ -25,20 +29,34 @@ function ProductDetail(props){
     },[])
 
     useEffect(()=>{
-        console.log('hi');
+        
         // 상품의 정보를 DB로부터 받아오면, 그걸 상세 페이지에 렌더링하는 곳.
         
     },[detailUpdate])
+
+    const moreDetail = (e) =>{
+        e.preventDefault();
+        productBodyRef.current.classList.add('active');
+        productShortBtnRef.current.removeAttribute('hidden');
+        productMoreBtnRef.current.setAttribute('hidden',true);
+    }
+
+    const hideDetail = (e) =>{
+        e.preventDefault();
+        productBodyRef.current.classList.remove('active');
+        productShortBtnRef.current.setAttribute('hidden',true);
+        productMoreBtnRef.current.removeAttribute('hidden');
+    }
 
     return(
         <div id='container'>
             <NavSideBar/>
             <NavBar/>
             <div className="uxArea">
-                <div className="contentContainer">
+                <div className="contentContainer" style={{maxHeight:'1200px'}}>
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
                         <div className="productContainer" style={{paddingLeft:'10%', width:'90%',height:'1200px'}}>
-                            <div className="productHeader" style={{width:'100%',height:'40%'}}>
+                            <div className="productHeader" style={{width:'100%',height:'600px'}}>
                                 <div className="productImage" style={{width:'250px', display:'inline-block'}}>
                                     <img src='images/jacket.jpg' style={{maxWidth:'250px'}}></img>
                                 </div>
@@ -58,7 +76,7 @@ function ProductDetail(props){
                                     <p>적립금</p>
                                 </div>
                             </div>
-                            <div className="productBody" style={{height:'50%'}}>
+                            <div className="productBody" ref={productBodyRef}>
                                 <hr style={{width:'60%', margin:'0'}}/>
                                 <div className="productSize">
                                     <table>
@@ -107,8 +125,12 @@ function ProductDetail(props){
                                     </table>
                                 </div>
                             </div>
-                            <div className="productFooter" style={{height:'50%'}}>
-                                Footer
+                            <div className="productFooter" style={{height:'300px'}}>
+                                {/*div 태그에 textalign center로 감싸고, width를 바꿔보자*/}
+                                <div style={{textAlign:'center'}}>
+                                    <button ref={productMoreBtnRef} style={{width:'30%'}} onClick={moreDetail}>내용 더 보기</button>
+                                    <button ref={productShortBtnRef} style={{width:'30%'}} onClick={hideDetail} hidden>내용 감추기</button>
+                                </div>
                             </div>
                         </div>
                         
@@ -116,8 +138,7 @@ function ProductDetail(props){
                 </div>
             </div>
             <Footer/>
-        </div>
-        
+        </div>   
     )
 }
 

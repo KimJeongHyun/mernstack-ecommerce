@@ -258,6 +258,14 @@ body{
     }
     .productBody{
         width:1200px;
+        height:600px;
+    }
+    .productBody.active{
+        width:1200px;
+        height:1200px;
+    }
+    .productFooter{
+        width:722px;
     }
 }
 
@@ -268,6 +276,14 @@ body{
     }
     .productBody{
         width:1550px;
+        height:600px;
+    }
+    .productBody.active{
+        width:1200px;
+        height:1200px;
+    }
+    .productFooter{
+        width:932px;
     }
 }
 
