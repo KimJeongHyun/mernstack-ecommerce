@@ -21,6 +21,7 @@
   "dependencies": {
     "antd": "^4.16.13",
     "axios": "^0.21.1",
+    "bson": "^4.5.1",
     "concurrently": "^6.2.1",
     "connect-mongo": "^4.5.0",
     "crypto": "^1.0.1",

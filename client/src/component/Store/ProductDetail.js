@@ -55,7 +55,7 @@ function ProductDetail(props){
             <div className="uxArea">
                 <div className="contentContainer" style={{maxHeight:'1200px'}}>
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
-                        <div className="productContainer" style={{paddingLeft:'10%', width:'90%',height:'1200px'}}>
+                        <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
                                 <div className="productImage" style={{width:'250px', display:'inline-block'}}>
                                     <img src='images/jacket.jpg' style={{maxWidth:'250px'}}></img>
@@ -75,9 +75,6 @@ function ProductDetail(props){
                                     <p>할인가</p>
                                     <p>적립금</p>
                                 </div>
-                            </div>
-                            <div className="productBody" ref={productBodyRef}>
-                                <hr style={{width:'60%', margin:'0'}}/>
                                 <div className="productSize">
                                     <table>
                                         <thead>
@@ -125,20 +122,31 @@ function ProductDetail(props){
                                     </table>
                                 </div>
                             </div>
+                            <div className="productBody" ref={productBodyRef}>
+                            <hr style={{margin:'0'}}/>
+                                <div className="productContent" style={{width:'722px',float:'left'}}>
+                                    <img src="images/Coor.jpg" style={{width:'100%'}}></img>
+                                    <img src="images/jacket.jpg" style={{width:'100%'}}></img>
+                                </div>
+                            </div>
                             <div className="productFooter" style={{height:'300px'}}>
                                 {/*div 태그에 textalign center로 감싸고, width를 바꿔보자*/}
                                 <div style={{textAlign:'center'}}>
-                                    <button ref={productMoreBtnRef} style={{width:'30%'}} onClick={moreDetail}>내용 더 보기</button>
-                                    <button ref={productShortBtnRef} style={{width:'30%'}} onClick={hideDetail} hidden>내용 감추기</button>
+                                    <button ref={productMoreBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={moreDetail}>내용 더 보기</button>
+                                    <button ref={productShortBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={hideDetail} hidden>내용 감추기</button>
                                 </div>
                             </div>
                         </div>
-                        
+                        <nav className='box' style={{width:'400px', height:'500px', display:'inline-block'}}>
+                            <div style={{border:'1px solid black', height:'500px'}}>
+
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </div>
             <Footer/>
-        </div>   
+        </div>
     )
 }
 

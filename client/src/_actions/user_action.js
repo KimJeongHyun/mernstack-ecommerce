@@ -3,7 +3,8 @@ import axios from "axios";
 import{
     AUTH_USER,
     LOGIN_USER,
-    REGISTER_USER
+    REGISTER_USER,
+    GET_CLOTHES
 } from './types';
 
 export function auth(){
@@ -30,6 +31,16 @@ export function loginUser(dataToSubmit){
     .then(response=>response.data);
     return{
         type:LOGIN_USER,
+        payload:request
+    }
+}
+
+export function getClothes(){
+    const request = axios.get('/api/getClothes')
+    .then(response=>response.data);
+
+    return{
+        type:GET_CLOTHES,
         payload:request
     }
 }

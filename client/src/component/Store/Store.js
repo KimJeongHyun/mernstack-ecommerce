@@ -1,126 +1,140 @@
 import React,{useEffect,useRef,useState} from 'react'
+import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
-import {Footer} from '../Footer/Footer'
+import { Footer } from '../Footer/Footer'
+import { getClothes } from '../../_actions/user_action'
 
 function Store(props){
     const [rendered, setRendered] = useState(false);
 
+    const dispatch = useDispatch();
+    
+    const storeGrid = useRef();
+
+    const [clothesMap,setClothesMap] = useState('');
+    const [startIndex,setStartIndex] = useState('');
+    const [mapLength, setMapLength] = useState(0);
+
     useEffect(()=>{
-        const mainRendering = () =>{
-            const result=[];
-            result.push(
-                <>
-                    <NavSideBar/>
-                    <NavBar/>
-                    <div className="uxArea">
-                        <div className="contentContainer">
-                            <div className="uxContent" style={{paddingTop:'20px', height:'1000px'}}>
-                                <table className="storeGrid">
-                                    <tr>
-                                        <td>
-                                            <a href="/ProductDetail"><img src="/images/jacket.jpg"/></a>
-                                            <a href="/ProductDetail"><p className="itemName">미니멀 트러커 자켓(Brown)</p></a>
-                                            <a href="/ProductDetail"><span className="itemPrice">100,000원</span></a>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                        <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <Footer/>
-                </>
-            )
-            return result;
-
-        }
-        ReactDOM.render(mainRendering(),document.getElementById('container'))
-        setRendered(true);
+        dispatch(getClothes())
+        .then(response=>{
+            const settingState = async () => {
+                const length = response.payload.length;
+                const resStartIndex = response.payload.startIndex;
+                const startIndexHandler = () =>{
+                    setStartIndex(resStartIndex);
+                }
+                const mapLengthHandler = () =>{
+                    setMapLength(length);
+                }
+                const clothesMapHandler = () =>{
+                    setClothesMap(response.payload.clothesMap);
+                }
+                await startIndexHandler();
+                await mapLengthHandler();
+                await clothesMapHandler();
+            }
+            settingState();
+        })
     },[])
 
     useEffect(()=>{
-        const storeID = document.getElementById('commerceStoreID');
-        if (storeID!=null){
-            const list = document.createElement('li');
-            list.className='sub';
-            const a = document.createElement('a');
-            a.href='#'
-            const textNode = document.createTextNode('Arrival');
-            a.appendChild(textNode);
-            list.appendChild(a);    
-            
-            // Arrival List
+        if (mapLength!=0){
+            const productRendering = () =>{
+                let cnt = 0;
+                let targetIndex=0;
+                for (let i=startIndex; i<startIndex+mapLength; i++){
+                    if (cnt%5==0){
+                        const trTag = document.createElement('tr');
+                        trTag.className = cnt;
+                        targetIndex=cnt;
+                        storeGrid.current.appendChild(trTag);
+                    }
+                    const tdTag = document.createElement('td');
 
-            const list2 = document.createElement('li');
-            list2.className='sub';
-            const a2 = document.createElement('a');
-            a2.href='#'
-            const textNode2 = document.createTextNode('2021 F / W');
-            a2.appendChild(textNode2);
-            list2.appendChild(a2);
+                    const aTag = document.createElement('a');
+                    aTag.href='/ProductDetail';
 
-            // 2021 F / W
+                    const imgTag = document.createElement('img');
+                    imgTag.src=clothesMap[i].clothImgPath
+                    aTag.appendChild(imgTag);
 
-            storeID.after(list2);
-            storeID.after(list);
-            
-            
+                    const aTag2 = document.createElement('a');
+                    aTag2.href='/ProductDetail';
+
+                    const pTag = document.createElement('p');
+                    pTag.classList.add('itemName');
+                    const nameNode = document.createTextNode(clothesMap[i].clothName);
+                    pTag.appendChild(nameNode);
+                    aTag2.appendChild(pTag);
+
+                    const spanTag = document.createElement('span');
+                    spanTag.classList.add('itemPrice');
+                    const priceNode = document.createTextNode(clothesMap[i].sellPrice+'원')
+                    spanTag.appendChild(priceNode);
+
+                    tdTag.appendChild(aTag)
+                    tdTag.appendChild(aTag2);
+                    tdTag.appendChild(spanTag);
+
+                    document.getElementsByClassName(targetIndex)[0].appendChild(tdTag);
+                    cnt=cnt+1;
+                }   
+            }
+            productRendering();
+            setRendered(true);
+        }
+    },[clothesMap])
+
+    useEffect(()=>{
+        if (rendered==true){
+            const storeID = document.getElementById('commerceStoreID');
+            if (storeID!=null){
+                const list = document.createElement('li');
+                list.className='sub';
+                const a = document.createElement('a');
+                a.href='#'
+                const textNode = document.createTextNode('Arrival');
+                a.appendChild(textNode);
+                list.appendChild(a);    
+                
+                // Arrival List
+
+                const list2 = document.createElement('li');
+                list2.className='sub';
+                const a2 = document.createElement('a');
+                a2.href='#'
+                const textNode2 = document.createTextNode('2021 F / W');
+                a2.appendChild(textNode2);
+                list2.appendChild(a2);
+
+                // 2021 F / W
+
+                storeID.after(list2);
+                storeID.after(list);
+            }
         }
     },[rendered])
 
+    
+
     return(
         <div id='container'>
-        
+            <NavSideBar/>
+                <NavBar/>
+                <div className="uxArea">
+                    <div className="contentContainer">
+                        <div className="uxContent" style={{paddingTop:'20px', height:'1000px'}}>
+                            <table className="storeGrid" ref={storeGrid}>
+                                
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <Footer/>
         </div>
         
     )

@@ -121,6 +121,7 @@ body{
     width:90%;
     border-collapse:separate;
     border-spacing: 0px 10px;
+    table-layout: fixed;
 }
 
 .uxContent .storeGrid a{
@@ -130,11 +131,14 @@ body{
 
 .uxContent .storeGrid tr td{
     padding:0;
+    width:200px;
+    line-height: 10px;
+    word-break: break-all;
 }
 
 .uxContent table tr td img{
-    width:70%;
-    height:70%;
+    width:200px;
+    height:250px;
 }
 
 .contentContainer{
@@ -253,17 +257,24 @@ body{
 
 @media screen and (max-width:1499px) {
     .productInfo{
-        width:850px;
+        width:500px;
         float:right;
     }
     .productBody{
-        width:1200px;
+        width:800px;
         height:600px;
+        overflow: hidden;
     }
     .productBody.active{
-        width:1200px;
-        height:1200px;
+        width:1000px;
+        height:1800px;
+        overflow: hidden;
     }
+
+    .productBody hr{
+        width:722px;
+    }
+
     .productFooter{
         width:722px;
     }
@@ -271,26 +282,39 @@ body{
 
 @media screen and (min-width:1500px) {
     .productInfo{
-        width:1200px;
+        width:750px;
         float:right;
     }
     .productBody{
-        width:1550px;
+        width:1050px;
         height:600px;
+        overflow: hidden;
     }
     .productBody.active{
-        width:1200px;
-        height:1200px;
+        width:1050px;
+        height:1800px;
+        overflow: hidden;
     }
+
+    .productBody hr{
+        width:932px;
+    }
+
     .productFooter{
         width:932px;
     }
 }
 
 
+
+
 .productSize{
     width:100%;
     height:15%;
+}
+
+.productContent{
+    width:100%;
 }
 
 .productSize table{
@@ -333,4 +357,8 @@ body{
     width:100%;
     top:70%;
     height:500px;
+}
+
+.box{
+    position:fixed;
 }
