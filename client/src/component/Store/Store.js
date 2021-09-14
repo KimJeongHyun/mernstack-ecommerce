@@ -17,13 +17,13 @@ function Store(props){
                     <NavBar/>
                     <div className="uxArea">
                         <div className="contentContainer">
-                            <div className="uxContent" style={{paddingTop:'20px'}}>
+                            <div className="uxContent" style={{paddingTop:'20px', height:'1000px'}}>
                                 <table className="storeGrid">
                                     <tr>
                                         <td>
-                                            <img src="/images/jacket.jpg"/>
-                                            <p className="itemName">미니멀 트러커 자켓(Brown)</p>
-                                            <span className="itemPrice">100,000원</span>
+                                            <a href="/ProductDetail"><img src="/images/jacket.jpg"/></a>
+                                            <a href="/ProductDetail"><p className="itemName">미니멀 트러커 자켓(Brown)</p></a>
+                                            <a href="/ProductDetail"><span className="itemPrice">100,000원</span></a>
                                         </td>
                                         <td>
                                             <img src="/images/jacket.jpg"/>

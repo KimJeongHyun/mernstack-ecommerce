@@ -3,7 +3,6 @@ body{
     font:0.75em Arial,Dotum,AppleGothic,sans-serif;
 }
 
-
 #commerceTitle a{
     text-decoration: none;
     color:#676767;
@@ -124,6 +123,11 @@ body{
     border-spacing: 0px 10px;
 }
 
+.uxContent .storeGrid a{
+    text-decoration: none;
+    color:black;
+}
+
 .uxContent .storeGrid tr td{
     padding:0;
 }
@@ -131,10 +135,6 @@ body{
 .uxContent table tr td img{
     width:70%;
     height:70%;
-}
-
-.uxContent .storeGrid tr td .itemName{
-    
 }
 
 .contentContainer{
@@ -251,6 +251,57 @@ body{
     background-color:#8d8d8d !important;
 }
 
+@media screen and (max-width:1499px) {
+    .productInfo{
+        width:850px;
+        float:right;
+    }
+    .productBody{
+        width:1200px;
+    }
+}
+
+@media screen and (min-width:1500px) {
+    .productInfo{
+        width:1200px;
+        float:right;
+    }
+    .productBody{
+        width:1550px;
+    }
+}
+
+
+.productSize{
+    width:100%;
+    height:15%;
+}
+
+.productSize table{
+    width:60%;
+    margin-top:10px;
+    text-align: center;
+    border: 1px solid lightgrey;
+    border-collapse:collapse;
+}
+
+.productSize table td{
+    border:1px solid #eee;
+}
+
+.productSize table thead{
+    background: #c9c9c9;
+    line-height:25px;
+}
+
+.productSize table tbody{
+    line-height: 25px;
+}
+
+.productSize table tbody .sizeRow{
+    background:#c9c9c9;
+    width:5%;
+}
 
 .footer{
     background-color: black;

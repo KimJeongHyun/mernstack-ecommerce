@@ -19,6 +19,7 @@ import Cart from "./component/RowbarMenu/Cart/Cart";
 import Review from "./component/RowbarMenu/Review/Review"
 import QnA from "./component/RowbarMenu/QnA/QnA"
 import Notice from "./component/RowbarMenu/Notice/Notice"
+import ProductDetail from "./component/Store/ProductDetail";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/Notice" component={Notice}/>
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>
+        <Route path="/ProductDetail" component={ProductDetail}/>
       </Switch>
     </Router>
   );
