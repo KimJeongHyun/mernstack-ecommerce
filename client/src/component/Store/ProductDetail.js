@@ -1,9 +1,11 @@
 import React,{useEffect,useRef,useState} from 'react'
+import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
 import {Footer} from '../Footer/Footer'
+import { getDetailData } from '../../_actions/user_action'
 
 function ProductDetail(props){
     const [detailUpdate, setDetailUpdate] = useState(false);
@@ -12,27 +14,57 @@ function ProductDetail(props){
     const productMoreBtnRef = useRef();
     const productShortBtnRef = useRef();
 
-    useEffect(()=>{
-        // 상품의 정보를 받아오는 공간.
-        // URL은 아마.. /Store/Product/:idx 로 해야될듯?
-        const mainRendering = () =>{
-            const result=[];
-            result.push(
-                <>
-                   
-                </>
-            )
-            return result;
+    const productImageRef = useRef();
+    const productNameNumRef = useRef();
+    const productSellNumRef = useRef();
+    const productReviewNumRef = useRef();
+    const productDeliveryRef = useRef();
+    const productExportRef = useRef();
+    const productPriceRef = useRef();
+    const productDiscountRef = useRef();
+    const productAccumRef = useRef();
 
-        }
+    const [productIndex,setProductIndex] = useState(0);
+    const [clothMap,setClothMap] = useState('');
+    
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        setProductIndex(props.location.pathname.split('/')[2])
         
     },[])
 
     useEffect(()=>{
-        
+        if (productIndex!=0){
+            dispatch(getDetailData(productIndex))
+            .then(response=>{
+                setClothMap(response.payload.clothRes);
+            })
+        }
         // 상품의 정보를 DB로부터 받아오면, 그걸 상세 페이지에 렌더링하는 곳.
-        
-    },[detailUpdate])
+    },[productIndex])
+
+    useEffect(()=>{
+        if (clothMap!=''){
+            const imgPath = () =>{
+                const result = [];
+                result.push(
+                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}}/>
+                )
+                return result;
+            }
+            ReactDOM.render(imgPath(),productImageRef.current)
+            ReactDOM.render(clothMap.clothName,productNameNumRef.current)
+            ReactDOM.render(clothMap.sellNum,productSellNumRef.current)
+            ReactDOM.render(clothMap.reviewNum,productReviewNumRef.current);
+            ReactDOM.render(clothMap.deliverySol,productDeliveryRef.current);
+            ReactDOM.render(clothMap.exportRange,productExportRef.current);
+            ReactDOM.render(clothMap.sellPrice,productPriceRef.current);
+            ReactDOM.render(clothMap.sellPrice*(100-clothMap.discountRate)*0.01,productDiscountRef.current);
+            ReactDOM.render(clothMap.sellPrice*(clothMap.discountRate)*0.01,productAccumRef.current)
+
+        }
+    },[clothMap])
 
     const moreDetail = (e) =>{
         e.preventDefault();
@@ -57,23 +89,31 @@ function ProductDetail(props){
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
                         <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
-                                <div className="productImage" style={{width:'250px', display:'inline-block'}}>
-                                    <img src='images/jacket.jpg' style={{maxWidth:'250px'}}></img>
+                                <div className="productImage" ref={productImageRef} style={{width:'250px', display:'inline-block'}}>
+                                    
                                 </div>
-                                <div className="productInfo">
-                                    <h3> Product Info </h3>
-                                    <p> 품명 / 품번 </p>
-                                    <p> 판매 갯수 </p>
-                                    <p> 구매 후기 </p>
-                                    <hr style={{border:'1px 0px 0px 0px solid #676767', width:'50%', margin:'0'}}/>
-                                    <h3> Delivery Info</h3>
-                                    <p> 배송 방법 </p>
-                                    <p> 출고 기간 </p>
-                                    <hr style={{border:'1px 0px 0px 0px solid #676767', width:'50%', margin:'0'}}/>
-                                    <h3>Price Info</h3>
-                                    <p>판매가</p>
-                                    <p>할인가</p>
-                                    <p>적립금</p>
+                                <div className="productInfo" style={{lineHeight:'20px'}}>
+                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}> Product Info </h3>
+                                    <span>품명 / 품번 </span> &#124; &nbsp;
+                                    <span ref={productNameNumRef}></span> / {productIndex} <br/>
+                                    <span>판매 갯수</span> &nbsp; &#124; &nbsp;
+                                    <span ref={productSellNumRef}></span> <br/> 
+                                    <span>구매 후기</span> &nbsp; &#124; &nbsp;
+                                    <span ref={productReviewNumRef}></span> <br/>  
+                                    <hr style={{marginTop:'5px',border:'none',backgroundColor:'lightgray', width:'50%', height:'1px', margin:'0'}}/>
+                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}> Delivery Info</h3>
+                                    <span>배송 방법</span> &nbsp; &#124; &nbsp;
+                                    <span ref={productDeliveryRef}></span> <br/>  
+                                    <span>출고 기간</span> &nbsp; &#124; &nbsp;
+                                    <span ref={productExportRef}></span> <br/>  
+                                    <hr style={{marginTop:'5px',border:'none',backgroundColor:'lightgray', width:'50%', height:'1px', margin:'0'}}/>
+                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}>Price Info</h3>
+                                    <span>판매가</span> &nbsp; &#124; &nbsp;
+                                    <span ref={productPriceRef}></span> 원<br/>
+                                    <span>할인가</span> &nbsp; &#124; &nbsp; 
+                                    <span ref={productDiscountRef}></span> 원<br/>
+                                    <span>적립금</span> &nbsp; &#124; &nbsp; 
+                                    <span ref={productAccumRef}></span> 원
                                 </div>
                                 <div className="productSize">
                                     <table>
@@ -137,8 +177,8 @@ function ProductDetail(props){
                                 </div>
                             </div>
                         </div>
-                        <nav className='box' style={{width:'400px', height:'500px', display:'inline-block'}}>
-                            <div style={{border:'1px solid black', height:'500px'}}>
+                        <nav className='payBox'>
+                            <div className='payContainer'>
 
                             </div>
                         </nav>

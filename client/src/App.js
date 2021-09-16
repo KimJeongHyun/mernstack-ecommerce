@@ -36,7 +36,7 @@ function App() {
         <Route path="/Notice" component={Notice}/>
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>
-        <Route path="/ProductDetail" component={ProductDetail}/>
+        <Route path="/ProductDetail/:idx" component={ProductDetail}/>
       </Switch>
     </Router>
   );

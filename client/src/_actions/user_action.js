@@ -4,7 +4,8 @@ import{
     AUTH_USER,
     LOGIN_USER,
     REGISTER_USER,
-    GET_CLOTHES
+    GET_CLOTHES,
+    GET_DETAILDATA
 } from './types';
 
 export function auth(){
@@ -41,6 +42,16 @@ export function getClothes(){
 
     return{
         type:GET_CLOTHES,
+        payload:request
+    }
+}
+
+export function getDetailData(dataParam){
+    const request = axios.get('/api/getDetailData/'+dataParam)
+    .then(response=>response.data);
+
+    return{
+        type:GET_DETAILDATA,
         payload:request
     }
 }

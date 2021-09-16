@@ -256,6 +256,7 @@ body{
 }
 
 @media screen and (max-width:1499px) {
+
     .productInfo{
         width:500px;
         float:right;
@@ -266,7 +267,7 @@ body{
         overflow: hidden;
     }
     .productBody.active{
-        width:1000px;
+        width:800px;
         height:1800px;
         overflow: hidden;
     }
@@ -305,8 +306,17 @@ body{
     }
 }
 
+.payBox{
+    position:fixed;
+    width:300px;
+    display:inline-block;
+}
 
 
+.payBox .payContainer{
+    border:1px solid black;
+    height:400px;
+}
 
 .productSize{
     width:100%;
@@ -359,6 +369,24 @@ body{
     height:500px;
 }
 
-.box{
-    position:fixed;
+
+
+
+/*
+.transition {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        transition:width 2s linear 1s;
+    }
+.transition:hover{
+    width:300px;
+    
+
 }
+
+ -> img에 hover이벤트가 발생하는 경우
+ -> 커서를 +모양으로 변화시키고
+ -> 그 상태에서 클릭 이벤트가 발생하면
+ -> 옆에 이미지를 확대한 추가 창이 형성된다.
+*/

@@ -15,7 +15,7 @@ export function NavSideBar(){
                         <a href="/About" id="commerceAbout">About us</a>
                     </li>
                     <li id="commerceStoreID">
-                        <a href="Store" id="commerceStore">Store</a>
+                        <a href="/Store" id="commerceStore">Store</a>
                     </li>
                     <li id="commerceCollectionID">
                         <a href="#" id="commerceCollection">Collection</a>

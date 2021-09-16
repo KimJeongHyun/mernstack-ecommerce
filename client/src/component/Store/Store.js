@@ -56,14 +56,14 @@ function Store(props){
                     const tdTag = document.createElement('td');
 
                     const aTag = document.createElement('a');
-                    aTag.href='/ProductDetail';
+                    aTag.href='/ProductDetail/'+i;
 
                     const imgTag = document.createElement('img');
                     imgTag.src=clothesMap[i].clothImgPath
                     aTag.appendChild(imgTag);
 
                     const aTag2 = document.createElement('a');
-                    aTag2.href='/ProductDetail';
+                    aTag2.href='/ProductDetail/'+i;
 
                     const pTag = document.createElement('p');
                     pTag.classList.add('itemName');
