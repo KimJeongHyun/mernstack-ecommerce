@@ -27,7 +27,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingPage}/>
         <Route path="/About" component={About}/>
-        <Route path="/Store" component={Store}/>
+        <Route path="/Store/:idx" component={Store}/>
         <Route path="/Login" component={Login}/>
         <Route path="/Join" component={Join}/>
         <Route path="/CheckPw" component={CheckPw}/>

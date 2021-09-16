@@ -136,6 +136,19 @@ body{
     word-break: break-all;
 }
 
+.storePagination{
+    position:relative;
+    text-align: center;
+    bottom:40%;
+    font-size:2em;
+    color:#6d6d6d;
+}
+
+.storePagination a{
+    text-decoration: none;
+    color:#6d6d6d;
+}
+
 .uxContent table tr td img{
     width:200px;
     height:250px;
