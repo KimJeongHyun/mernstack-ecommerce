@@ -403,3 +403,17 @@ body{
  -> 그 상태에서 클릭 이벤트가 발생하면
  -> 옆에 이미지를 확대한 추가 창이 형성된다.
 */
+
+/* 패럴랙스 효과 만들기 
+#main #parallax {
+    width:100%;
+    background:url('../img/main_details/parallax.png') no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+    padding: 50px 0;
+    margin-bottom:20px;
+    
+    text-align:center;
+    color:#ffffff;
+}
+*/

@@ -55,7 +55,7 @@ function Store(props){
                     const urlParam = i+1;
                     result.push(
                         <span key={i}>
-                            [<a href={"/Store/"+urlParam}>{i+1}</a>]
+                            <a href={"/Store/"+urlParam}>[{i+1}]</a>
                         </span>
                     )
                 }
