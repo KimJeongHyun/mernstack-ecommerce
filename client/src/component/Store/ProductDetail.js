@@ -172,20 +172,19 @@ function ProductDetail(props){
                                 </div>
                             </div>
                             <div className="productFooter" style={{height:'850px', textAlign:'center'}}>
-                                {/*div 태그에 textalign center로 감싸고, width를 바꿔보자*/}
                                 <div style={{textAlign:'center', height:'100px'}}>
                                     <button ref={productMoreBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={moreDetail}>내용 더 보기</button>
                                     <button ref={productShortBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={hideDetail} hidden>내용 감추기</button>
                                 </div>
                                 <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
                                 <p style={{left:'50%'}}>Q&amp;A</p>
-                                <div style={{height:'200px', marginTop:'10px', marginBottom:'70px', textAlign:'center'}}>
-                                    <QnAFooter clothMap={clothMap}/>
+                                <div style={{height:'200px', marginTop:'10px', marginBottom:'100px', textAlign:'center'}}>
+                                    <QnAFooter clothMapNum={productIndex}/>
                                 </div>
                                 <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
                                 <p style={{left:'50%'}}>Review</p>
                                 <div style={{height:'200px', marginTop:'10px', marginBottom:'10px',textAlign:'center'}}>
-                                    <ReviewFooter clothMap={clothMap}/>
+                                    <ReviewFooter clothMapNum={productIndex}/>
                                 </div>
                             </div>
                         </div>

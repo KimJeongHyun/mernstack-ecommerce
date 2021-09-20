@@ -3,7 +3,9 @@ import {
     LOGIN_USER,
     REGISTER_USER,
     GET_CLOTHES,
-    GET_DETAILDATA
+    GET_DETAILDATA,
+    GET_QNA,
+    GET_REVIEW
 } from '../_actions/types'
 
 
@@ -19,7 +21,11 @@ export default function (state={}, action){
         case GET_CLOTHES:
             return {...state, getClothSuccess: action.payload}
         case GET_DETAILDATA:
-            return {...state,getDetailData: action.payload}   
+            return {...state,getDetailData: action.payload}
+        case GET_QNA:
+            return {...state,getQnAData: action.payload}   
+        case GET_REVIEW:
+            return {...state,getReviewData: action.payload}  
         default:
             return state;
     }

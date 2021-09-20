@@ -9,6 +9,8 @@ const userLogout = require('./controller/userController/userLogout')
 const userRegister = require('./controller/userController/userRegister');
 const getClothes = require('./controller/storeController/getClothData')
 const getDetailData = require('./controller/storeController/getDetailData')
+const getQnAData = require('./controller/storeController/getQnAData');
+const getReviewData = require('./controller/storeController/getReviewData');
 
 const port = 5000;
 
@@ -40,6 +42,8 @@ app.use(userLogout);
 app.use(userRegister);
 app.use(getClothes);
 app.use(getDetailData);
+app.use(getQnAData);
+app.use(getReviewData);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{
