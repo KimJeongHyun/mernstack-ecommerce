@@ -20,6 +20,8 @@ import Review from "./component/RowbarMenu/Review/Review"
 import QnA from "./component/RowbarMenu/QnA/QnA"
 import Notice from "./component/RowbarMenu/Notice/Notice"
 import ProductDetail from "./component/Store/ProductDetail";
+import QnAPost from "./component/Store/QnAPost";
+import ReviewPost from "./component/Store/ReviewPost"
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>
         <Route path="/ProductDetail/:idx" component={ProductDetail}/>
+        <Route path="/QnAPost/:idx" component={Auth(QnAPost,true)}/>
+        <Route path="/ReviewPost/:idx" component={Auth(ReviewPost,true)}/>
       </Switch>
     </Router>
   );

@@ -11,8 +11,9 @@ import { getQnAData } from '../../_actions/user_action'
 
 function QnAFooter(props){
     const QnAFooterRef = useRef();
+    const QnATBodyRef = useRef();
     const productIndex = props.clothMapNum;
-
+    
     const [QnAMap,setQnAMap] = useState('');
     const [MapLength,setMapLength] = useState('');
     const dispatch = useDispatch()
@@ -47,31 +48,11 @@ function QnAFooter(props){
                         <td>날짜</td>
                     </tr>
                 </thead>
-                <tbody style={{lineHeight:'40px', borderBottom:'0.5px solid lightgray'}}>
-                    <tr>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                    </tr>
-                    <tr>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                    </tr>
-                    <tr>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                        <td>asdf</td>
-                    </tr>
+                <tbody ref={QnATBodyRef} style={{lineHeight:'40px', borderBottom:'0.5px solid lightgray'}}>
+                    
                 </tbody>
             </table>
-            <button style={{width:'130px',height:'30px', marginTop:'30px', marginLeft:'82%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
+            <a href={"/QnAPost/"+productIndex}><button className='SubmitBtn' style={{marginLeft:'82%'}}>글 쓰기</button></a>
         </div>
     )
 }
