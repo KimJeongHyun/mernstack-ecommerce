@@ -32,6 +32,8 @@ function QnAFooter(props){
     useEffect(()=>{
         if(QnAMap!=''){
             console.log(Object.keys(QnAMap).length)
+            //Product 별 데이터는 인덱스가 들쭉날쭉할 것.
+            //일단 Map을 받고, 해당 맵에 대한 각각의 인덱스를 재정립해야됨.
         }
     },[QnAMap])
     
