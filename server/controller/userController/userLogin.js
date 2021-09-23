@@ -3,10 +3,6 @@ const {users} = require('../../model/userSchema')
 const router = require('express').Router();
 const crypto = require('crypto');
 
-const database = require('../../database')();
-
-database.db_open();
-
 router.post('/api/login',(req,res)=>{
     const ID = req.body.ID;
     const Password = req.body.Password;

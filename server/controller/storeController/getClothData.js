@@ -2,10 +2,6 @@ const {cloth} = require('../../model/clothSchema')
 
 const router = require('express').Router();
 
-const database = require('../../database')();
-
-database.db_open();
-
 router.get('/api/getClothes',(req,res)=>{
     cloth.find({}, function(err,clothes){
         var clothesMap={};

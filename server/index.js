@@ -37,6 +37,10 @@ app.use(express_session({
     cookie:{maxAge:(3.6e+6)*24}
 }))
 
+const database = require('./database')();
+
+database.db_open();
+
 app.use(userLogin);
 app.use(userLogout);
 app.use(userRegister);

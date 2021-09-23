@@ -2,10 +2,6 @@ const {Review} = require('../../model/ReviewSchema')
 
 const router = require('express').Router();
 
-const database = require('../../database')();
-
-database.db_open();
-
 router.get('/api/getReview/:idx',(req,res)=>{
     Review.find({clothIndex:req.params.idx}, function(err,Reviews){
         var ReviewMap={};

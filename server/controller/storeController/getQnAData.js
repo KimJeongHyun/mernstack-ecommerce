@@ -2,10 +2,6 @@ const {QnA} = require('../../model/QnASchema')
 
 const router = require('express').Router();
 
-const database = require('../../database')();
-
-database.db_open();
-
 router.get('/api/getQnA/:idx',(req,res)=>{
     QnA.find({clothIndex:req.params.idx}, function(err,QnAs){
         var QnAMap={};
