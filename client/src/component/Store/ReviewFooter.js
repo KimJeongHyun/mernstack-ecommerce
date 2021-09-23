@@ -12,7 +12,7 @@ function ReviewFooter(props){
     const ReviewFooterRef = useRef();
     const productIndex = props.clothMapNum;
 
-    const [ReviewMap,setQnAMap] = useState('');
+    const [ReviewMap,setReviewMap] = useState('');
     const [MapLength,setMapLength] = useState('');
     const dispatch = useDispatch()
     
@@ -23,15 +23,14 @@ function ReviewFooter(props){
                 setReviewMap(response.payload.ReviewMap);
                 setMapLength(response.payload.length);
             })
-            
         }
     },[productIndex])
 
     useEffect(()=>{
-        if(QnAMap!=''){
+        if(ReviewMap!=''){
             console.log(Object.keys(ReviewMap).length)
         }
-    },[QnAMap])
+    },[ReviewMap])
     
 
     return(
