@@ -7,6 +7,7 @@ import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import '../../css/style.css'
 import axios from 'axios'
+import { postQnAData } from '../../_actions/user_action'
 
 
 
@@ -16,6 +17,8 @@ function QnAPost(props){
     const [postTitle,setPostTitle] = useState("");
     const [postContent,setPostContent] = useState("");
     const [productIndex,setProductIndex] = useState(0);
+
+    const dispatch = useDispatch()
 
     const postTitleHandler = (event) =>{
         setPostTitle(event.target.value);
@@ -38,6 +41,10 @@ function QnAPost(props){
             postContent : postContent,
             productIndex : productIndex
         }
+        dispatch(postQnAData(productIndex,body))
+        .then(response=>{
+
+        })
         // pw 넘길 때 혹시 여기에 취약점이 있진 않을까
     }
 

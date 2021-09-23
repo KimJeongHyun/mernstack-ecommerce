@@ -10,4 +10,8 @@ export const GET_DETAILDATA="get_detaildata";
 
 export const GET_QNA="get_qna";
 
+export const POST_QNA="post_qna";
+
 export const GET_REVIEW="get_review";
+
+export const POST_REVIEW="post_review"

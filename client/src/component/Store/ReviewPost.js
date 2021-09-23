@@ -7,6 +7,7 @@ import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import '../../css/style.css'
 import axios from 'axios'
+import { postReviewData } from '../../_actions/user_action'
 
 
 function ReviewPost(props){
@@ -15,6 +16,8 @@ function ReviewPost(props){
     const [postTitle,setPostTitle] = useState("");
     const [postContent,setPostContent] = useState("");
     const [productIndex,setProductIndex] = useState(0);
+
+    const dispatch = useDispatch()
 
     const postTitleHandler = (event) =>{
         setPostTitle(event.target.value);
@@ -37,6 +40,10 @@ function ReviewPost(props){
             postContent : postContent,
             productIndex : productIndex
         }
+        dispatch(postReviewData(productIndex,body))
+        .then(response=>{
+
+        })
     }
 
     useEffect(()=>{
@@ -57,14 +64,14 @@ function ReviewPost(props){
                         <div className="uxContent" style={{paddingTop:'0px'}}>
                             <p style={{fontSize:'20px', color:'#676767'}}> Review </p>
                             <div className="writeContainer">
-                                <form>
+                                <form onSubmit={onSubmitHandler}>
                                     <table>
                                         <thead>
                                             <tr>
                                                 <td>NAME</td>
                                                 <td><input value={userName}/></td>
                                                 <td>PASSWORD</td>
-                                                <td><input type="password" value={postPW}/></td>
+                                                <td><input type="password" value={postPW} onChange={postPWHandler}/></td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,7 +85,7 @@ function ReviewPost(props){
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href='#'><button className='SubmitBtn' style={{left:'188px'}}>글 쓰기</button></a>
+                                    <button className='SubmitBtn' style={{left:'188px'}}>글 쓰기</button>
                                 </form>
                             </div>
                         </div>

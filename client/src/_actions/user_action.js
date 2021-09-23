@@ -7,7 +7,9 @@ import{
     GET_CLOTHES,
     GET_DETAILDATA,
     GET_QNA,
-    GET_REVIEW
+    POST_QNA,
+    GET_REVIEW,
+    POST_REVIEW
 } from './types';
 
 export function auth(){
@@ -68,12 +70,32 @@ export function getQnAData(dataParam){
     }
 }
 
+export function postQnAData(dataParam, dataToSubmit){
+    const request = axios.post('/api/postQnA/'+dataParam,dataToSubmit)
+    .then(response=>response.data);
+
+    return{
+        type:POST_QNA,
+        payload:request
+    }
+}
+
 export function getReviewData(dataParam){
     const request = axios.get('/api/getReview/'+dataParam)
     .then(response=>response.data);
 
     return{
         type:GET_REVIEW,
+        payload:request
+    }
+}
+
+export function postReviewData(dataParam, dataToSubmit){
+    const request = axios.post('/api/postReview/'+dataParam,dataToSubmit)
+    .then(response=>response.data);
+
+    return{
+        type:POST_REVIEW,
         payload:request
     }
 }
