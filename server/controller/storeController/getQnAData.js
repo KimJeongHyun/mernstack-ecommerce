@@ -8,7 +8,7 @@ router.get('/api/getQnA/:idx',(req,res)=>{
         var startIndex = 0;
         var cnt = 0;
         QnAs.forEach(function(QnA){
-            QnAMap[QnA.QnAIndex] = cloth;
+            QnAMap[QnA.QnAIndex] = QnA;
             if (cnt==0){
                 startIndex = QnA.QnAIndex;
             }

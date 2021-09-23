@@ -8,7 +8,7 @@ router.get('/api/getReview/:idx',(req,res)=>{
         var startIndex = 0;
         var cnt = 0;
         Reviews.forEach(function(Review){
-            ReviewMap[Review.ReviewIndex] = cloth;
+            ReviewMap[Review.ReviewIndex] = Review;
             if (cnt==0){
                 startIndex = Review.ReviewIndex;
             }

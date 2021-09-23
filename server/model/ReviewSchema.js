@@ -3,9 +3,8 @@ var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
 
 const ReviewSchema = mongoose.Schema({
-    userName:String,
     userID:String,
-    clothIndex:String,
+    clothIndex:Number,
     title:String,
     content:String,
     password:String,
@@ -13,15 +12,15 @@ const ReviewSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    seq:{
+    ReviewIndex:{
         type:Number,
         default:0
     }
 })
 
 ReviewSchema.plugin(autoIncrement.plugin,{
-    model:'QnA',
-    field:'seq',
+    model:'Review',
+    field:'ReviewIndex',
     startAt:1,
     increment:1
 })

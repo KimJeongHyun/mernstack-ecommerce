@@ -70,8 +70,8 @@ export function getQnAData(dataParam){
     }
 }
 
-export function postQnAData(dataParam, dataToSubmit){
-    const request = axios.post('/api/postQnA/'+dataParam,dataToSubmit)
+export function postQnAData(dataToSubmit){
+    const request = axios.post('/api/postQnA/',dataToSubmit)
     .then(response=>response.data);
 
     return{
@@ -90,8 +90,8 @@ export function getReviewData(dataParam){
     }
 }
 
-export function postReviewData(dataParam, dataToSubmit){
-    const request = axios.post('/api/postReview/'+dataParam,dataToSubmit)
+export function postReviewData(dataToSubmit){
+    const request = axios.post('/api/postReview/',dataToSubmit)
     .then(response=>response.data);
 
     return{

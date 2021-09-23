@@ -39,8 +39,8 @@ function App() {
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>
         <Route path="/ProductDetail/:idx" component={ProductDetail}/>
-        <Route path="/QnAPost/:idx" component={Auth(QnAPost,true)}/>
-        <Route path="/ReviewPost/:idx" component={Auth(ReviewPost,true)}/>
+        <Route path="/QnAPost/" component={Auth(QnAPost,true)}/>
+        <Route path="/ReviewPost/" component={Auth(ReviewPost,true)}/>
       </Switch>
     </Router>
   );

@@ -3,7 +3,6 @@ var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
 
 const QnASchema = mongoose.Schema({
-    userName:String,
     userID:String,
     clothIndex:Number,
     title:String,
@@ -13,7 +12,7 @@ const QnASchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    seq:{
+    QnAIndex:{
         type:Number,
         default:0
     }
