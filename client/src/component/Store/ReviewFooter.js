@@ -9,14 +9,28 @@ import { getReviewData } from '../../_actions/user_action'
 
 
 function ReviewFooter(props){
+    const PostNum = 5;
+
     const ReviewFooterRef = useRef();
     const ReviewTBodyRef = useRef();
+    const ReviewPaginationRef = useRef();
     const productIndex = props.clothMapNum;
+    const clothName = props.clothName;
 
     const [ReviewMap,setReviewMap] = useState('');
     const [MapLength,setMapLength] = useState('');
+    const [PostPaging,setPostPaging] = useState(1);
+
     const dispatch = useDispatch()
     
+    const postPagingHandler = (event) =>{
+        event.preventDefault();
+        const propPagingNum = event.target.classList.value.split('ReviewPaging')[1];
+        if (propPagingNum!=PostPaging){
+            setPostPaging(propPagingNum)
+        }
+    }
+
     useEffect(()=>{
         if (productIndex!=0){
             dispatch(getReviewData(productIndex))
@@ -28,12 +42,78 @@ function ReviewFooter(props){
     },[productIndex])
 
     useEffect(()=>{
-        if(ReviewMap!=''){
-            console.log(Object.keys(ReviewMap).length)
+        const footerRendering = () =>{
+            const result=[];
+            for (let i=0; i<MapLength/PostNum; i++){
+                result.push(
+                    <span onClick={postPagingHandler}>
+                        <a className={'ReviewPaging'+(i+1)} href="#none" >[{i+1}]</a>
+                    </span>
+                )
+            }
+            ReactDOM.render(result,ReviewPaginationRef.current);
+        }
+        if (MapLength!=''){
+            footerRendering();
+        }
+        
+    },[MapLength])
+
+    useEffect(()=>{
+        if(ReviewMap!='' && MapLength!='' & clothName!=undefined){
+            let cnt = 0;
+            let targetClassName='';
+            for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
+                if (i>MapLength){
+                    break;
+                }else{
+                    if (cnt%5==0){
+                        const trTag = document.createElement('tr');
+                        trTag.className = 'Review'+cnt;
+                        targetClassName = 'Review'+cnt;
+                        ReviewTBodyRef.current.appendChild(trTag);
+                        cnt=cnt+1;
+                    }
+                    
+                    const tdTagNum = document.createElement('td');
+                    const tdTagNumText = document.createTextNode(i)
+                    tdTagNum.appendChild(tdTagNumText);
+
+                    const tdTagProduct = document.createElement('td');
+                    const tdTagProductA = document.createElement('a');
+                    tdTagProductA.href='/ProductDetail/'+productIndex;
+                    const tdTagProductText = document.createTextNode(clothName);
+                    tdTagProductA.appendChild(tdTagProductText);
+                    tdTagProduct.appendChild(tdTagProductA);
+
+                    const tdTagTitle = document.createElement('td');
+                    const tdTagTitleA = document.createElement('a');
+                    tdTagTitleA.href='/Review/'+ReviewMap[i]._id;
+                    const tdTagTitleText = document.createTextNode(ReviewMap[i].title);
+                    tdTagTitleA.appendChild(tdTagTitleText);
+                    tdTagTitle.appendChild(tdTagTitleA);
+
+                    const tdTagID = document.createElement('td');
+                    const tdTagIDText = document.createTextNode((ReviewMap[i].userID).substring(0,3)+"***");
+                    tdTagID.appendChild(tdTagIDText);
+
+                    const tdTagDate = document.createElement('td');
+                    const tdTagDateText = document.createTextNode(ReviewMap[i].regDate.split('T')[0]);
+                    tdTagDate.appendChild(tdTagDateText);
+
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagProduct);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
+                    
+                }
+            }
+            
             //Product 별 데이터는 인덱스가 들쭉날쭉할 것.
             //일단 Map을 받고, 해당 맵에 대한 각각의 인덱스를 재정립해야됨.
         }
-    },[ReviewMap])
+    },[ReviewMap,MapLength,clothName,PostPaging])
     
 
     return(
@@ -52,7 +132,10 @@ function ReviewFooter(props){
                 
                 </tbody>
             </table>
-            <a href={"/ReviewPost/"+productIndex}><button style={{width:'130px',height:'30px', marginTop:'30px', marginLeft:'82%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button></a>
+            <div ref={ReviewPaginationRef}>
+
+            </div>
+            <button className='SubmitBtn' style={{width:'130px',height:'30px', marginTop:'30px', marginLeft:'82%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}><a href={"/ReviewPost/"+productIndex}>글 쓰기</a></button>
         </div>
     )
 }

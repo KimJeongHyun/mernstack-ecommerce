@@ -10,13 +10,27 @@ import { getQnAData } from '../../_actions/user_action'
 
 
 function QnAFooter(props){
+    const PostNum = 5;
+    
     const QnAFooterRef = useRef();
     const QnATBodyRef = useRef();
+    const QnAPaginationRef = useRef();
     const productIndex = props.clothMapNum;
-    
+    const clothName = props.clothName;
+
     const [QnAMap,setQnAMap] = useState('');
     const [MapLength,setMapLength] = useState('');
+    const [PostPaging,setPostPaging] = useState(1);
+
     const dispatch = useDispatch()
+
+    const postPagingHandler = (event) =>{
+        event.preventDefault();
+        const propPagingNum = event.target.classList.value.split('QnAPaging')[1];
+        if (propPagingNum!=PostPaging){
+            setPostPaging(propPagingNum)
+        }
+    }
     
     useEffect(()=>{
         if (productIndex!=0){
@@ -30,12 +44,78 @@ function QnAFooter(props){
     },[productIndex])
 
     useEffect(()=>{
-        if(QnAMap!=''){
-            console.log(Object.keys(QnAMap).length)
+        const footerRendering = () =>{
+            const result=[];
+            for (let i=0; i<MapLength/PostNum; i++){
+                result.push(
+                    <span onClick={postPagingHandler}>
+                        <a className={'QnAPaging'+(i+1)} href="#none" >[{i+1}]</a>
+                    </span>
+                )
+            }
+            ReactDOM.render(result,QnAPaginationRef.current);
+        }
+        if (MapLength!=''){
+            footerRendering();
+        }
+        
+    },[MapLength])
+
+    useEffect(()=>{
+        if(QnAMap!='' && MapLength!='' & clothName!=undefined){
+            let cnt =0;
+            let targetClassName='';
+            for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
+                if (i>MapLength){
+                    break;
+                }else{
+                    if (cnt%5==0){
+                        const trTag = document.createElement('tr');
+                        trTag.className = 'QnA'+cnt;
+                        targetClassName = 'QnA'+cnt;
+                        QnATBodyRef.current.appendChild(trTag);
+                        cnt=cnt+1;
+                    }
+
+                    const tdTagNum = document.createElement('td');
+                    const tdTagNumText = document.createTextNode(i)
+                    tdTagNum.appendChild(tdTagNumText);
+
+                    const tdTagProduct = document.createElement('td');
+                    const tdTagProductA = document.createElement('a');
+                    tdTagProductA.href='/ProductDetail/'+productIndex;
+                    const tdTagProductText = document.createTextNode(clothName);
+                    tdTagProductA.appendChild(tdTagProductText);
+                    tdTagProduct.appendChild(tdTagProductA);
+
+                    const tdTagTitle = document.createElement('td');
+                    const tdTagTitleA = document.createElement('a');
+                    tdTagTitleA.href='/QnA/'+QnAMap[i]._id;
+                    const tdTagTitleText = document.createTextNode(QnAMap[i].title);
+                    tdTagTitleA.appendChild(tdTagTitleText);
+                    tdTagTitle.appendChild(tdTagTitleA);
+
+                    const tdTagID = document.createElement('td');
+                    const tdTagIDText = document.createTextNode((QnAMap[i].userID).substring(0,3)+"***");
+                    tdTagID.appendChild(tdTagIDText);
+
+                    const tdTagDate = document.createElement('td');
+                    const tdTagDateText = document.createTextNode(QnAMap[i].regDate.split('T')[0]);
+                    tdTagDate.appendChild(tdTagDateText);
+
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagProduct);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
+                    
+                }
+            }
+            
             //Product 별 데이터는 인덱스가 들쭉날쭉할 것.
             //일단 Map을 받고, 해당 맵에 대한 각각의 인덱스를 재정립해야됨.
         }
-    },[QnAMap])
+    },[QnAMap,MapLength,clothName])
     
 
     return(
@@ -54,7 +134,10 @@ function QnAFooter(props){
                     
                 </tbody>
             </table>
-            <a href={"/QnAPost/"+productIndex}><button className='SubmitBtn' style={{marginLeft:'82%'}}>글 쓰기</button></a>
+            <div ref={QnAPaginationRef}>
+
+            </div>
+            <button className='SubmitBtn' style={{marginLeft:'82%'}}><a href={"/QnAPost/"+productIndex}>글 쓰기</a></button>
         </div>
     )
 }

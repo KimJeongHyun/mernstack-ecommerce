@@ -405,9 +405,13 @@ textarea:focus{
     height:30px;
     background-color:#8d8d8d;
     border:none;
-    color:#fff;
     position:relative;
+}
+
+.SubmitBtn a{
+    color:#fff;
     cursor:pointer;
+    text-decoration: none;
 }
 
 .footer{

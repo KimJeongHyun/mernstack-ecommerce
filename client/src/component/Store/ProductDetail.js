@@ -179,12 +179,12 @@ function ProductDetail(props){
                                 <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
                                 <p style={{left:'50%'}}>Q&amp;A</p>
                                 <div style={{height:'200px', marginTop:'10px', marginBottom:'100px', textAlign:'center'}}>
-                                    <QnAFooter clothMapNum={productIndex}/>
+                                    <QnAFooter clothMapNum={productIndex} clothName={clothMap.clothName}/>
                                 </div>
                                 <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
                                 <p style={{left:'50%'}}>Review</p>
                                 <div style={{height:'200px', marginTop:'10px', marginBottom:'10px',textAlign:'center'}}>
-                                    <ReviewFooter clothMapNum={productIndex}/>
+                                    <ReviewFooter clothMapNum={productIndex} clothName={clothMap.clothName}/>
                                 </div>
                             </div>
                         </div>
