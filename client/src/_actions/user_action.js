@@ -7,8 +7,10 @@ import{
     GET_CLOTHES,
     GET_DETAILDATA,
     GET_QNA,
+    GET_QNAONE,
     POST_QNA,
     GET_REVIEW,
+    GET_REVIEWONE,
     POST_REVIEW
 } from './types';
 
@@ -70,6 +72,16 @@ export function getQnAData(dataParam){
     }
 }
 
+export function getQnADataOne(dataParam1,dataParam2){
+    const request = axios.get('/api/getQnAOne/'+dataParam1+'/'+dataParam2)
+    .then(response=>response.data);
+
+    return{
+        type:GET_QNAONE,
+        payload:request
+    }
+}
+
 export function postQnAData(dataToSubmit){
     const request = axios.post('/api/postQnA/',dataToSubmit)
     .then(response=>response.data);
@@ -86,6 +98,16 @@ export function getReviewData(dataParam){
 
     return{
         type:GET_REVIEW,
+        payload:request
+    }
+}
+
+export function getReviewDataOne(dataParam1,dataParam2){
+    const request = axios.get('/api/getReviewOne/'+dataParam1+'/'+dataParam2)
+    .then(response=>response.data);
+    
+    return{
+        type:GET_REVIEWONE,
         payload:request
     }
 }

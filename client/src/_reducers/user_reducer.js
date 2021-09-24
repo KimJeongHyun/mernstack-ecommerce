@@ -5,8 +5,10 @@ import {
     GET_CLOTHES,
     GET_DETAILDATA,
     GET_QNA,
+    GET_QNAONE,
     POST_QNA,
     GET_REVIEW,
+    GET_REVIEWONE,
     POST_REVIEW
 } from '../_actions/types'
 
@@ -25,11 +27,15 @@ export default function (state={}, action){
         case GET_DETAILDATA:
             return {...state,getDetailData: action.payload}
         case GET_QNA:
-            return {...state,getQnAData: action.payload}   
+            return {...state,getQnAData: action.payload}
+        case GET_QNAONE:
+            return {...state,getQnAOneData: action.payload}   
         case POST_QNA:
             return {...state,postQnAData: action.payload}  
         case GET_REVIEW:
-            return {...state,getReviewData: action.payload}   
+            return {...state,getReviewData: action.payload}
+        case GET_REVIEWONE:
+            return {...state,getReviewOneData: action.payload}   
         case POST_REVIEW:
             return {...state,postReviewData: action.payload}  
         default:

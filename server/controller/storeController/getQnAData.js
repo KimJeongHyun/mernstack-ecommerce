@@ -6,15 +6,26 @@ router.get('/api/getQnA/:idx',(req,res)=>{
     QnA.find({clothIndex:req.params.idx}, function(err,QnAs){
         var QnAMap={};
         var startIndex = 0;
-        var cnt = 0;
+        var cnt = 1;
         QnAs.forEach(function(QnA){
-            QnAMap[QnA.QnAIndex] = QnA;
+            QnAMap[cnt] = QnA;
             if (cnt==0){
-                startIndex = QnA.QnAIndex;
+                startIndex = cnt;
             }
             cnt=cnt+1;
         })
-        res.json({getQnAData:true,QnAMap:QnAMap,length:QnAs.length,startIndex:startIndex})
+        res.json({getQnAData:true,QnAMap:QnAMap,length:QnAs.length,startIndex:cnt})
+    })
+})
+
+router.get('/api/getQnAOne/:idx/:_id',(req,res)=>{
+    QnA.find({clothIndex:req.params.idx, _id:req.params._id}, function(err,QnAs){
+        var QnAMap={};
+        var cnt = 1;
+        QnAs.forEach(function(QnA){
+            QnAMap[cnt] = QnA;
+        })
+        res.json({getQnAOneData:true,QnAMap:QnAMap})
     })
 })
 

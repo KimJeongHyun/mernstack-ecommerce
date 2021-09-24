@@ -88,7 +88,7 @@ function ReviewFooter(props){
 
                     const tdTagTitle = document.createElement('td');
                     const tdTagTitleA = document.createElement('a');
-                    tdTagTitleA.href='/Review/'+ReviewMap[i]._id;
+                    tdTagTitleA.href='/ReviewOne/'+productIndex+'/'+ReviewMap[i]._id;
                     const tdTagTitleText = document.createTextNode(ReviewMap[i].title);
                     tdTagTitleA.appendChild(tdTagTitleText);
                     tdTagTitle.appendChild(tdTagTitleA);

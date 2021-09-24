@@ -90,7 +90,7 @@ function QnAFooter(props){
 
                     const tdTagTitle = document.createElement('td');
                     const tdTagTitleA = document.createElement('a');
-                    tdTagTitleA.href='/QnA/'+QnAMap[i]._id;
+                    tdTagTitleA.href='/QnAOne/'+productIndex+'/'+QnAMap[i]._id;
                     const tdTagTitleText = document.createTextNode(QnAMap[i].title);
                     tdTagTitleA.appendChild(tdTagTitleText);
                     tdTagTitle.appendChild(tdTagTitleA);
