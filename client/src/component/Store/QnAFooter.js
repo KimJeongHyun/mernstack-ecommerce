@@ -69,12 +69,14 @@ function QnAFooter(props){
                 if (i>MapLength){
                     break;
                 }else{
-                    if (cnt%5==0){
+                    if (cnt!=5){
                         const trTag = document.createElement('tr');
                         trTag.className = 'QnA'+cnt;
                         targetClassName = 'QnA'+cnt;
                         QnATBodyRef.current.appendChild(trTag);
                         cnt=cnt+1;
+                    }else{
+                        cnt=0
                     }
 
                     const tdTagNum = document.createElement('td');
@@ -84,6 +86,7 @@ function QnAFooter(props){
                     const tdTagProduct = document.createElement('td');
                     const tdTagProductA = document.createElement('a');
                     tdTagProductA.href='/ProductDetail/'+productIndex;
+                    tdTagProductA.classList.add('productName')
                     const tdTagProductText = document.createTextNode(clothName);
                     tdTagProductA.appendChild(tdTagProductText);
                     tdTagProduct.appendChild(tdTagProductA);
@@ -91,6 +94,7 @@ function QnAFooter(props){
                     const tdTagTitle = document.createElement('td');
                     const tdTagTitleA = document.createElement('a');
                     tdTagTitleA.href='/QnAOne/'+productIndex+'/'+QnAMap[i]._id;
+                    tdTagTitleA.classList.add('title')
                     const tdTagTitleText = document.createTextNode(QnAMap[i].title);
                     tdTagTitleA.appendChild(tdTagTitleText);
                     tdTagTitle.appendChild(tdTagTitleA);

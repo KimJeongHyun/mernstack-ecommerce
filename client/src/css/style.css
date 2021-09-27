@@ -3,6 +3,16 @@ body{
     font:0.75em Arial,Dotum,AppleGothic,sans-serif;
 }
 
+table tr td .productName{
+    text-decoration:none;
+    color:black;
+}
+
+table tr td .title{
+    text-decoration: none;
+    color:blue;
+}
+
 input:focus,
 textarea:focus{
     outline:none;

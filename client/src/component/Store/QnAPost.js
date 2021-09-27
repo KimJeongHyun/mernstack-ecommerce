@@ -95,7 +95,7 @@ function QnAPost(props){
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button className='SubmitBtn' style={{left:'188px'}}>글 쓰기</button>
+                                    <button className='SubmitBtn' style={{left:'188px', cursor:'pointer', color:'#fff'}}>글 쓰기</button>
                                 </form>
                             </div>
                         </div>

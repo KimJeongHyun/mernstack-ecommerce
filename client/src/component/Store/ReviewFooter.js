@@ -67,12 +67,14 @@ function ReviewFooter(props){
                 if (i>MapLength){
                     break;
                 }else{
-                    if (cnt%5==0){
+                    if (cnt!=5){
                         const trTag = document.createElement('tr');
                         trTag.className = 'Review'+cnt;
                         targetClassName = 'Review'+cnt;
                         ReviewTBodyRef.current.appendChild(trTag);
                         cnt=cnt+1;
+                    }else{
+                        cnt=0
                     }
                     
                     const tdTagNum = document.createElement('td');
@@ -82,6 +84,7 @@ function ReviewFooter(props){
                     const tdTagProduct = document.createElement('td');
                     const tdTagProductA = document.createElement('a');
                     tdTagProductA.href='/ProductDetail/'+productIndex;
+                    tdTagProductA.classList.add('productName')
                     const tdTagProductText = document.createTextNode(clothName);
                     tdTagProductA.appendChild(tdTagProductText);
                     tdTagProduct.appendChild(tdTagProductA);
@@ -89,6 +92,7 @@ function ReviewFooter(props){
                     const tdTagTitle = document.createElement('td');
                     const tdTagTitleA = document.createElement('a');
                     tdTagTitleA.href='/ReviewOne/'+productIndex+'/'+ReviewMap[i]._id;
+                    tdTagTitleA.classList.add('title')
                     const tdTagTitleText = document.createTextNode(ReviewMap[i].title);
                     tdTagTitleA.appendChild(tdTagTitleText);
                     tdTagTitle.appendChild(tdTagTitleA);
