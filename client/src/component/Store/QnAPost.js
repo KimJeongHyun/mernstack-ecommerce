@@ -7,7 +7,7 @@ import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import '../../css/style.css'
 import axios from 'axios'
-import { postQnAData } from '../../_actions/user_action'
+import { postQnAData, getDetailData } from '../../_actions/user_action'
 
 
 
@@ -17,6 +17,7 @@ function QnAPost(props){
     const [postTitle,setPostTitle] = useState("");
     const [postContent,setPostContent] = useState("");
     const [clothIndex,setClothIndex] = useState(0);
+    const [clothName,setClothName] = useState("");
 
     const dispatch = useDispatch()
 
@@ -39,7 +40,8 @@ function QnAPost(props){
             postPW : postPW,
             postTitle : postTitle,
             postContent : postContent,
-            clothIndex : clothIndex
+            clothIndex : clothIndex,
+            clothName : clothName
         }
         dispatch(postQnAData(body))
         .then(response=>{
@@ -62,6 +64,14 @@ function QnAPost(props){
         })
     },[])
 
+    useEffect(()=>{
+        if (clothIndex!=''){
+            dispatch(getDetailData(clothIndex))
+            .then(response=>{
+                setClothName(response.payload.clothRes.clothName);
+            })
+        }
+    },[clothIndex])
     
 
     return(

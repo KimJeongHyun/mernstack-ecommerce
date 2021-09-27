@@ -34,7 +34,7 @@ function ReviewView(props){
                 <div className="uxArea">
                     <div className="contentContainer">
                         <div className="uxContent" style={{paddingTop:'0px'}}>
-                            <p style={{fontSize:'20px', color:'#676767'}}>Q&amp;A</p>
+                            <p style={{fontSize:'20px', color:'#676767'}}>Review</p>
                             <div className="writeContainer">
                                 <table>
                                     <thead>

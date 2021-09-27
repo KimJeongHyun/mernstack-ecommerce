@@ -5,6 +5,7 @@ autoIncrement.initialize(mongoose.connection);
 const ReviewSchema = mongoose.Schema({
     userID:String,
     clothIndex:Number,
+    clothName:String,
     title:String,
     content:String,
     password:String,

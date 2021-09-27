@@ -6,6 +6,7 @@ router.post('/api/postQnA/',(req,res)=>{
     const reqData = req.body;
     const userID = reqData.userID;
     const clothIndex = reqData.clothIndex;
+    const clothName = reqData.clothName;
     const title = reqData.postTitle;
     const content = reqData.postContent;
     const password = reqData.postPW;
@@ -13,6 +14,7 @@ router.post('/api/postQnA/',(req,res)=>{
     const postInfo = new QnA({
         userID:userID,
         clothIndex:clothIndex,
+        clothName:clothName,
         title:title,
         content:content,
         password:password

@@ -29,4 +29,16 @@ router.get('/api/getQnAOne/:idx/:_id',(req,res)=>{
     })
 })
 
+router.get('/api/getQnAAll/',(req,res)=>{
+    QnA.find({},function(err,QnAs){
+        var QnAMap={};
+        var cnt = 1;
+        QnAs.forEach(function(QnA){
+            QnAMap[cnt] = QnA;
+            cnt=cnt+1
+        })
+        res.json({getQnAAllData:true,QnAMap:QnAMap,length:QnAs.length})
+    })
+})
+
 module.exports = router;

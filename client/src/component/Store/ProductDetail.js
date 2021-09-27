@@ -171,7 +171,7 @@ function ProductDetail(props){
                                     <img src="images/jacket.jpg" style={{width:'100%'}}></img>
                                 </div>
                             </div>
-                            <div className="productFooter" style={{height:'850px', textAlign:'center'}}>
+                            <div className="productFooter" style={{height:'900px', textAlign:'center'}}>
                                 <div style={{textAlign:'center', height:'100px'}}>
                                     <button ref={productMoreBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={moreDetail}>내용 더 보기</button>
                                     <button ref={productShortBtnRef} style={{width:'30%', marginTop:'20px'}} onClick={hideDetail} hidden>내용 감추기</button>

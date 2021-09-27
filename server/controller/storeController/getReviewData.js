@@ -8,7 +8,7 @@ router.get('/api/getReview/:idx',(req,res)=>{
         var startIndex = 0;
         var cnt = 1;
         Reviews.forEach(function(Review){
-            ReviewMap[Review.ReviewIndex] = Review;
+            ReviewMap[cnt] = Review;
             if (cnt==0){
                 startIndex = Review.ReviewIndex;
             }
@@ -26,6 +26,18 @@ router.get('/api/getReviewOne/:idx/:_id',(req,res)=>{
             ReviewMap[cnt] = Review;
         })
         res.json({getReviewOneData:true,ReviewMap:ReviewMap})
+    })
+})
+
+router.get('/api/getReviewAll/',(req,res)=>{
+    Review.find({}, function(err,Reviews){
+        var ReviewMap={};
+        var cnt = 1;
+        Reviews.forEach(function(Review){
+            ReviewMap[Review.ReviewIndex] = Review;
+            cnt=cnt+1;
+        })
+        res.json({getReviewAllData:true,ReviewMap:ReviewMap,length:Reviews.length})
     })
 })
 

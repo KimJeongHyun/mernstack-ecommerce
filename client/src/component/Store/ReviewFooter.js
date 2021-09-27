@@ -26,9 +26,7 @@ function ReviewFooter(props){
     const postPagingHandler = (event) =>{
         event.preventDefault();
         const propPagingNum = event.target.classList.value.split('ReviewPaging')[1];
-        if (propPagingNum!=PostPaging){
-            setPostPaging(propPagingNum)
-        }
+        setPostPaging(propPagingNum)
     }
 
     useEffect(()=>{
@@ -60,6 +58,9 @@ function ReviewFooter(props){
     },[MapLength])
 
     useEffect(()=>{
+        while(ReviewTBodyRef.current.hasChildNodes()){
+            ReviewTBodyRef.current.removeChild(ReviewTBodyRef.current.firstChild)
+        }
         if(ReviewMap!='' && MapLength!='' & clothName!=undefined){
             let cnt = 0;
             let targetClassName='';

@@ -6,9 +6,11 @@ import {
     GET_DETAILDATA,
     GET_QNA,
     GET_QNAONE,
+    GET_QNAALL,
     POST_QNA,
     GET_REVIEW,
     GET_REVIEWONE,
+    GET_REVIEWALL,
     POST_REVIEW
 } from '../_actions/types'
 
@@ -29,13 +31,17 @@ export default function (state={}, action){
         case GET_QNA:
             return {...state,getQnAData: action.payload}
         case GET_QNAONE:
-            return {...state,getQnAOneData: action.payload}   
+            return {...state,getQnAOneData: action.payload}
+        case GET_QNAALL:
+            return {...state,getQnAAllData: action.payload}   
         case POST_QNA:
             return {...state,postQnAData: action.payload}  
         case GET_REVIEW:
             return {...state,getReviewData: action.payload}
         case GET_REVIEWONE:
-            return {...state,getReviewOneData: action.payload}   
+            return {...state,getReviewOneData: action.payload} 
+        case GET_REVIEWALL:
+            return {...state,getReviewAllData: action.payload}    
         case POST_REVIEW:
             return {...state,postReviewData: action.payload}  
         default:

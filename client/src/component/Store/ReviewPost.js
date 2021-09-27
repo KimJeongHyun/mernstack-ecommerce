@@ -7,8 +7,7 @@ import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import '../../css/style.css'
 import axios from 'axios'
-import { postReviewData } from '../../_actions/user_action'
-import { Redirect } from 'react-router-dom'
+import { postReviewData, getDetailData } from '../../_actions/user_action'
 
 
 function ReviewPost(props){
@@ -17,6 +16,7 @@ function ReviewPost(props){
     const [postTitle,setPostTitle] = useState("");
     const [postContent,setPostContent] = useState("");
     const [clothIndex,setClothIndex] = useState(0);
+    const [clothName,setClothName] = useState("");
 
     const dispatch = useDispatch()
 
@@ -39,7 +39,8 @@ function ReviewPost(props){
             postPW : postPW,
             postTitle : postTitle,
             postContent : postContent,
-            clothIndex : clothIndex
+            clothIndex : clothIndex,
+            clothName : clothName
         }
         dispatch(postReviewData(body))
         .then(response=>{
@@ -59,7 +60,17 @@ function ReviewPost(props){
         .then(response=>{
             setUserID(response.data.ID)
         })
+
     },[])
+
+    useEffect(()=>{
+        if (clothIndex!=''){
+            dispatch(getDetailData(clothIndex))
+            .then(response=>{
+                setClothName(response.payload.clothRes.clothName);
+            })
+        }
+    },[clothIndex])
 
     return(
         <div id='container'>

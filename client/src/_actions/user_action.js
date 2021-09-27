@@ -8,9 +8,11 @@ import{
     GET_DETAILDATA,
     GET_QNA,
     GET_QNAONE,
+    GET_QNAALL,
     POST_QNA,
     GET_REVIEW,
     GET_REVIEWONE,
+    GET_REVIEWALL,
     POST_REVIEW
 } from './types';
 
@@ -82,6 +84,16 @@ export function getQnADataOne(dataParam1,dataParam2){
     }
 }
 
+export function getQnADataAll(){
+    const request = axios.get('/api/getQnAAll/')
+    .then(response=>response.data);
+
+    return{
+        type:GET_QNAALL,
+        payload:request
+    }
+}
+
 export function postQnAData(dataToSubmit){
     const request = axios.post('/api/postQnA/',dataToSubmit)
     .then(response=>response.data);
@@ -111,6 +123,17 @@ export function getReviewDataOne(dataParam1,dataParam2){
         payload:request
     }
 }
+
+export function getReviewDataAll(){
+    const request = axios.get('/api/getReviewAll/')
+    .then(response=>response.data);
+
+    return{
+        type:GET_REVIEWALL,
+        payload:request
+    }
+}
+
 
 export function postReviewData(dataToSubmit){
     const request = axios.post('/api/postReview/',dataToSubmit)
