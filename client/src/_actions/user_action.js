@@ -13,7 +13,10 @@ import{
     GET_REVIEW,
     GET_REVIEWONE,
     GET_REVIEWALL,
-    POST_REVIEW
+    POST_REVIEW,
+    GET_NOTICE,
+    GET_NOTICEONE,
+    POST_NOTICE
 } from './types';
 
 export function auth(){
@@ -141,6 +144,36 @@ export function postReviewData(dataToSubmit){
 
     return{
         type:POST_REVIEW,
+        payload:request
+    }
+}
+
+export function getNotice(){
+    const request = axios.get('/api/getNotice/')
+    .then(response=>response.data)
+
+    return{
+        type:GET_NOTICE,
+        payload:request
+    }
+}
+
+export function getNoticeOne(dataParam1,dataParam2){
+    const request = axios.get('/api/getNoticeOne/'+dataParam1+'/'+dataParam2)
+    .then(response=>response.data)
+
+    return{
+        type:GET_NOTICEONE,
+        payload:request
+    }
+}
+
+export function postNotice(dataToSubmit){
+    const request = axios.post('/api/postNotice',dataToSubmit)
+    .then(response=>response.data)
+
+    return{
+        type:POST_NOTICE,
         payload:request
     }
 }

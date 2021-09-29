@@ -13,7 +13,8 @@ const getQnAData = require('./controller/storeController/getQnAData');
 const postQnAData = require('./controller/storeController/postQnA');
 const getReviewData = require('./controller/storeController/getReviewData');
 const postReviewData = require('./controller/storeController/postReview');
-
+const getNotice = require('./controller/boardController/getNotice');
+const postNotice = require('./controller/boardController/postNotice');
 
 const port = 5000;
 
@@ -53,6 +54,8 @@ app.use(getQnAData);
 app.use(postQnAData);
 app.use(getReviewData);
 app.use(postReviewData);
+app.use(getNotice);
+app.use(postNotice);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{

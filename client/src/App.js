@@ -24,6 +24,8 @@ import QnAPost from "./component/Store/QnAPost";
 import QnAView from "./component/Store/QnAView";
 import ReviewPost from "./component/Store/ReviewPost"
 import ReviewView from "./component/Store/ReviewView";
+import NoticePost from "./component/RowbarMenu/Notice/NoticePost";
+import NoticeView from "./component/RowbarMenu/Notice/NoticeView";
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
         <Route path="/ReviewPost/" component={Auth(ReviewPost,true)}/>
         <Route path="/QnAOne/:idx/:_id" component={QnAView}/>
         <Route path="/ReviewOne/:idx/:_id" component={ReviewView}/>
+        <Route path="/NoticePost/" component={Auth(NoticePost,true)}/>
+        <Route path="/NoticeOne/:idx/:_id" component={NoticeView}/>
       </Switch>
     </Router>
   );

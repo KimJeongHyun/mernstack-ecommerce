@@ -13,6 +13,14 @@ export default function (SpecificComponent, option, adminRoute = null){
                     if (option==false){
                         alert('으악!');
                     }
+                    if (SpecificComponent.name=='NoticePost'){
+                        if (response.payload.ID!='admin'){
+                            alert('비정상적인 접근입니다.')
+                            props.history.push({
+                                pathname:'/'
+                            })
+                        }
+                    }
                 }else{
                     if (option==true && SpecificComponent.name!=='Logout'){
                         alert('로그인을 먼저 해주시기 바랍니다.')

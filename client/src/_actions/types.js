@@ -23,3 +23,10 @@ export const GET_REVIEWONE="get_reviewone"
 export const GET_REVIEWALL="get_reviewall"
 
 export const POST_REVIEW="post_review"
+
+export const GET_NOTICE="get_notice"
+
+export const GET_NOTICEONE="get_noticeone"
+
+export const POST_NOTICE="post_notice"
+

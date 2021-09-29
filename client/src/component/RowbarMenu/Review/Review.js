@@ -55,12 +55,9 @@ function Review(props){
     },[MapLength])
 
     useEffect(()=>{
-        const work1 = () =>{
-            while(ReviewTBodyRef.current.hasChildNodes()){
-                ReviewTBodyRef.current.removeChild(ReviewTBodyRef.current.firstChild)
-            }
+        while(ReviewTBodyRef.current.hasChildNodes()){
+            ReviewTBodyRef.current.removeChild(ReviewTBodyRef.current.firstChild)
         }
-        work1();
         if(ReviewMap!='' && MapLength!=''){
             let cnt = 0;
             let targetClassName='';
@@ -146,7 +143,7 @@ function Review(props){
                                 <div ref={ReviewPaginationRef}>
 
                                 </div>
-                                <button style={{width:'170px',height:'50px', marginTop:'10px', marginLeft:'79%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
+                                <button className='SubmitBtn' style={{marginLeft:'79%'}}><a href='#none'>글 쓰기</a></button>
                             </div>
                         </div>
                     </div>

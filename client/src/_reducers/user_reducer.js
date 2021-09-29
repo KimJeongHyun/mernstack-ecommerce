@@ -11,7 +11,10 @@ import {
     GET_REVIEW,
     GET_REVIEWONE,
     GET_REVIEWALL,
-    POST_REVIEW
+    POST_REVIEW,
+    GET_NOTICE,
+    GET_NOTICEONE,
+    POST_NOTICE
 } from '../_actions/types'
 
 
@@ -44,6 +47,12 @@ export default function (state={}, action){
             return {...state,getReviewAllData: action.payload}    
         case POST_REVIEW:
             return {...state,postReviewData: action.payload}  
+        case GET_NOTICE:
+            return {...state,getNoticeData: action.payload}
+        case GET_NOTICEONE:
+            return {...state,getNoticeOne: action.payload}    
+        case POST_NOTICE:
+            return {...state,postNoticeData: action.payload}
         default:
             return state;
     }
