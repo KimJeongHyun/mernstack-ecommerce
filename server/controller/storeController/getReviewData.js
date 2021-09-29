@@ -3,7 +3,7 @@ const {Review} = require('../../model/ReviewSchema')
 const router = require('express').Router();
 
 router.get('/api/getReview/:idx',(req,res)=>{
-    Review.find({clothIndex:req.params.idx}, function(err,Reviews){
+    Review.find({clothIndex:req.params.idx}).sort({regDate:-1}).exec(function(err,Reviews){
         var ReviewMap={};
         var startIndex = 0;
         var cnt = 1;
@@ -19,7 +19,7 @@ router.get('/api/getReview/:idx',(req,res)=>{
 })
 
 router.get('/api/getReviewOne/:idx/:_id',(req,res)=>{
-    Review.find({clothIndex:req.params.idx, _id:req.params._id}, function(err,Reviews){
+    Review.find({clothIndex:req.params.idx, _id:req.params._id}).sort({regDate:-1}).exec(function(err,Reviews){
         var ReviewMap={};
         var cnt = 1;
         Reviews.forEach(function(Review){
@@ -30,7 +30,7 @@ router.get('/api/getReviewOne/:idx/:_id',(req,res)=>{
 })
 
 router.get('/api/getReviewAll/',(req,res)=>{
-    Review.find({}, function(err,Reviews){
+    Review.find({}).sort({regDate:-1}).exec(function(err,Reviews){
         var ReviewMap={};
         var cnt = 1;
         Reviews.forEach(function(Review){

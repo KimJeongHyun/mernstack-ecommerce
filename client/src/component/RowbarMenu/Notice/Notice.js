@@ -4,10 +4,29 @@ import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
+import axios from 'axios'
 
 
 
 function Notice(props){
+
+    const NoticeBtnRef = useRef();
+
+    useEffect(()=>{
+        axios.get('/api/getSession/')
+        .then(response=>{
+            if (response.data.userID=='admin'){
+                const btnRendering = () =>{
+                    const result=[];
+                    result.push(
+                        <button style={{width:'170px',height:'50px', marginTop:'10px', marginLeft:'73%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
+                    )
+                }
+                ReactDOM.render(btnRendering(),NoticeBtnRef.current);
+            }
+        })
+    })
+
     return(
         <div id='container'>
             <>
@@ -47,7 +66,10 @@ function Notice(props){
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button style={{width:'170px',height:'50px', marginTop:'10px', marginLeft:'73%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>글 쓰기</button>
+                                <div ref={NoticeBtnRef}>
+
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

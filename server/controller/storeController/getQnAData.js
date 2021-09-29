@@ -3,7 +3,7 @@ const {QnA} = require('../../model/QnASchema')
 const router = require('express').Router();
 
 router.get('/api/getQnA/:idx',(req,res)=>{
-    QnA.find({clothIndex:req.params.idx}, function(err,QnAs){
+    QnA.find({clothIndex:req.params.idx}).sort({regDate:-1}).exec(function(err,QnAs){
         var QnAMap={};
         var startIndex = 0;
         var cnt = 1;
@@ -19,7 +19,7 @@ router.get('/api/getQnA/:idx',(req,res)=>{
 })
 
 router.get('/api/getQnAOne/:idx/:_id',(req,res)=>{
-    QnA.find({clothIndex:req.params.idx, _id:req.params._id}, function(err,QnAs){
+    QnA.find({clothIndex:req.params.idx, _id:req.params._id}).sort({regDate:-1}).exec(function(err,QnAs){
         var QnAMap={};
         var cnt = 1;
         QnAs.forEach(function(QnA){
@@ -30,7 +30,7 @@ router.get('/api/getQnAOne/:idx/:_id',(req,res)=>{
 })
 
 router.get('/api/getQnAAll/',(req,res)=>{
-    QnA.find({},function(err,QnAs){
+    QnA.find({}).sort({regDate:-1}).exec(function(err,QnAs){
         var QnAMap={};
         var cnt = 1;
         QnAs.forEach(function(QnA){
