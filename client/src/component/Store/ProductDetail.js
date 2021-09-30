@@ -12,6 +12,9 @@ import ReviewFooter from './ReviewFooter'
 function ProductDetail(props){
     const [detailUpdate, setDetailUpdate] = useState(false);
 
+    const boxRef = useRef();
+    const cursorBoxRef = useRef();
+
     const productBodyRef = useRef();
     const productMoreBtnRef = useRef();
     const productShortBtnRef = useRef();
@@ -30,6 +33,64 @@ function ProductDetail(props){
     const [clothMap,setClothMap] = useState('');
     
     const dispatch = useDispatch()
+
+
+    const imgMouseMoveFunc = (event) =>{
+        event.preventDefault();
+        const rect = event.target.getBoundingClientRect();
+        let xCoordi = event.clientX;
+        let yCoordi = event.clientY;
+        // 이미지의 맨 위 절대 y좌표는 rect.top
+        // 이미지의 맨 밑쪽 절대 y좌표는 rect.bottom
+        // 이미지의 맨 왼쪽 절대 x좌표는 rect.left
+        // 이미지의 맨 오른쪽 절대 x좌표는 rect.right
+        // 사용자의 커서 X좌표 = event.clientX
+        // 사용자의 커서 Y좌표 = event.clientY
+        // event.clientX-250좌
+        // event.clientX+250우
+        // event.clientY-250하
+        // event.clientY+250상
+
+        if (xCoordi-50<rect.left){
+            xCoordi = rect.left+50;
+        }
+        if (xCoordi+50>rect.right){
+            xCoordi = rect.right-50;
+        }
+        if (yCoordi-50<rect.top){
+            yCoordi = rect.top+50;
+        }
+        if (yCoordi+50>rect.bottom){
+            yCoordi = rect.bottom-50;
+        }
+        const divRendering = () =>{
+                const result = [];
+                result.push(
+                    <div ref={cursorBoxRef} style={{position:'absolute',left:`${xCoordi}px`,top:`${yCoordi}px`}}>
+                        hi
+                    </div>
+                )
+                return result;
+        }
+        ReactDOM.render(divRendering(),boxRef.current);
+        cursorBoxRef.current.style.display = 'block'
+    }
+
+    const imgMouseLeaveFunc = (event) =>{
+        event.preventDefault();
+        const rect = event.target.getBoundingClientRect();
+        let xCoordi = event.clientX;
+        let yCoordi = event.clientY;
+        if (xCoordi<=Math.floor(rect.left) || xCoordi>=Math.floor(rect.right)){
+            cursorBoxRef.current.style.display = 'none'
+        }
+
+        if (yCoordi<=Math.floor(rect.top) || yCoordi>=Math.floor(rect.bottom)){
+            cursorBoxRef.current.style.display = 'none'
+        }
+
+
+    }
 
     useEffect(()=>{
         setProductIndex(props.location.pathname.split('/')[2])
@@ -51,7 +112,7 @@ function ProductDetail(props){
             const imgPath = () =>{
                 const result = [];
                 result.push(
-                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}}/>
+                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseOutCapture={imgMouseLeaveFunc} onMouseMove={imgMouseMoveFunc}/>
                 )
                 return result;
             }
@@ -195,6 +256,9 @@ function ProductDetail(props){
                         </nav>
                     </div>
                 </div>
+            </div>
+            <div ref={boxRef}>
+
             </div>
             <Footer/>
         </div>
