@@ -46,50 +46,53 @@ function ProductDetail(props){
         // 이미지의 맨 오른쪽 절대 x좌표는 rect.right
         // 사용자의 커서 X좌표 = event.clientX
         // 사용자의 커서 Y좌표 = event.clientY
-        // event.clientX-250좌
-        // event.clientX+250우
-        // event.clientY-250하
-        // event.clientY+250상
 
-        if (xCoordi-50<rect.left){
-            xCoordi = rect.left+50;
+
+        if (xCoordi-25<rect.left){
+            xCoordi = rect.left+25;
         }
-        if (xCoordi+50>rect.right){
-            xCoordi = rect.right-50;
+        if (xCoordi+25>rect.right){
+            xCoordi = rect.right-25;
         }
-        if (yCoordi-50<rect.top){
-            yCoordi = rect.top+50;
+        if (yCoordi-25<rect.top){
+            yCoordi = rect.top+25;
         }
-        if (yCoordi+50>rect.bottom){
-            yCoordi = rect.bottom-50;
+        if (yCoordi+25>rect.bottom){
+            yCoordi = rect.bottom-25;
         }
         const divRendering = () =>{
                 const result = [];
                 result.push(
-                    <div ref={cursorBoxRef} style={{position:'absolute',left:`${xCoordi}px`,top:`${yCoordi}px`}}>
-                        hi
+                    <div ref={cursorBoxRef} 
+                    style={{
+                        position:'absolute',
+                        width:'50px', height:'50px', 
+                        left:`${xCoordi-25}px`,top:`${yCoordi-25}px`
+                    }}>
+                        <div style={{position:'relative',left:'18.75px',top:'18.75px'}}>
+                            {/* 이미지 줌인 영역 */}
+                        </div>
                     </div>
                 )
                 return result;
         }
         ReactDOM.render(divRendering(),boxRef.current);
-        cursorBoxRef.current.style.display = 'block'
+        if (event.target.tagName=='IMG'){
+            cursorBoxRef.current.style.visibility='visible'
+            cursorBoxRef.current.style.backgroundColor = '#fdfdfd'
+            cursorBoxRef.current.style.opacity = '0.7'
+        } 
     }
 
     const imgMouseLeaveFunc = (event) =>{
         event.preventDefault();
-        const rect = event.target.getBoundingClientRect();
-        let xCoordi = event.clientX;
-        let yCoordi = event.clientY;
-        if (xCoordi<=Math.floor(rect.left) || xCoordi>=Math.floor(rect.right)){
-            cursorBoxRef.current.style.display = 'none'
+        if (event.target.tagName=='DIV'){
+            if (cursorBoxRef.current!=undefined){
+                cursorBoxRef.current.style.visibility='hidden'
+            }
         }
 
-        if (yCoordi<=Math.floor(rect.top) || yCoordi>=Math.floor(rect.bottom)){
-            cursorBoxRef.current.style.display = 'none'
-        }
-
-
+        
     }
 
     useEffect(()=>{
@@ -112,7 +115,7 @@ function ProductDetail(props){
             const imgPath = () =>{
                 const result = [];
                 result.push(
-                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseOutCapture={imgMouseLeaveFunc} onMouseMove={imgMouseMoveFunc}/>
+                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseMoveCapture={imgMouseMoveFunc}/>
                 )
                 return result;
             }
@@ -152,7 +155,7 @@ function ProductDetail(props){
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
                         <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
-                                <div className="productImage" ref={productImageRef} style={{width:'250px', display:'inline-block'}}>
+                                <div className="productImage" ref={productImageRef} style={{width:'300px', display:'inline-block', padding:'10px 10px'}} onMouseOver={imgMouseLeaveFunc}>
                                     
                                 </div>
                                 <div className="productInfo" style={{lineHeight:'20px'}}>
@@ -163,14 +166,14 @@ function ProductDetail(props){
                                     <span ref={productSellNumRef}></span> <br/> 
                                     <span>구매 후기</span> &nbsp; &#124; &nbsp;
                                     <span ref={productReviewNumRef}></span> <br/>  
-                                    <hr style={{marginTop:'5px',border:'none',backgroundColor:'lightgray', width:'50%', height:'1px', margin:'0'}}/>
-                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}> Delivery Info</h3>
+                                    <hr style={{marginTop:'10px',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
+                                    <h3 style={{marginTop:'10px',marginBottom:'5px'}}> Delivery Info</h3>
                                     <span>배송 방법</span> &nbsp; &#124; &nbsp;
                                     <span ref={productDeliveryRef}></span> <br/>  
                                     <span>출고 기간</span> &nbsp; &#124; &nbsp;
                                     <span ref={productExportRef}></span> <br/>  
-                                    <hr style={{marginTop:'5px',border:'none',backgroundColor:'lightgray', width:'50%', height:'1px', margin:'0'}}/>
-                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}>Price Info</h3>
+                                    <hr style={{marginTop:'10px',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
+                                    <h3 style={{marginTop:'10px',marginBottom:'5px'}}>Price Info</h3>
                                     <span>판매가</span> &nbsp; &#124; &nbsp;
                                     <span ref={productPriceRef}></span> 원<br/>
                                     <span>할인가</span> &nbsp; &#124; &nbsp; 
