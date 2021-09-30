@@ -202,3 +202,20 @@ function ProductDetail(props){
 }
 
 export default ProductDetail
+
+
+
+/* 줌인 줌아웃 방법
+function zoomIn() {
+    image.style.transform="scale(1.2)"
+    image.style.transition = "all 0.5s"
+}
+
+function zoomOut() {
+    image.style.transform="scale(1.0)"
+    image.style.transition = "all 0.5s"
+}
+
+image.addEventListener('mouseenter',zoomIn)
+image.addEventListener('mouseleave',zoomOut)
+*/
