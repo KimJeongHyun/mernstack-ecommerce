@@ -6,7 +6,7 @@
 * MongoDB + Mongoose
 * Node.js
 * Express (Next.js 학습 예정)
-
+---
 구현 사항
 1. 회원가입/로그인/로그아웃
 2. Navigation Bar (사이드, 위쪽 고정)
