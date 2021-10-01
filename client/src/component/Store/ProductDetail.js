@@ -87,7 +87,7 @@ function ProductDetail(props){
         let cy = imageZoomRef.current.offsetHeight/cursorBoxRef.current.offsetHeight;
 
         imageZoomRef.current.style.backgroundSize=productImageTagRef.current.offsetWidth*cx+'px '+productImageTagRef.current.offsetHeight*cy+'px'
-        let x = xCoordi+25-cursorBoxRef.current.offsetWidth;
+        let x = xCoordi+10-cursorBoxRef.current.offsetWidth;
         let y = yCoordi-100-cursorBoxRef.current.offsetHeight;
         
         if (event.target.tagName=='IMG'){
