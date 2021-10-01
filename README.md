@@ -18,7 +18,7 @@
 7. 제품별 Q&A, Review Footer ( Create, View, Pagination )
 8. 제품 전체 Q&A, Review ( Create, View, Pagination )
 9. Notice ( Admin Only. Create, View)
-
+---
 구현 필요사항
 1. SCSS, GSAP
 2. 장바구니(비 로그인 유저, 로그인 유저 구별 필요)
@@ -27,7 +27,7 @@
 3. 좋아요 버튼(로그인 유저만 가능.)
 4. 관리자 페이지
  * 물품 정리표를 업로드하면 서버에서 자동으로 DB에 넣어주는 로직. 관리자용
-
+---
 추가해야하는 Model
 1. users model modified(좋아요, 장바구니)
 
