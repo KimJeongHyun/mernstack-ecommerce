@@ -14,6 +14,9 @@ function ProductDetail(props){
 
     const boxRef = useRef();
     const cursorBoxRef = useRef();
+    const imgLensRef = useRef();
+    const imageZoomRef = useRef();
+    const productImageTagRef = useRef();
 
     const productBodyRef = useRef();
     const productMoreBtnRef = useRef();
@@ -40,13 +43,15 @@ function ProductDetail(props){
         const rect = event.target.getBoundingClientRect();
         let xCoordi = event.clientX;
         let yCoordi = event.clientY;
+        
+        const imgWidth = productImageTagRef.current.width;
+        const imgHeight = productImageTagRef.current.height;
         // 이미지의 맨 위 절대 y좌표는 rect.top
         // 이미지의 맨 밑쪽 절대 y좌표는 rect.bottom
         // 이미지의 맨 왼쪽 절대 x좌표는 rect.left
         // 이미지의 맨 오른쪽 절대 x좌표는 rect.right
         // 사용자의 커서 X좌표 = event.clientX
         // 사용자의 커서 Y좌표 = event.clientY
-
 
         if (xCoordi-25<rect.left){
             xCoordi = rect.left+25;
@@ -69,18 +74,28 @@ function ProductDetail(props){
                         width:'50px', height:'50px', 
                         left:`${xCoordi-25}px`,top:`${yCoordi-25}px`
                     }}>
-                        <div style={{position:'relative',left:'18.75px',top:'18.75px'}}>
-                            {/* 이미지 줌인 영역 */}
+                        <div ref={imgLensRef} style={{position:'relative',left:'18.75px',top:'18.75px'}}>
+                            {/* img zoom lens */}
                         </div>
                     </div>
                 )
                 return result;
         }
         ReactDOM.render(divRendering(),boxRef.current);
+        
+        let cx = imageZoomRef.current.offsetWidth/cursorBoxRef.current.offsetWidth;
+        let cy = imageZoomRef.current.offsetHeight/cursorBoxRef.current.offsetHeight;
+
+        imageZoomRef.current.style.backgroundSize=productImageTagRef.current.offsetWidth*cx+'px '+productImageTagRef.current.offsetHeight*cy+'px'
+        let x = xCoordi+25-cursorBoxRef.current.offsetWidth;
+        let y = yCoordi-100-cursorBoxRef.current.offsetHeight;
+        
         if (event.target.tagName=='IMG'){
             cursorBoxRef.current.style.visibility='visible'
             cursorBoxRef.current.style.backgroundColor = '#fdfdfd'
             cursorBoxRef.current.style.opacity = '0.7'
+            imageZoomRef.current.style.visibility='visible'
+            imageZoomRef.current.style.backgroundPosition='-'+(x*cx)+'px -'+(y*cy)+'px'
         } 
     }
 
@@ -89,6 +104,7 @@ function ProductDetail(props){
         if (event.target.tagName=='DIV'){
             if (cursorBoxRef.current!=undefined){
                 cursorBoxRef.current.style.visibility='hidden'
+                imageZoomRef.current.style.visibility='hidden'
             }
         }
 
@@ -115,8 +131,9 @@ function ProductDetail(props){
             const imgPath = () =>{
                 const result = [];
                 result.push(
-                    <img src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseMoveCapture={imgMouseMoveFunc}/>
+                    <img ref={productImageTagRef} src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseMoveCapture={imgMouseMoveFunc}/>
                 )
+                imageZoomRef.current.style.backgroundImage="url('../"+clothMap.clothImgPath+"')"
                 return result;
             }
             ReactDOM.render(imgPath(),productImageRef.current)
@@ -156,6 +173,9 @@ function ProductDetail(props){
                         <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
                                 <div className="productImage" ref={productImageRef} style={{width:'300px', display:'inline-block', padding:'10px 10px'}} onMouseOver={imgMouseLeaveFunc}>
+                                    
+                                </div>
+                                <div ref = {imageZoomRef} className='imageZoom'>
                                     
                                 </div>
                                 <div className="productInfo" style={{lineHeight:'20px'}}>

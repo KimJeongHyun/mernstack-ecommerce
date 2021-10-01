@@ -335,6 +335,16 @@ textarea:focus{
     }
 }
 
+.imageZoom{
+    position:absolute;
+    width:250px;
+    height:375px;
+    margin-top:30px;
+    top:0%;
+    display:inline-block;
+    background-image: url('../images/jacket.jpg');
+}
+
 .payBox{
     position:fixed;
     width:300px;
