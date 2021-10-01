@@ -14,7 +14,6 @@ function ProductDetail(props){
 
     const boxRef = useRef();
     const cursorBoxRef = useRef();
-    const imgLensRef = useRef();
     const imageZoomRef = useRef();
     const productImageTagRef = useRef();
 
@@ -34,66 +33,59 @@ function ProductDetail(props){
 
     const [productIndex,setProductIndex] = useState(0);
     const [clothMap,setClothMap] = useState('');
-    
+    const [cursorCoordi,setCursorCoordi] = useState({
+        cursorX:0,
+        cursorY:0
+    })
+
     const dispatch = useDispatch()
 
 
     const imgMouseMoveFunc = (event) =>{
         event.preventDefault();
-        const rect = event.target.getBoundingClientRect();
-        let xCoordi = event.clientX;
-        let yCoordi = event.clientY;
         
-        const imgWidth = productImageTagRef.current.width;
-        const imgHeight = productImageTagRef.current.height;
+        let xCoordi = event.pageX;
+        let yCoordi = event.pageY;
+        setCursorCoordi({
+            cursorX:xCoordi-25,
+            cursorY:yCoordi-25
+        })
         // 이미지의 맨 위 절대 y좌표는 rect.top
         // 이미지의 맨 밑쪽 절대 y좌표는 rect.bottom
         // 이미지의 맨 왼쪽 절대 x좌표는 rect.left
         // 이미지의 맨 오른쪽 절대 x좌표는 rect.right
-        // 사용자의 커서 X좌표 = event.clientX
-        // 사용자의 커서 Y좌표 = event.clientY
+        // 사용자의 커서 X좌표 = event.pageX
+        // 사용자의 커서 Y좌표 = event.pageY
 
-        if (xCoordi-25<rect.left){
-            xCoordi = rect.left+25;
-        }
-        if (xCoordi+25>rect.right){
-            xCoordi = rect.right-25;
-        }
-        if (yCoordi-25<rect.top){
-            yCoordi = rect.top+25;
-        }
-        if (yCoordi+25>rect.bottom){
-            yCoordi = rect.bottom-25;
-        }
-        const divRendering = () =>{
-                const result = [];
-                result.push(
-                    <div ref={cursorBoxRef} 
-                    style={{
-                        position:'absolute',
-                        width:'50px', height:'50px', 
-                        left:`${xCoordi-25}px`,top:`${yCoordi-25}px`
-                    }}>
-                        <div ref={imgLensRef} style={{position:'relative',left:'18.75px',top:'18.75px'}}>
-                            {/* img zoom lens */}
-                        </div>
-                    </div>
-                )
-                return result;
-        }
-        ReactDOM.render(divRendering(),boxRef.current);
-        
         let cx = imageZoomRef.current.offsetWidth/cursorBoxRef.current.offsetWidth;
         let cy = imageZoomRef.current.offsetHeight/cursorBoxRef.current.offsetHeight;
 
-        imageZoomRef.current.style.backgroundSize=productImageTagRef.current.offsetWidth*cx+'px '+productImageTagRef.current.offsetHeight*cy+'px'
-        let x = xCoordi+10-cursorBoxRef.current.offsetWidth;
-        let y = yCoordi-100-cursorBoxRef.current.offsetHeight;
+        imageZoomRef.current.style.backgroundSize=productImageTagRef.current.width*cx+'px '+productImageTagRef.current.height*cy+'px'
+
+        const rect = event.target.getBoundingClientRect();
+        
+        function getCursorPos(e){
+            let a, x=0, y=0;
+
+            a = rect;
+            x = e.pageX - a.left;
+            y = e.pageY - a.top;
+            x = x-window.scrollX
+            y = y-window.scrollY
+            return {x:x, y:y}
+        }
+
+        const pos = getCursorPos(event);
+
+        let x = pos.x-cursorBoxRef.current.offsetWidth/2;
+        let y = pos.y-cursorBoxRef.current.offsetHeight/2;
         
         if (event.target.tagName=='IMG'){
-            cursorBoxRef.current.style.visibility='visible'
+            /*cursorBoxRef.current.style.visibility='visible'
             cursorBoxRef.current.style.backgroundColor = '#fdfdfd'
             cursorBoxRef.current.style.opacity = '0.7'
+            커서 영역 보이게 하는 코드
+            */
             imageZoomRef.current.style.visibility='visible'
             imageZoomRef.current.style.backgroundPosition='-'+(x*cx)+'px -'+(y*cy)+'px'
         } 
@@ -107,8 +99,6 @@ function ProductDetail(props){
                 imageZoomRef.current.style.visibility='hidden'
             }
         }
-
-        
     }
 
     useEffect(()=>{
@@ -131,7 +121,9 @@ function ProductDetail(props){
             const imgPath = () =>{
                 const result = [];
                 result.push(
-                    <img ref={productImageTagRef} src={'../'+clothMap.clothImgPath} style={{maxWidth:'250px'}} onMouseMoveCapture={imgMouseMoveFunc}/>
+                    <img ref={productImageTagRef} 
+                    src={'../'+clothMap.clothImgPath} 
+                    style={{maxWidth:'250px'}} onMouseMove={imgMouseMoveFunc}/>
                 )
                 imageZoomRef.current.style.backgroundImage="url('../"+clothMap.clothImgPath+"')"
                 return result;
@@ -172,14 +164,18 @@ function ProductDetail(props){
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
                         <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
-                                <div className="productImage" ref={productImageRef} style={{width:'300px', display:'inline-block', padding:'10px 10px'}} onMouseOver={imgMouseLeaveFunc}>
+
+                                <div className="productImage" ref={productImageRef} 
+                                style={{width:'300px', display:'inline-block', padding:'10px 10px'}} 
+                                onMouseOver={imgMouseLeaveFunc}>
                                     
                                 </div>
                                 <div ref = {imageZoomRef} className='imageZoom'>
                                     
                                 </div>
+
                                 <div className="productInfo" style={{lineHeight:'20px'}}>
-                                    <h3 style={{marginTop:'5px',marginBottom:'5px'}}> Product Info </h3>
+                                    <h3 style={{marginTop:'10px',marginBottom:'5px'}}> Product Info </h3>
                                     <span>품명 / 품번 </span> &#124; &nbsp;
                                     <span ref={productNameNumRef}></span> / {productIndex} <br/>
                                     <span>판매 갯수</span> &nbsp; &#124; &nbsp;
@@ -281,7 +277,13 @@ function ProductDetail(props){
                 </div>
             </div>
             <div ref={boxRef}>
-
+                <div ref={cursorBoxRef} 
+                    style={{
+                        position:'absolute',
+                        width:'50px', height:'50px', 
+                        left:`${cursorCoordi.cursorX}px`,top:`${cursorCoordi.cursorY}px`
+                    }}>
+                </div>
             </div>
             <Footer/>
         </div>
