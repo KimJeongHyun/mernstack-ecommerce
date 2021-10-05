@@ -2,7 +2,7 @@
 
 * JavaScript(ES6+)
 * React
-* Redux, Redux-thunk
+* Redux
 * MongoDB + Mongoose
 * Node.js
 * Express (Next.js 학습 예정)
