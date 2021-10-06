@@ -18,20 +18,14 @@
 7. 제품별 Q&A, Review Footer ( Create, View, Pagination )
 8. 제품 전체 Q&A, Review ( Create, View, Pagination )
 9. Notice ( Admin Only. Create, View)
+10. 장바구니 (저장 구현됨. 장바구니 탭 구현 및 아이템 삭제 구현 필요)
 ---
 구현 필요사항
 1. SCSS, GSAP
 2. 장바구니(비 로그인 유저, 로그인 유저 구별 필요)
  * 로그인 유저 : 
-    장바구니 버튼 클릭 
-    
-    서버에 productIndex 전달
-    
-    DB의 Cart 모델 데이터 확인
-    
-    만약 productIndex가 존재한다면 count 필드 증가. 없다면 새로 생성.
-    
-    장바구니 메뉴를 클릭하면 DB로 부터 Index, count를 얻어와 렌더링. 
+    장바구니 데이터 저장 구현 완료.
+    Shopping bag 클릭시 DB로부터 받아와 렌더링하는 것 필요함.
     
  * 비로그인 유저 :
     장바구니 버튼 클릭
@@ -47,6 +41,3 @@
  * 물품 정리표를 업로드하면 서버에서 자동으로 DB에 넣어주는 로직. 관리자용
 5. 결제 모듈 추가(페이팔?)
 ---
-추가해야하는 Model
-1. users model modified(좋아요, 장바구니)
-
