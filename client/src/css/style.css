@@ -356,6 +356,7 @@ textarea:focus{
     float:left;
     width:30%;
     height:50px;
+    cursor:pointer;
 }
 
 .imageZoom{

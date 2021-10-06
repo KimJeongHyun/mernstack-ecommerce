@@ -5,10 +5,12 @@ import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
 import {Footer} from '../Footer/Footer'
-import { getDetailData, addCart } from '../../_actions/user_action'
+import { getDetailData, postCart } from '../../_actions/user_action'
 import QnAFooter from './QnAFooter'
 import ReviewFooter from './ReviewFooter'
 import { MdAddShoppingCart } from "react-icons/md";
+import axios from 'axios'
+
 
 function ProductDetail(props){
     const [detailUpdate, setDetailUpdate] = useState(false);
@@ -32,6 +34,7 @@ function ProductDetail(props){
     const productDiscountRef = useRef();
     const productAccumRef = useRef();
 
+    const [userID,setUserID] = useState('');
     const [productIndex,setProductIndex] = useState(0);
     const [clothMap,setClothMap] = useState('');
     const [cursorCoordi,setCursorCoordi] = useState({
@@ -104,6 +107,10 @@ function ProductDetail(props){
 
     useEffect(()=>{
         setProductIndex(props.location.pathname.split('/')[2])
+        axios.get('/api/getSession')
+        .then(response=>{
+            setUserID(response.data.ID);
+        })
         
     },[])
 
@@ -158,7 +165,16 @@ function ProductDetail(props){
 
     const cartClick = (e) =>{
         e.preventDefault();
-        dispatch(addCart(productIndex))
+        const body={
+            productIndex:productIndex,
+            userID:userID
+        }
+        dispatch(postCart(body))
+        .then(response=>{
+            if (response.payload.data.postCartSuccess){
+                alert('장바구니에 추가되었습니다.');
+            }
+        })
     }
 
     return(

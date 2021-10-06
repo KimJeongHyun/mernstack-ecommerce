@@ -1,12 +1,12 @@
 import {
-    ADD_CART
+    POST_CART
 } from '../_actions/types'
 
 
-export default function (state=[], action){
+export default function (state={}, action){
     switch (action.type){
-        case ADD_CART:
-            return [...state, action.payload]
+        case POST_CART:
+            return {...state, postCartSuccess:action.payload}
         default:
             return state;
     }

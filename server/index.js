@@ -15,6 +15,10 @@ const getReviewData = require('./controller/storeController/getReviewData');
 const postReviewData = require('./controller/storeController/postReview');
 const getNotice = require('./controller/boardController/getNotice');
 const postNotice = require('./controller/boardController/postNotice');
+const getCart = require('./controller/cartController/getCart')
+const postCart = require('./controller/cartController/postCart')
+
+
 
 const port = 5000;
 
@@ -56,6 +60,7 @@ app.use(getReviewData);
 app.use(postReviewData);
 app.use(getNotice);
 app.use(postNotice);
+app.use(postCart);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{
