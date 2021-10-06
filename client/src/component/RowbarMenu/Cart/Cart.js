@@ -1,4 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react'
+import { useSelector, connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
@@ -6,8 +7,9 @@ import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
 
 
-
 function Cart(props){
+    const cart = useSelector(store=>store.cart)
+    console.log(cart);
     return(
         <div id='container'>
             <>

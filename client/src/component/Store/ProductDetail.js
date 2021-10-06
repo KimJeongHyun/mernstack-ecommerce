@@ -5,7 +5,7 @@ import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
 import {Footer} from '../Footer/Footer'
-import { getDetailData } from '../../_actions/user_action'
+import { getDetailData, addCart } from '../../_actions/user_action'
 import QnAFooter from './QnAFooter'
 import ReviewFooter from './ReviewFooter'
 import { MdAddShoppingCart } from "react-icons/md";
@@ -158,7 +158,7 @@ function ProductDetail(props){
 
     const cartClick = (e) =>{
         e.preventDefault();
-        alert('장바구니 추가')
+        dispatch(addCart(productIndex))
     }
 
     return(

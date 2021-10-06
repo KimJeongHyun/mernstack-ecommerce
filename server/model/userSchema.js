@@ -8,6 +8,15 @@ const userSchema = mongoose.Schema({
     password:String,
     userEmail:String,
     userPhone:Number,
+    CartItem:[{
+        clothIndex:{
+            type:Number
+        },
+        quantity:{
+            type:Number    
+        }
+    }],
+    accumVolume:Number,
     salt:String,
     seq:{
         type:Number,
