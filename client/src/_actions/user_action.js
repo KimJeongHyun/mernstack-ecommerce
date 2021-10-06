@@ -16,7 +16,8 @@ import{
     POST_REVIEW,
     GET_NOTICE,
     GET_NOTICEONE,
-    POST_NOTICE
+    POST_NOTICE,
+    ADD_CART
 } from './types';
 
 export function auth(){
@@ -175,5 +176,12 @@ export function postNotice(dataToSubmit){
     return{
         type:POST_NOTICE,
         payload:request
+    }
+}
+
+export function addCart(item){
+    return{
+        type:ADD_CART,
+        payload:item
     }
 }

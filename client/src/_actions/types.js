@@ -30,3 +30,4 @@ export const GET_NOTICEONE="get_noticeone"
 
 export const POST_NOTICE="post_notice"
 
+export const ADD_CART="add_cart"

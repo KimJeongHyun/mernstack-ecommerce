@@ -156,6 +156,11 @@ function ProductDetail(props){
         productMoreBtnRef.current.removeAttribute('hidden');
     }
 
+    const cartClick = (e) =>{
+        e.preventDefault();
+        alert('장바구니 추가')
+    }
+
     return(
         <div id='container'>
             <NavSideBar/>
@@ -201,7 +206,7 @@ function ProductDetail(props){
                                     <h3 style={{marginTop:'10px',marginBottom:'20px'}}/>
                                     <div className="productBtn">
                                         <button id="payBtn">구매하기</button>
-                                        <MdAddShoppingCart id="CartBtn"/>
+                                        <MdAddShoppingCart id="CartBtn" onClick={cartClick}/>
                                     </div>
                                 </div>
                                 
