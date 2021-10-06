@@ -335,6 +335,29 @@ textarea:focus{
     }
 }
 
+.productBtn{
+    display:inline-block;
+    width:50%;
+}
+
+.productBtn #payBtn{
+    display:inline-block;
+    float:left;
+    margin-right:15px;
+    width:45%;
+    height:50px;
+    background-color:#8d8d8d;
+    border:none;
+    color:#fff;
+}
+
+.productBtn #CartBtn{
+    display:inline-block;
+    float:left;
+    width:30%;
+    height:50px;
+}
+
 .imageZoom{
     position:absolute;
     width:250px;

@@ -8,6 +8,7 @@ import {Footer} from '../Footer/Footer'
 import { getDetailData } from '../../_actions/user_action'
 import QnAFooter from './QnAFooter'
 import ReviewFooter from './ReviewFooter'
+import { MdAddShoppingCart } from "react-icons/md";
 
 function ProductDetail(props){
     const [detailUpdate, setDetailUpdate] = useState(false);
@@ -170,7 +171,7 @@ function ProductDetail(props){
                                 onMouseOver={imgMouseLeaveFunc}>
                                     
                                 </div>
-                                <div ref = {imageZoomRef} className='imageZoom'>
+                                <div ref = {imageZoomRef} className='imageZoom' style={{visibility:'hidden'}}>
                                     
                                 </div>
 
@@ -195,15 +196,22 @@ function ProductDetail(props){
                                     <span>할인가</span> &nbsp; &#124; &nbsp; 
                                     <span ref={productDiscountRef}></span> 원<br/>
                                     <span>적립금</span> &nbsp; &#124; &nbsp; 
-                                    <span ref={productAccumRef}></span> 원
+                                    <span ref={productAccumRef}></span> 원<br/>
+                                    <hr style={{marginTop:'10px',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
+                                    <h3 style={{marginTop:'10px',marginBottom:'20px'}}/>
+                                    <div className="productBtn">
+                                        <button id="payBtn">구매하기</button>
+                                        <MdAddShoppingCart id="CartBtn"/>
+                                    </div>
                                 </div>
+                                
                                 <div className="productSize">
                                     <table>
                                         <thead>
                                             <td>cm</td>
                                             <td>총장</td>
                                             <td>허리단면</td>
-                                            <td>허벅지단면</td>
+                                            <td>허벅지단면</td> 
                                             <td>밑위</td>
                                             <td>밑단단면</td>
                                         </thead>
