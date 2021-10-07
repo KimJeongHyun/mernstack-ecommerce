@@ -17,6 +17,7 @@ import{
     GET_NOTICE,
     GET_NOTICEONE,
     POST_NOTICE,
+    GET_CART,
     POST_CART
 } from './types';
 
@@ -175,6 +176,14 @@ export function postNotice(dataToSubmit){
 
     return{
         type:POST_NOTICE,
+        payload:request
+    }
+}
+
+export function getCart(dataToSubmit){
+    const request = axios.post('/api/getCart/',dataToSubmit)
+    return{
+        type:GET_CART,
         payload:request
     }
 }

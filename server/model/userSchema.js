@@ -12,6 +12,14 @@ const userSchema = mongoose.Schema({
         clothIndex:{
             type:Number
         },
+        clothImgPath:String,
+        clothName:String,
+        sellPrice:{
+            type:Number
+        },
+        discountRate:{
+            type:Number
+        },
         quantity:{
             type:Number    
         }

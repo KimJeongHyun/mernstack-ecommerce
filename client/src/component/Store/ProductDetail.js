@@ -167,6 +167,10 @@ function ProductDetail(props){
         e.preventDefault();
         const body={
             productIndex:productIndex,
+            clothImgPath:clothMap.clothImgPath,
+            clothName:clothMap.clothName,
+            sellPrice:clothMap.sellPrice,
+            discountRate:clothMap.discountRate,
             userID:userID
         }
         dispatch(postCart(body))

@@ -4,6 +4,10 @@ const router = require('express').Router();
 router.post('/api/postCart/',(req,res)=>{
     const reqData = req.body;
     const productIndex = reqData.productIndex;
+    const clothImgPath = reqData.clothImgPath;
+    const clothName = reqData.clothName;
+    const sellPrice = reqData.sellPrice;
+    const discountRate = reqData.discountRate;
     const userID = reqData.userID;
     users.findOne({userID:userID},function(err,user){
        const userCart = user.CartItem;
@@ -12,6 +16,10 @@ router.post('/api/postCart/',(req,res)=>{
             {$push:{
                 CartItem:{
                     clothIndex:productIndex,
+                    clothImgPath:clothImgPath,
+                    clothName:clothName,
+                    sellPrice:sellPrice,
+                    discountRate:discountRate,
                     quantity:1
                 }
             }},function(err,result){
@@ -38,6 +46,10 @@ router.post('/api/postCart/',(req,res)=>{
                 {$push:{
                     CartItem:{
                         clothIndex:productIndex,
+                        clothImgPath:clothImgPath,
+                        clothName:clothName,
+                        sellPrice:sellPrice,
+                        discountRate:discountRate,
                         quantity:1
                     }
                 }},function(err,result){

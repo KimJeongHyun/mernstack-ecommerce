@@ -60,6 +60,7 @@ app.use(getReviewData);
 app.use(postReviewData);
 app.use(getNotice);
 app.use(postNotice);
+app.use(getCart);
 app.use(postCart);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
