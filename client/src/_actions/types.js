@@ -33,3 +33,5 @@ export const POST_NOTICE="post_notice"
 export const GET_CART="get_cart"
 
 export const POST_CART="post_cart"
+
+export const CLEAR_CART="clear_cart"

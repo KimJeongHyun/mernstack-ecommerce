@@ -18,7 +18,8 @@ import{
     GET_NOTICEONE,
     POST_NOTICE,
     GET_CART,
-    POST_CART
+    POST_CART,
+    CLEAR_CART
 } from './types';
 
 export function auth(){
@@ -192,6 +193,14 @@ export function postCart(dataToSubmit){
     const request = axios.post('/api/postCart/',dataToSubmit)
     return{
         type:POST_CART,
+        payload:request
+    }
+}
+
+export function clearCart(dataToSubmit){
+    const request = axios.post('/api/clearCart',dataToSubmit)
+    return{
+        type:CLEAR_CART,
         payload:request
     }
 }

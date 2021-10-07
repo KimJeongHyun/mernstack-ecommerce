@@ -17,6 +17,7 @@ const getNotice = require('./controller/boardController/getNotice');
 const postNotice = require('./controller/boardController/postNotice');
 const getCart = require('./controller/cartController/getCart')
 const postCart = require('./controller/cartController/postCart')
+const clearCart = require('./controller/cartController/clearCart')
 
 
 
@@ -62,6 +63,7 @@ app.use(getNotice);
 app.use(postNotice);
 app.use(getCart);
 app.use(postCart);
+app.use(clearCart);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{

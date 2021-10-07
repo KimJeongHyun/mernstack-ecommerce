@@ -5,7 +5,7 @@ import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
-import { getCart } from '../../../_actions/user_action'
+import { getCart, clearCart } from '../../../_actions/user_action'
 import axios from 'axios'
 
 
@@ -19,12 +19,14 @@ function Cart(props){
     const [MapLength,setMapLength] = useState('')
     const [PostPaging, setPostPaging] = useState(1);
     const [deleteList,setDeleteList] = useState([]);
+    const [userID, setUserID] = useState('');
     const dispatch = useDispatch()
 
     useEffect(() =>{
         axios.get('/api/getSession')
         .then(response=>{
             const userID = response.data.ID;
+            setUserID(userID);
             const body = {
                 userID:userID
             }
@@ -46,10 +48,32 @@ function Cart(props){
 
     const deleteListCheck = (event) =>{
         event.preventDefault();
+        const index = event.target.classList.add.substring(4)
         if (event.target.checked){
-            setDeleteList(deleteList.concat(event.target.classList.add))
+            setDeleteList(deleteList=>[...deleteList,index])
+        }
+        
+        if (!event.target.checked){
+            setDeleteList(deleteList=>deleteList.filter(item=>item!=index));
+        }
+    }
+
+    const clearCartBtn = (event) =>{
+        event.preventDefault();
+        if (deleteList.length==0){
+            alert('선택한 상품이 없습니다.')
         }else{
-            console.log(deleteList);
+            let body={
+                userID:userID,
+                deleteList:deleteList
+            }
+            dispatch(clearCart(body))
+            .then(response=>{
+                if (response.payload.data.clearCartSuccess){
+                    alert('선택한 상품을 삭제했습니다.')
+                    window.location.replace('/Cart')
+                }
+            })
         }
     }
 
@@ -104,8 +128,12 @@ function Cart(props){
                     tdTagProductA.appendChild(tdTagProductText);
                     tdTagProduct.appendChild(tdTagProductA);
 
+                    const tdTagQuan = document.createElement('td');
+                    const tdTagQuanText = document.createTextNode((CartMap[i].quantity));
+                    tdTagQuan.appendChild(tdTagQuanText)
+
                     const tdTagPrice = document.createElement('td');
-                    const tdTagPriceText = document.createTextNode((CartMap[i].sellPrice)+' ₩');
+                    const tdTagPriceText = document.createTextNode((CartMap[i].sellPrice)*(CartMap[i].quantity)+' ₩');
                     tdTagPrice.appendChild(tdTagPriceText);
 
                     const tdTagDiscountRate = document.createElement('td');
@@ -113,11 +141,11 @@ function Cart(props){
                     tdTagDiscountRate.appendChild(tdTagDiscountRateText);
 
                     const tdTagDiscountPrice = document.createElement('td');
-                    const tdTagDiscountPriceText = document.createTextNode((CartMap[i].sellPrice)*(100-(CartMap[i].discountRate))*0.01+' ₩');
+                    const tdTagDiscountPriceText = document.createTextNode((CartMap[i].sellPrice)*(CartMap[i].quantity)*(100-(CartMap[i].discountRate))*0.01+' ₩');
                     tdTagDiscountPrice.appendChild(tdTagDiscountPriceText);
 
                     const tdTagAccumPrice = document.createElement('td');
-                    const tdTagAccumPriceText = document.createTextNode((CartMap[i].sellPrice)*0.1+' ₩');
+                    const tdTagAccumPriceText = document.createTextNode((CartMap[i].sellPrice)*(CartMap[i].quantity)*0.1+' ₩');
                     tdTagAccumPrice.appendChild(tdTagAccumPriceText);
 
 
@@ -135,6 +163,7 @@ function Cart(props){
 
                     document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
                     document.getElementsByClassName(targetClassName)[0].appendChild(tdTagProduct);
+                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagQuan);
                     document.getElementsByClassName(targetClassName)[0].appendChild(tdTagPrice);
                     document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDiscountRate);
                     document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDiscountPrice);
@@ -164,6 +193,7 @@ function Cart(props){
                                         <tr>
                                             <td>번호</td>
                                             <td>품명</td>
+                                            <td>수량</td>
                                             <td>가격</td>
                                             <td>할인율</td>
                                             <td>할인가격</td>
@@ -180,7 +210,7 @@ function Cart(props){
                                 
                                 </div>
                                 <button style={{width:'170px',height:'50px', marginTop:'10px', marginRight:'10px', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}>주문하기</button>
-                                <button style={{width:'170px',height:'50px', border:'0.5px solid lightgray', backgroundColor:'#fff', cursor:'pointer'}}>장바구니 비우기</button>
+                                <button style={{width:'170px',height:'50px', border:'0.5px solid lightgray', backgroundColor:'#fff', cursor:'pointer'}} onClick={clearCartBtn}>장바구니 비우기</button>
                             </div>
                         </div>
                     </div>
