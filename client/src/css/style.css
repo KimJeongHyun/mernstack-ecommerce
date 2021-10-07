@@ -341,7 +341,6 @@ textarea:focus{
 }
 
 .productBtn #payBtn{
-    display:inline-block;
     float:left;
     margin-right:15px;
     width:45%;
@@ -352,7 +351,6 @@ textarea:focus{
 }
 
 .productBtn #CartBtn{
-    display:inline-block;
     float:left;
     width:30%;
     height:50px;
