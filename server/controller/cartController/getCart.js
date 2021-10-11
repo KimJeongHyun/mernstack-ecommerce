@@ -12,7 +12,12 @@ router.post('/api/getCart',(req,res)=>{
             UserMap[cnt] = user;
             cnt=cnt+1;
         })
-        res.json({getCartData:true,CartMap:UserMap[1].CartItem,length:UserMap[1].CartItem.length})
+        if (UserMap[1]===undefined){
+            res.json({getCartData:false})
+        }else{
+            res.json({getCartData:true,CartMap:UserMap[1].CartItem,length:UserMap[1].CartItem.length})
+        }
+        
     })
 })
 

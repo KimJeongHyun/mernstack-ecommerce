@@ -26,7 +26,7 @@ function Notice(props){
     const postPagingHandler = (event) =>{
         event.preventDefault();
         const propPagingNum = event.target.classList.value.split('PostPaging')[1];
-        if (propPagingNum!=PostPaging){
+        if (propPagingNum!==PostPaging){
             setPostPaging(propPagingNum)
         }
     }
@@ -34,7 +34,7 @@ function Notice(props){
     useEffect(()=>{
         axios.get('/api/getSession/')
         .then(response=>{
-            if (response.data.ID=='admin'){
+            if (response.data.ID==='admin'){
                 const btnRendering = () =>{
                     const result=[];
                     result.push(
@@ -67,7 +67,7 @@ function Notice(props){
             }
             ReactDOM.render(result,NoticePaginationRef.current);
         }
-        if (MapLength!=''){
+        if (MapLength!==''){
             footerRendering();
         }
         
@@ -77,51 +77,64 @@ function Notice(props){
         while(NoticeTBodyRef.current.hasChildNodes()){
             NoticeTBodyRef.current.removeChild(NoticeTBodyRef.current.firstChild)
         }
-        if(NoticeMap!='' && MapLength!=''){
-            let cnt = 0;
-            let targetClassName='';
-            for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
-                if (i>MapLength){
-                    break;
-                }else{
-                    if (cnt!=10){
-                        const trTag = document.createElement('tr');
-                        trTag.className = 'Notice'+cnt;
-                        targetClassName = 'Notice'+cnt;
-                        NoticeTBodyRef.current.appendChild(trTag);
-                        cnt=cnt+1;
+        if(NoticeMap!=='' && MapLength!==''){
+            if (MapLength===0){
+                const trTag = document.createElement('tr');
+                trTag.className='EmptyCartTR'
+                NoticeTBodyRef.current.appendChild(trTag);
+
+                const tdTag = document.createElement('td');
+                tdTag.colSpan=9
+                const tdTagText = document.createTextNode('공지사항이 없습니다.');
+                tdTag.appendChild(tdTagText);
+
+                document.getElementsByClassName('EmptyCartTR')[0].appendChild(tdTag)
+            }else{
+                let cnt = 0;
+                let targetClassName='';
+                for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
+                    if (i>MapLength){
+                        break;
                     }else{
-                        cnt=0
+                        if (cnt!==10){
+                            const trTag = document.createElement('tr');
+                            trTag.className = 'Notice'+cnt;
+                            targetClassName = 'Notice'+cnt;
+                            NoticeTBodyRef.current.appendChild(trTag);
+                            cnt=cnt+1;
+                        }else{
+                            cnt=0
+                        }
+                        
+                        const tdTagNum = document.createElement('td');
+                        const tdTagNumText = document.createTextNode(i)
+                        tdTagNum.appendChild(tdTagNumText);
+    
+                        const tdTagTitle = document.createElement('td');
+                        const tdTagTitleA = document.createElement('a');
+                        tdTagTitleA.href='/NoticeOne/'+NoticeMap[i].NoticeIndex+'/'+NoticeMap[i]._id;
+                        tdTagTitleA.classList.add('title')
+                        const tdTagTitleText = document.createTextNode(NoticeMap[i].title);
+                        tdTagTitleA.appendChild(tdTagTitleText);
+                        tdTagTitle.appendChild(tdTagTitleA);
+    
+                        const tdTagID = document.createElement('td');
+                        const tdTagIDText = document.createTextNode((NoticeMap[i].userID).substring(0,3)+"***");
+                        tdTagID.appendChild(tdTagIDText);
+    
+                        const tdTagDate = document.createElement('td');
+                        const tdTagDateText = document.createTextNode(NoticeMap[i].regDate.split('T')[0]);
+                        tdTagDate.appendChild(tdTagDateText);
+    
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
+                        
                     }
-                    
-                    const tdTagNum = document.createElement('td');
-                    const tdTagNumText = document.createTextNode(i)
-                    tdTagNum.appendChild(tdTagNumText);
-
-                    const tdTagTitle = document.createElement('td');
-                    const tdTagTitleA = document.createElement('a');
-                    tdTagTitleA.href='/NoticeOne/'+NoticeMap[i].NoticeIndex+'/'+NoticeMap[i]._id;
-                    tdTagTitleA.classList.add('title')
-                    const tdTagTitleText = document.createTextNode(NoticeMap[i].title);
-                    tdTagTitleA.appendChild(tdTagTitleText);
-                    tdTagTitle.appendChild(tdTagTitleA);
-
-                    const tdTagID = document.createElement('td');
-                    const tdTagIDText = document.createTextNode((NoticeMap[i].userID).substring(0,3)+"***");
-                    tdTagID.appendChild(tdTagIDText);
-
-                    const tdTagDate = document.createElement('td');
-                    const tdTagDateText = document.createTextNode(NoticeMap[i].regDate.split('T')[0]);
-                    tdTagDate.appendChild(tdTagDateText);
-
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
-                    
                 }
             }
-            
+
             //Product 별 데이터는 인덱스가 들쭉날쭉할 것.
             //일단 Map을 받고, 해당 맵에 대한 각각의 인덱스를 재정립해야됨.
         }

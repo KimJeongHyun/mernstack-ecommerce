@@ -22,7 +22,7 @@ export function NavBar(props){
             .then(response=>{
                 len = response.data.length;
                 
-                if (len==0){
+                if (len===0){
                     const guestRendering = () =>{
                         const result = [];
                         result.push(
@@ -62,7 +62,7 @@ export function NavBar(props){
                             <nav>
                                 <ul className="rowBar">
                                     <li>
-                                        <a onClick={onLogout} style={{cursor:'pointer'}}>LOGOUT</a>
+                                        <a href="#!" onClick={onLogout} style={{cursor:'pointer'}}>LOGOUT</a>
                                     </li>
                                     <li>
                                         <a href="/MyPage">MY PAGE</a>

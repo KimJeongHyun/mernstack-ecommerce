@@ -24,7 +24,7 @@ function QnA(props){
     const postPagingHandler = (event) =>{
         event.preventDefault();
         const propPagingNum = event.target.classList.value.split('QnAPaging')[1];
-        if (propPagingNum!=PostPaging){
+        if (propPagingNum!==PostPaging){
             setPostPaging(propPagingNum)
         }
     }
@@ -50,7 +50,7 @@ function QnA(props){
             }
             ReactDOM.render(result,QnAPaginationRef.current);
         }
-        if (MapLength!=''){
+        if (MapLength!==''){
             footerRendering();
         }
         
@@ -61,59 +61,73 @@ function QnA(props){
         while(QnATBodyRef.current.hasChildNodes()){
             QnATBodyRef.current.removeChild(QnATBodyRef.current.firstChild)
         }
-        if(QnAMap!='' && MapLength!=''){
-            let cnt = 0;
-            let targetClassName='';
-            for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
-                if (i>MapLength){
-                    break;
-                }else{
-                    if (cnt!=5){
-                        const trTag = document.createElement('tr');
-                        trTag.className = 'QnA'+cnt;
-                        targetClassName = 'QnA'+cnt;
-                        QnATBodyRef.current.appendChild(trTag);
-                        cnt=cnt+1;
+        if(QnAMap!=='' && MapLength!==''){
+            if (MapLength===0){
+                const trTag = document.createElement('tr');
+                trTag.className='EmptyCartTR'
+                QnATBodyRef.current.appendChild(trTag);
+
+                const tdTag = document.createElement('td');
+                tdTag.colSpan=9
+                const tdTagText = document.createTextNode('공지사항이 없습니다.');
+                tdTag.appendChild(tdTagText);
+
+                document.getElementsByClassName('EmptyCartTR')[0].appendChild(tdTag)
+            }else{
+                let cnt = 0;
+                let targetClassName='';
+                for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
+                    if (i>MapLength){
+                        break;
                     }else{
-                        cnt=0
+                        if (cnt!==5){
+                            const trTag = document.createElement('tr');
+                            trTag.className = 'QnA'+cnt;
+                            targetClassName = 'QnA'+cnt;
+                            QnATBodyRef.current.appendChild(trTag);
+                            cnt=cnt+1;
+                        }else{
+                            cnt=0
+                        }
+                        
+                        const tdTagNum = document.createElement('td');
+                        const tdTagNumText = document.createTextNode(i)
+                        tdTagNum.appendChild(tdTagNumText);
+    
+                        const tdTagProduct = document.createElement('td');
+                        const tdTagProductA = document.createElement('a');
+                        tdTagProductA.href='/ProductDetail/'+QnAMap[i].clothIndex;
+                        tdTagProductA.classList.add('productName')
+                        const tdTagProductText = document.createTextNode(QnAMap[i].clothName);
+                        tdTagProductA.appendChild(tdTagProductText);
+                        tdTagProduct.appendChild(tdTagProductA);
+    
+                        const tdTagTitle = document.createElement('td');
+                        const tdTagTitleA = document.createElement('a');
+                        tdTagTitleA.href='/QnAOne/'+QnAMap[i].clothIndex+'/'+QnAMap[i]._id;
+                        tdTagTitleA.classList.add('title')
+                        const tdTagTitleText = document.createTextNode(QnAMap[i].title);
+                        tdTagTitleA.appendChild(tdTagTitleText);
+                        tdTagTitle.appendChild(tdTagTitleA);
+    
+                        const tdTagID = document.createElement('td');
+                        const tdTagIDText = document.createTextNode((QnAMap[i].userID).substring(0,3)+"***");
+                        tdTagID.appendChild(tdTagIDText);
+    
+                        const tdTagDate = document.createElement('td');
+                        const tdTagDateText = document.createTextNode(QnAMap[i].regDate.split('T')[0]);
+                        tdTagDate.appendChild(tdTagDateText);
+    
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagProduct);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
+                        
                     }
-                    
-                    const tdTagNum = document.createElement('td');
-                    const tdTagNumText = document.createTextNode(i)
-                    tdTagNum.appendChild(tdTagNumText);
-
-                    const tdTagProduct = document.createElement('td');
-                    const tdTagProductA = document.createElement('a');
-                    tdTagProductA.href='/ProductDetail/'+QnAMap[i].clothIndex;
-                    tdTagProductA.classList.add('productName')
-                    const tdTagProductText = document.createTextNode(QnAMap[i].clothName);
-                    tdTagProductA.appendChild(tdTagProductText);
-                    tdTagProduct.appendChild(tdTagProductA);
-
-                    const tdTagTitle = document.createElement('td');
-                    const tdTagTitleA = document.createElement('a');
-                    tdTagTitleA.href='/QnAOne/'+QnAMap[i].clothIndex+'/'+QnAMap[i]._id;
-                    tdTagTitleA.classList.add('title')
-                    const tdTagTitleText = document.createTextNode(QnAMap[i].title);
-                    tdTagTitleA.appendChild(tdTagTitleText);
-                    tdTagTitle.appendChild(tdTagTitleA);
-
-                    const tdTagID = document.createElement('td');
-                    const tdTagIDText = document.createTextNode((QnAMap[i].userID).substring(0,3)+"***");
-                    tdTagID.appendChild(tdTagIDText);
-
-                    const tdTagDate = document.createElement('td');
-                    const tdTagDateText = document.createTextNode(QnAMap[i].regDate.split('T')[0]);
-                    tdTagDate.appendChild(tdTagDateText);
-
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagProduct);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
-                    document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
-                    
                 }
             }
+            
             
             //Product 별 데이터는 인덱스가 들쭉날쭉할 것.
             //일단 Map을 받고, 해당 맵에 대한 각각의 인덱스를 재정립해야됨.

@@ -1,10 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react'
 import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
-import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
-import { NavBar } from '../NavBar/NavBar'
-import axios from 'axios'
 import { getReviewData } from '../../_actions/user_action'
 
 
@@ -30,7 +27,7 @@ function ReviewFooter(props){
     }
 
     useEffect(()=>{
-        if (productIndex!=0){
+        if (productIndex!==0){
             dispatch(getReviewData(productIndex))
             .then(response=>{
                 setReviewMap(response.payload.ReviewMap);
@@ -51,7 +48,7 @@ function ReviewFooter(props){
             }
             ReactDOM.render(result,ReviewPaginationRef.current);
         }
-        if (MapLength!=''){
+        if (MapLength!==''){
             footerRendering();
         }
         
@@ -61,14 +58,14 @@ function ReviewFooter(props){
         while(ReviewTBodyRef.current.hasChildNodes()){
             ReviewTBodyRef.current.removeChild(ReviewTBodyRef.current.firstChild)
         }
-        if(ReviewMap!='' && MapLength!='' & clothName!=undefined){
+        if(ReviewMap!=='' && MapLength!=='' & clothName!==undefined){
             let cnt = 0;
             let targetClassName='';
             for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
                 if (i>MapLength){
                     break;
                 }else{
-                    if (cnt!=5){
+                    if (cnt!==5){
                         const trTag = document.createElement('tr');
                         trTag.className = 'Review'+cnt;
                         targetClassName = 'Review'+cnt;
@@ -140,7 +137,7 @@ function ReviewFooter(props){
             <div ref={ReviewPaginationRef}>
 
             </div>
-            <button className='SubmitBtn' style={{width:'130px',height:'30px', marginTop:'30px', marginLeft:'82%', backgroundColor:'#8d8d8d', border:'none',color:'#fff', cursor:'pointer'}}><a href={"/ReviewPost/"+productIndex}>글 쓰기</a></button>
+            <button className='SubmitBtn' style={{marginTop:'30px', marginLeft:'82%'}}><a href={"/ReviewPost/"+productIndex}>글 쓰기</a></button>
         </div>
     )
 }

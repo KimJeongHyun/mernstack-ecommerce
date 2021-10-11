@@ -1,14 +1,10 @@
 import React,{useEffect,useRef,useState} from 'react'
 import { useDispatch } from 'react-redux'
-import { withRouter } from 'react-router'
 import { registerUser } from '../../../_actions/user_action'
-import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
-import axios from 'axios'
-
 
 
 function Join(props){
@@ -82,15 +78,15 @@ function Join(props){
     }
 
     useEffect(()=>{
-        if (Name!='' && ID!='' && Password!='' && Password2!='' && Email!='' && Phone!=''){
-            if (Phone.length==11 && Email.includes('@')){
+        if (Name!=='' && ID!=='' && Password!=='' && Password2!=='' && Email!=='' && Phone!==''){
+            if (Phone.length===11 && Email.includes('@')){
                 joinBtn.current.classList.remove('notEnough');
                 joinBtn.current.removeAttribute('disabled');
             }
             
         }
 
-        if (Name=='' || ID=='' || Password=='' || Password2=='' || Email=='' || Phone==''){
+        if (Name==='' || ID==='' || Password==='' || Password2==='' || Email==='' || Phone===''){
             joinBtn.current.classList.add('notEnough');
             joinBtn.current.setAttribute('disabled',true);
         }

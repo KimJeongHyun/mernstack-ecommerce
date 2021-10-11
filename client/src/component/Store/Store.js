@@ -48,7 +48,7 @@ function Store(props){
     },[])
 
     useEffect(()=>{
-        if (mapLength!=0){
+        if (mapLength!==0){
             const footerRendering = () =>{
                 const result=[];
                 for (let i=0; i<mapLength/PageNum; i++){
@@ -69,7 +69,7 @@ function Store(props){
                     if (i>=(startIndex+mapLength)){
                         break;
                     }else{
-                        if (cnt%5==0){
+                        if (cnt%5===0){
                             const trTag = document.createElement('tr');
                             trTag.className = cnt;
                             targetIndex=cnt;
@@ -114,7 +114,7 @@ function Store(props){
     },[clothesMap])
 
     useEffect(()=>{
-        if (rendered==true){
+        if (rendered===true){
             const storeID = document.getElementById('commerceStoreID');
             if (storeID!=null){
                 const list = document.createElement('li');

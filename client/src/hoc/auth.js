@@ -10,11 +10,11 @@ export default function (SpecificComponent, option, adminRoute = null){
             dispatch(auth())
             .then(response=>{
                 if (response.payload.isAuth){
-                    if (option==false){
+                    if (option===false){
                         alert('으악!');
                     }
-                    if (SpecificComponent.name=='NoticePost'){
-                        if (response.payload.ID!='admin'){
+                    if (SpecificComponent.name==='NoticePost'){
+                        if (response.payload.ID!=='admin'){
                             alert('비정상적인 접근입니다.')
                             props.history.push({
                                 pathname:'/'
@@ -22,7 +22,7 @@ export default function (SpecificComponent, option, adminRoute = null){
                         }
                     }
                 }else{
-                    if (option==true && SpecificComponent.name!=='Logout'){
+                    if (option===true && SpecificComponent.name!=='Logout'){
                         alert('로그인을 먼저 해주시기 바랍니다.')
                         props.history.push({
                             pathname:'/'

@@ -1,4 +1,4 @@
-import React,{useEffect,useRef,useState} from 'react'
+import React,{useRef} from 'react'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
@@ -15,7 +15,7 @@ function MyPage(props){
     const contentsRef = useRef();
 
     const classChange = (e) =>{
-        if (e.target==selectRef.current){
+        if (e.target===selectRef.current){
             selectRef.current.classList.add('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.remove('active');
@@ -65,7 +65,7 @@ function MyPage(props){
             ReactDOM.render(selectRefRendering(),contentsRef.current);
         }
 
-        if (e.target==accumRef.current){
+        if (e.target===accumRef.current){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.add('active');
             couponRef.current.classList.remove('active');
@@ -107,7 +107,7 @@ function MyPage(props){
             ReactDOM.render(accumRefRendering(),contentsRef.current);
         }
 
-        if (e.target==couponRef.current){
+        if (e.target===couponRef.current){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.add('active');
@@ -157,7 +157,7 @@ function MyPage(props){
             ReactDOM.render(couponRefRendering(),contentsRef.current);
         }
 
-        if (e.target==writtenRef.current){
+        if (e.target===writtenRef.current){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.remove('active');

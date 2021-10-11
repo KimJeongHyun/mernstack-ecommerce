@@ -1,10 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react'
 import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
-import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
-import { NavBar } from '../NavBar/NavBar'
-import axios from 'axios'
 import { getQnAData } from '../../_actions/user_action'
 
 
@@ -31,7 +28,7 @@ function QnAFooter(props){
     }
     
     useEffect(()=>{
-        if (productIndex!=0){
+        if (productIndex!==0){
             dispatch(getQnAData(productIndex))
             .then(response=>{
                 setQnAMap(response.payload.QnAMap);
@@ -53,7 +50,7 @@ function QnAFooter(props){
             }
             ReactDOM.render(result,QnAPaginationRef.current);
         }
-        if (MapLength!=''){
+        if (MapLength!==''){
             footerRendering();
         }
         
@@ -63,14 +60,14 @@ function QnAFooter(props){
         while(QnATBodyRef.current.hasChildNodes()){
             QnATBodyRef.current.removeChild(QnATBodyRef.current.firstChild)
         }
-        if(QnAMap!='' && MapLength!='' & clothName!=undefined){
+        if(QnAMap!=='' && MapLength!=='' & clothName!==undefined){
             let cnt = 0;
             let targetClassName='';
             for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
                 if (i>MapLength){
                     break;
                 }else{
-                    if (cnt!=5){
+                    if (cnt!==5){
                         const trTag = document.createElement('tr');
                         trTag.className = 'QnA'+cnt;
                         targetClassName = 'QnA'+cnt;
@@ -142,7 +139,7 @@ function QnAFooter(props){
             <div ref={QnAPaginationRef}>
 
             </div>
-            <button className='SubmitBtn' style={{marginLeft:'82%'}}><a href={"/QnAPost/"+productIndex}>글 쓰기</a></button>
+            <button className='SubmitBtn' style={{marginTop:'30px', marginLeft:'82%'}}><a href={"/QnAPost/"+productIndex}>글 쓰기</a></button>
         </div>
     )
 }

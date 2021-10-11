@@ -13,7 +13,6 @@ import axios from 'axios'
 
 
 function ProductDetail(props){
-    const [detailUpdate, setDetailUpdate] = useState(false);
 
     const boxRef = useRef();
     const cursorBoxRef = useRef();
@@ -84,7 +83,7 @@ function ProductDetail(props){
         let x = pos.x-cursorBoxRef.current.offsetWidth/2;
         let y = pos.y-cursorBoxRef.current.offsetHeight/2;
         
-        if (event.target.tagName=='IMG'){
+        if (event.target.tagName==='IMG'){
             /*cursorBoxRef.current.style.visibility='visible'
             cursorBoxRef.current.style.backgroundColor = '#fdfdfd'
             cursorBoxRef.current.style.opacity = '0.7'
@@ -97,8 +96,8 @@ function ProductDetail(props){
 
     const imgMouseLeaveFunc = (event) =>{
         event.preventDefault();
-        if (event.target.tagName=='DIV'){
-            if (cursorBoxRef.current!=undefined){
+        if (event.target.tagName==='DIV'){
+            if (cursorBoxRef.current!==undefined){
                 cursorBoxRef.current.style.visibility='hidden'
                 imageZoomRef.current.style.visibility='hidden'
             }
@@ -115,7 +114,7 @@ function ProductDetail(props){
     },[])
 
     useEffect(()=>{
-        if (productIndex!=0){
+        if (productIndex!==0){
             dispatch(getDetailData(productIndex))
             .then(response=>{
                 setClothMap(response.payload.clothRes);
@@ -125,13 +124,15 @@ function ProductDetail(props){
     },[productIndex])
 
     useEffect(()=>{
-        if (clothMap!=''){
+        if (clothMap!==''){
             const imgPath = () =>{
                 const result = [];
                 result.push(
                     <img ref={productImageTagRef} 
                     src={'../'+clothMap.clothImgPath} 
-                    style={{maxWidth:'250px'}} onMouseMove={imgMouseMoveFunc}/>
+                    style={{maxWidth:'250px'}} onMouseMove={imgMouseMoveFunc}
+                    alt='productImage'
+                    />
                 )
                 imageZoomRef.current.style.backgroundImage="url('../"+clothMap.clothImgPath+"')"
                 return result;
@@ -223,7 +224,6 @@ function ProductDetail(props){
                                     <span>적립금</span> &nbsp; &#124; &nbsp; 
                                     <span ref={productAccumRef}></span> 원<br/>
                                     <hr style={{marginTop:'10px',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
-                                    <h3 style={{marginTop:'10px',marginBottom:'20px'}}/>
                                     <div className="productBtn">
                                         <button id="payBtn">구매하기</button>
                                         <MdAddShoppingCart id="CartBtn" onClick={cartClick}/>
@@ -280,8 +280,8 @@ function ProductDetail(props){
                             <div className="productBody" ref={productBodyRef}>
                             <hr style={{margin:'0'}}/>
                                 <div className="productContent" style={{width:'722px',float:'left'}}>
-                                    <img src="images/Coor.jpg" style={{width:'100%'}}></img>
-                                    <img src="images/jacket.jpg" style={{width:'100%'}}></img>
+                                    <img src="images/Coor.jpg" style={{width:'100%'}} alt='tempImage'></img>
+                                    <img src="images/jacket.jpg" style={{width:'100%'}} alt='tempImage'></img>
                                 </div>
                             </div>
                             <div className="productFooter" style={{height:'900px', textAlign:'center'}}>

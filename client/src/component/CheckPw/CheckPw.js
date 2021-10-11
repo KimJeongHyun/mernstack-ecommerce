@@ -1,5 +1,4 @@
-import React,{useEffect,useRef,useState} from 'react'
-import ReactDOM from 'react-dom'
+import React,{useState} from 'react'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'

@@ -1,6 +1,5 @@
-import React,{useEffect,useRef,useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useDispatch } from 'react-redux'
-import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'

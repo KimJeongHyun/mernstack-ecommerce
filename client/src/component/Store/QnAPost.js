@@ -1,7 +1,5 @@
-import React,{useEffect,useRef,useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useDispatch } from 'react-redux'
-import { withRouter } from 'react-router'
-import ReactDOM from 'react-dom'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
@@ -16,7 +14,7 @@ function QnAPost(props){
     const [postPW,setPostPW] = useState("");
     const [postTitle,setPostTitle] = useState("");
     const [postContent,setPostContent] = useState("");
-    const [clothIndex,setClothIndex] = useState(0);
+    const [clothIndex,setClothIndex] = useState("");
     const [clothName,setClothName] = useState("");
 
     const dispatch = useDispatch()
@@ -65,7 +63,7 @@ function QnAPost(props){
     },[])
 
     useEffect(()=>{
-        if (clothIndex!=''){
+        if (clothIndex!==''){
             dispatch(getDetailData(clothIndex))
             .then(response=>{
                 setClothName(response.payload.clothRes.clothName);

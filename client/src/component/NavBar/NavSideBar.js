@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 
 
 export function NavSideBar(){
@@ -18,10 +18,10 @@ export function NavSideBar(){
                         <a href="/Store/1" id="commerceStore">Store</a>
                     </li>
                     <li id="commerceCollectionID">
-                        <a href="#" id="commerceCollection">Collection</a>
+                        <a href="#!" id="commerceCollection">Collection</a>
                     </li>
                     <li id="commerceContactID">
-                        <a href="#" id="commerceContact">Contact</a>
+                        <a href="#!" id="commerceContact">Contact</a>
                     </li>
                 </ul>
             </nav>

@@ -1,10 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect,
-  HashRouter
+  Route
 } from "react-router-dom"
 
 import Auth from './hoc/auth'
@@ -39,7 +36,7 @@ function App() {
         <Route path="/Join" component={Join}/>
         <Route path="/CheckPw" component={CheckPw}/>
         <Route path="/MyPage" component={Auth(MyPage,true)}/>
-        <Route path="/Cart" component={Cart} />
+        <Route path="/Cart" component={Auth(Cart,true)} />
         <Route path="/Notice" component={Notice}/>
         <Route path="/QnA" component={QnA}/>
         <Route path="/Review" component={Review}/>

@@ -338,6 +338,7 @@ textarea:focus{
 .productBtn{
     display:inline-block;
     width:50%;
+    margin-top: 30px;
 }
 
 .productBtn #payBtn{

@@ -1,8 +1,6 @@
-import React,{useEffect,useRef,useState} from 'react'
+import React,{useState} from 'react'
 import { useDispatch } from 'react-redux'
-import { withRouter } from 'react-router'
 import { loginUser } from '../../../_actions/user_action'
-import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
@@ -11,7 +9,6 @@ import '../../../css/style.css'
 
 
 function Login(props){
-    const loginBtn = useRef();
 
     const dispatch = useDispatch();
 
@@ -66,8 +63,8 @@ function Login(props){
                                         <div style={{display:'flex', flexDirection:'column'}}>
                                             <input placeholder="ID" maxLength="20" value={ID} onChange={onIDHandler}></input>
                                             <input type="password" placeholder="PASSWORD" value={Password} onChange={onPasswordHandler}></input>
-                                            <a href="#">Forgot?</a>
-                                            <a href="#">Join Us</a>
+                                            <a href="{()=>false}">Forgot?</a>
+                                            <a href="{()=>false}">Join Us</a>
                                             <button>Login</button>
                                         </div>
                                     </fieldset>
