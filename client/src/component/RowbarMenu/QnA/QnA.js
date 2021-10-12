@@ -82,8 +82,8 @@ function QnA(props){
                     }else{
                         if (cnt!==5){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'QnA'+cnt;
-                            targetClassName = 'QnA'+cnt;
+                            trTag.className = 'QnA'
+                            targetClassName = 'QnA'
                             QnATBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{

@@ -63,8 +63,8 @@ function Login(props){
                                         <div style={{display:'flex', flexDirection:'column'}}>
                                             <input placeholder="ID" maxLength="20" value={ID} onChange={onIDHandler}></input>
                                             <input type="password" placeholder="PASSWORD" value={Password} onChange={onPasswordHandler}></input>
-                                            <a href="{()=>false}">Forgot?</a>
-                                            <a href="{()=>false}">Join Us</a>
+                                            <a href="#!">Forgot?</a>
+                                            <a href="/Join">Join Us</a>
                                             <button>Login</button>
                                         </div>
                                     </fieldset>

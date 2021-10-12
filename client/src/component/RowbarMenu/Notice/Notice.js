@@ -21,6 +21,7 @@ function Notice(props){
     const [NoticeMap,setNoticeMap] = useState('')
     const [MapLength,setMapLength] = useState('')
     const [PostPaging,setPostPaging] = useState(1);
+    const [deleteList,setDeleteList] = useState([]);
 
 
     const postPagingHandler = (event) =>{
@@ -31,6 +32,47 @@ function Notice(props){
         }
     }
 
+    const deleteListCheck = (event) =>{
+        event.preventDefault();
+        const index = event.target.classList.add.substring(4)
+        if (event.target.checked){
+            setDeleteList(deleteList=>[...deleteList,index])
+        }
+        
+        if (!event.target.checked){
+            setDeleteList(deleteList=>deleteList.filter(item=>item!==index));
+        }
+    }
+    
+    const deleteVisible = (event) =>{
+        event.preventDefault();
+        const Btns = document.getElementsByClassName('Check');
+        const deleteCheckBtn = document.getElementById('deleteCheckBtn')
+        const deleteGroupBtn = document.getElementById('deleteGroupBtn')
+
+        
+        deleteCheckBtn.style.display='none'
+        deleteGroupBtn.style.display='inline-block'
+        
+        for (let i=0; i<Btns.length; i++){
+            Btns[i].style.display='block'
+        }
+    }
+
+    const deleteGroup = (event) =>{
+        event.preventDefault();
+        const Btns = document.getElementsByClassName('Check');
+        const deleteCheckBtn = document.getElementById('deleteCheckBtn')
+        const deleteGroupBtn = document.getElementById('deleteGroupBtn')
+
+        deleteGroupBtn.style.display='none'
+        deleteCheckBtn.style.display='inline-block'
+        
+        for (let i=0; i<Btns.length; i++){
+            Btns[i].style.display='none'
+        }
+    }
+
     useEffect(()=>{
         axios.get('/api/getSession/')
         .then(response=>{
@@ -38,9 +80,22 @@ function Notice(props){
                 const btnRendering = () =>{
                     const result=[];
                     result.push(
-                        <button className='SubmitBtn' style={{marginLeft:'79%'}}>
-                            <a href={"/NoticePost/"}>글 쓰기</a>
-                        </button>
+                        <div style={{marginTop:'20px'}}>
+                        <div id="deleteBtnDiv" style={{float:'left', width:'21%'}}>
+                            <button className="SubmitBtn" id="deleteCheckBtn" style={{marginLeft:'300%'}}>
+                                <a href="#!" onClick={deleteVisible}>삭제</a>
+                            </button>
+                            <button className="SubmitBtn" id="deleteGroupBtn" style={{marginLeft:'300%',display:'none'}}>
+                                <a href="#!" onClick={deleteGroup}>그룹 삭제</a>
+                            </button>
+                        </div>
+                        <div style={{float:'left', width:'21%'}}>
+                            <button className='SubmitBtn' id="noticePostBtn" style={{marginLeft:'300%'}}>
+                                <a href={"/NoticePost/"}>글 쓰기</a>
+                            </button>
+                        </div>
+                        
+                        </div>
                     )
                     return result;
                 }
@@ -119,18 +174,29 @@ function Notice(props){
                         tdTagTitle.appendChild(tdTagTitleA);
     
                         const tdTagID = document.createElement('td');
-                        const tdTagIDText = document.createTextNode((NoticeMap[i].userID).substring(0,3)+"***");
+                        const tdTagIDText = document.createTextNode("admin");
                         tdTagID.appendChild(tdTagIDText);
     
                         const tdTagDate = document.createElement('td');
+                        tdTagDate.style.width='25%'
                         const tdTagDateText = document.createTextNode(NoticeMap[i].regDate.split('T')[0]);
                         tdTagDate.appendChild(tdTagDateText);
     
+                        const tdCheckBtn = document.createElement('td');
+                        const tdCheckBtnElement = document.createElement('input');
+                        tdCheckBtnElement.type='checkbox'
+                        tdCheckBtnElement.classList.add='Prod'+NoticeMap[i].NoticeIndex;
+                        tdCheckBtnElement.style.marginTop='20px'
+                        tdCheckBtn.classList.add("Check");
+                        tdCheckBtn.style.display='none'
+                        tdCheckBtnElement.onchange=deleteListCheck
+                        tdCheckBtn.appendChild(tdCheckBtnElement);
+
                         document.getElementsByClassName(targetClassName)[0].appendChild(tdTagNum);
                         document.getElementsByClassName(targetClassName)[0].appendChild(tdTagTitle);
                         document.getElementsByClassName(targetClassName)[0].appendChild(tdTagID);
                         document.getElementsByClassName(targetClassName)[0].appendChild(tdTagDate);
-                        
+                        document.getElementsByClassName(targetClassName)[0].appendChild(tdCheckBtn);
                     }
                 }
             }
@@ -162,10 +228,10 @@ function Notice(props){
                                         
                                     </tbody>
                                 </table>
-                                <div ref={NoticeBtnRef}>
+                                <div ref={NoticePaginationRef} style={{marginTop:'10px'}}>
 
                                 </div>
-                                <div ref={NoticePaginationRef}>
+                                <div ref={NoticeBtnRef}>
 
                                 </div>
                             </div>

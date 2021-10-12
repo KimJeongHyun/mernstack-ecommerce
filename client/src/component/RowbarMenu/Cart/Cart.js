@@ -119,10 +119,10 @@ function Cart(props){
                     if (i>=MapLength){
                         break;
                     }else{
-                        if (cnt!==5){
+                        if (cnt!==10){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'Cart'+cnt;
-                            targetClassName = 'Cart'+cnt;
+                            trTag.className = 'CartTR'
+                            targetClassName = 'CartTR'
                             CartTBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{

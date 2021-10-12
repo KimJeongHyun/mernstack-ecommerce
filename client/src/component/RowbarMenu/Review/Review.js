@@ -10,7 +10,7 @@ import { getReviewDataAll } from '../../../_actions/user_action'
 
 
 function Review(props){
-    const PostNum = 5;
+    const PostNum = 10;
 
     const ReviewTBodyRef = useRef();
     const ReviewPaginationRef = useRef();
@@ -77,10 +77,10 @@ function Review(props){
                     if (i>MapLength){
                         break;
                     }else{
-                        if (cnt!==5){
+                        if (cnt!==10){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'Review'+cnt;
-                            targetClassName = 'Review'+cnt;
+                            trTag.className = 'ReviewTR'
+                            targetClassName = 'ReviewTR'
                             ReviewTBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{
