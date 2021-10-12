@@ -1,63 +1,41 @@
-import React,{useRef} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
+import {MyQnARendering} from './MyQnA'
+import { MyReviewRendering } from './MyReview'
 import '../../../css/style.css'
-
+import axios from 'axios'
+import { MyCouponRendering } from './MyCoupon'
+import { MyAccumRendering } from './MyAccum'
+import { MyOrderRendering } from './MyOrder'
 
 
 function MyPage(props){
     const selectRef = useRef();
     const accumRef = useRef();
     const couponRef = useRef();
-    const writtenRef = useRef();
+    const qnaRef = useRef();
+    
+    const reviewRef = useRef();
     const contentsRef = useRef();
+
+    const [userID,setUserID] = useState('');
+
 
     const classChange = (e) =>{
         if (e.target===selectRef.current){
             selectRef.current.classList.add('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.remove('active');
-            writtenRef.current.classList.remove('active');
+            qnaRef.current.classList.remove('active');
+            reviewRef.current.classList.remove('active')
 
             const selectRefRendering = () =>{
                 const result=[];
                 result.push(
-                    <table className='selectTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
-                        <thead style={{lineHeight:'20px',borderTop:'2px solid lightgray',borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <th>번호</th>
-                                <th>주문일자</th>
-                                <th>품명</th>
-                                <th>결제금액</th>
-                                <th>주문상세</th>
-                            </tr>
-                        </thead>
-                        <tbody style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <MyOrderRendering/>
                 )
                 return result;
             }
@@ -69,37 +47,13 @@ function MyPage(props){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.add('active');
             couponRef.current.classList.remove('active');
-            writtenRef.current.classList.remove('active');
+            qnaRef.current.classList.remove('active');
+            reviewRef.current.classList.remove('active')
 
             const accumRefRendering = () =>{
                 const result=[];
                 result.push(
-                    <table className='accumTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
-                        <thead style={{lineHeight:'20px',borderTop:'2px solid lightgray',borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <th>날짜</th>
-                                <th>적립내역</th>
-                                <th>적립금</th>
-                            </tr>
-                        </thead>
-                        <tbody style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <MyAccumRendering/>
                 )
                 return result;
             }
@@ -111,45 +65,13 @@ function MyPage(props){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.add('active');
-            writtenRef.current.classList.remove('active');
+            qnaRef.current.classList.remove('active');
+            reviewRef.current.classList.remove('active')
 
             const couponRefRendering = () =>{
                 const result=[];
                 result.push(
-                    <table className='couponTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
-                        <thead style={{lineHeight:'20px',borderTop:'2px solid lightgray',borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <th>쿠폰번호</th>
-                                <th>쿠폰이름</th>
-                                <th>쿠폰전용품목</th>
-                                <th>사용가능금액</th>
-                                <th>사용기간</th>
-                            </tr>
-                        </thead>
-                        <tbody style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <MyCouponRendering/>
                 )
                 return result;
             }
@@ -157,54 +79,50 @@ function MyPage(props){
             ReactDOM.render(couponRefRendering(),contentsRef.current);
         }
 
-        if (e.target===writtenRef.current){
+        if (e.target===qnaRef.current){
             selectRef.current.classList.remove('active');
             accumRef.current.classList.remove('active');
             couponRef.current.classList.remove('active');
-            writtenRef.current.classList.add('active');
+            qnaRef.current.classList.add('active');
+            reviewRef.current.classList.remove('active')
 
-            const writtenRefRendering = () =>{
+            const qnaRefRendering = () =>{
                 const result=[];
                 result.push(
-                    <table className='writtenTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
-                        <thead style={{lineHeight:'20px',borderTop:'2px solid lightgray',borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <th>번호</th>
-                                <th>게시판</th>
-                                <th>제목</th>
-                                <th>날짜</th>
-                            </tr>
-                        </thead>
-                        <tbody style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <MyQnARendering/>
                 )
                 return result;
             }
 
-            ReactDOM.render(writtenRefRendering(),contentsRef.current);
+            ReactDOM.render(qnaRefRendering(),contentsRef.current);
+        }
+
+        if (e.target===reviewRef.current){
+            selectRef.current.classList.remove('active');
+            accumRef.current.classList.remove('active');
+            couponRef.current.classList.remove('active');
+            qnaRef.current.classList.remove('active');
+            reviewRef.current.classList.add('active')
+            
+            const reviewRefRendering = () =>{
+                const result=[];
+                result.push(
+                    <MyReviewRendering/>
+                )
+                return result;
+            }
+
+            ReactDOM.render(reviewRefRendering(),contentsRef.current);
         }
     }
 
-    
+    useEffect(()=>{
+        axios.get('/api/getSession')
+        .then(response=>{
+            setUserID(response.data.ID);
+        })
+    },[])
+
 
     return(
         <div id='container'>
@@ -218,7 +136,8 @@ function MyPage(props){
                                 <button className="selectClass active" ref={selectRef} onClick={classChange}>주문내역 조회</button>
                                 <button className="accumClass" ref={accumRef} onClick={classChange}>적립금</button>
                                 <button className="couponClass" ref={couponRef} onClick={classChange}>쿠폰</button>
-                                <button className="writtenClass" ref={writtenRef} onClick={classChange}>게시물 관리</button>
+                                <button className="qnaClass" ref={qnaRef} onClick={classChange}>Q&amp;A 관리</button>
+                                <button className="reviewClass" ref={reviewRef} onClick={classChange}>Review 관리</button>
                                 <hr style={{border:'0',width:'80%',height:'1px',backgroundColor:'lightgray', margin:'0px'}}/>
                             </div>
                             <div className="myPageContent" ref={contentsRef}>
