@@ -36,7 +36,7 @@
 4. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
 5. 최초 랜딩 페이지 다이나믹하게 꾸미기
-6. Q&A,Review delete per user
+6. Q&A,Review view & delete per user
 7. HELP TAB
 * Only for logined user
 * 즉시 1:1 문의 PostView 렌더링
