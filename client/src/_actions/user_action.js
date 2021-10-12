@@ -17,6 +17,7 @@ import{
     GET_NOTICE,
     GET_NOTICEONE,
     POST_NOTICE,
+    CLEAR_NOTICE,
     GET_CART,
     POST_CART,
     CLEAR_CART
@@ -172,7 +173,7 @@ export function getNoticeOne(dataParam1,dataParam2){
 }
 
 export function postNotice(dataToSubmit){
-    const request = axios.post('/api/postNotice',dataToSubmit)
+    const request = axios.post('/api/postNotice/',dataToSubmit)
     .then(response=>response.data)
 
     return{
@@ -180,6 +181,18 @@ export function postNotice(dataToSubmit){
         payload:request
     }
 }
+
+export function clearNotice(dataToSubmit){
+    const request = axios.post('/api/clearNotice/',dataToSubmit)
+    .then(response=>response.data)
+
+    return{
+        type:CLEAR_NOTICE,
+        payload:request
+    }
+}
+
+
 
 export function getCart(dataToSubmit){
     const request = axios.post('/api/getCart/',dataToSubmit)

@@ -30,6 +30,8 @@ export const GET_NOTICEONE="get_noticeone"
 
 export const POST_NOTICE="post_notice"
 
+export const CLEAR_NOTICE="clear_notice"
+
 export const GET_CART="get_cart"
 
 export const POST_CART="post_cart"

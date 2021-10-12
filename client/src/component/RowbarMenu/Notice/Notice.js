@@ -6,7 +6,7 @@ import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
 import axios from 'axios'
-import { getNotice } from '../../../_actions/user_action'
+import { getNotice, clearNotice } from '../../../_actions/user_action'
 
 
 
@@ -16,13 +16,33 @@ function Notice(props){
     const NoticeTBodyRef = useRef();
     const NoticePaginationRef = useRef();
     const NoticeBtnRef = useRef();
-    const dispatch = useDispatch()
+    
     
     const [NoticeMap,setNoticeMap] = useState('')
     const [MapLength,setMapLength] = useState('')
     const [PostPaging,setPostPaging] = useState(1);
     const [deleteList,setDeleteList] = useState([]);
 
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        axios.get('/api/getSession/')
+        .then(response=>{
+            if (response.data.ID=='admin'){
+                const deleteCheckBtn = document.getElementById('deleteCheckBtn')
+                const noticePostBtn = document.getElementById('noticePostBtn')
+                deleteCheckBtn.style.display='inline-block'
+                noticePostBtn.style.display='inline-block'
+                
+            }
+        })
+
+        dispatch(getNotice())
+        .then(response=>{
+            setNoticeMap(response.payload.NoticeMap)
+            setMapLength(response.payload.length);
+        })
+    },[])
 
     const postPagingHandler = (event) =>{
         event.preventDefault();
@@ -50,7 +70,6 @@ function Notice(props){
         const deleteCheckBtn = document.getElementById('deleteCheckBtn')
         const deleteGroupBtn = document.getElementById('deleteGroupBtn')
 
-        
         deleteCheckBtn.style.display='none'
         deleteGroupBtn.style.display='inline-block'
         
@@ -61,6 +80,7 @@ function Notice(props){
 
     const deleteGroup = (event) =>{
         event.preventDefault();
+
         const Btns = document.getElementsByClassName('Check');
         const deleteCheckBtn = document.getElementById('deleteCheckBtn')
         const deleteGroupBtn = document.getElementById('deleteGroupBtn')
@@ -71,44 +91,23 @@ function Notice(props){
         for (let i=0; i<Btns.length; i++){
             Btns[i].style.display='none'
         }
-    }
 
-    useEffect(()=>{
-        axios.get('/api/getSession/')
+        let body={
+            deleteList:deleteList
+        }
+
+        dispatch(clearNotice(body))
         .then(response=>{
-            if (response.data.ID==='admin'){
-                const btnRendering = () =>{
-                    const result=[];
-                    result.push(
-                        <div style={{marginTop:'20px'}}>
-                        <div id="deleteBtnDiv" style={{float:'left', width:'21%'}}>
-                            <button className="SubmitBtn" id="deleteCheckBtn" style={{marginLeft:'300%'}}>
-                                <a href="#!" onClick={deleteVisible}>삭제</a>
-                            </button>
-                            <button className="SubmitBtn" id="deleteGroupBtn" style={{marginLeft:'300%',display:'none'}}>
-                                <a href="#!" onClick={deleteGroup}>그룹 삭제</a>
-                            </button>
-                        </div>
-                        <div style={{float:'left', width:'21%'}}>
-                            <button className='SubmitBtn' id="noticePostBtn" style={{marginLeft:'300%'}}>
-                                <a href={"/NoticePost/"}>글 쓰기</a>
-                            </button>
-                        </div>
-                        
-                        </div>
-                    )
-                    return result;
-                }
-                ReactDOM.render(btnRendering(),NoticeBtnRef.current);
+            console.log(response);
+            if (response.payload.clearNoticeSuccess){
+                alert("선택된 글이 삭제되었습니다.")
+                window.location.replace('/Notice')
+            }else{
+                alert('오류가 있습니다.')
+                window.location.replace('/Notice')
             }
         })
-
-        dispatch(getNotice())
-        .then(response=>{
-            setNoticeMap(response.payload.NoticeMap)
-            setMapLength(response.payload.length);
-        })
-    },[])
+    }
 
     useEffect(()=>{
         const footerRendering = () =>{
@@ -116,7 +115,7 @@ function Notice(props){
             for (let i=0; i<MapLength/PostNum; i++){
                 result.push(
                     <span onClick={postPagingHandler}>
-                        <a className={'NoticePaging'+(i+1)} href="#none" >[{i+1}]</a>
+                        <a className={'PostPaging'+(i+1)} href="#none" >[{i+1}]</a>
                     </span>
                 )
             }
@@ -232,7 +231,21 @@ function Notice(props){
 
                                 </div>
                                 <div ref={NoticeBtnRef}>
-
+                                    <div style={{marginTop:'20px'}}>
+                                        <div id="deleteBtnDiv" style={{float:'left', width:'21%'}}>
+                                            <button className="SubmitBtn" id="deleteCheckBtn" style={{marginLeft:'300%',display:'none'}}>
+                                                <a href="#!" onClick={deleteVisible}>삭제</a>
+                                            </button>
+                                            <button className="SubmitBtn" id="deleteGroupBtn" style={{marginLeft:'300%',display:'none'}}>
+                                                <a href="#!" onClick={deleteGroup}>그룹 삭제</a>
+                                            </button>
+                                        </div>
+                                        <div style={{float:'left', width:'21%'}}>
+                                            <button className='SubmitBtn' id="noticePostBtn" style={{marginLeft:'300%',display:'none'}}>
+                                                <a href={"/NoticePost/"}>글 쓰기</a>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

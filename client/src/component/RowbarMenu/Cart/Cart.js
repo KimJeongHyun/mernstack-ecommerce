@@ -121,8 +121,8 @@ function Cart(props){
                     }else{
                         if (cnt!==10){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'CartTR'
-                            targetClassName = 'CartTR'
+                            trTag.className = 'CartTR'+cnt
+                            targetClassName = 'CartTR'+cnt
                             CartTBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{

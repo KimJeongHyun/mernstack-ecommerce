@@ -15,11 +15,10 @@ const getReviewData = require('./controller/storeController/getReviewData');
 const postReviewData = require('./controller/storeController/postReview');
 const getNotice = require('./controller/boardController/getNotice');
 const postNotice = require('./controller/boardController/postNotice');
+const clearNotice = require('./controller/boardController/clearNotice')
 const getCart = require('./controller/cartController/getCart')
 const postCart = require('./controller/cartController/postCart')
 const clearCart = require('./controller/cartController/clearCart')
-
-
 
 const port = 5000;
 
@@ -33,8 +32,6 @@ app.use(express.urlencoded({
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
-
-
 const express_session = require('express-session');
 const MongoStore = require('connect-mongo');
 
@@ -42,8 +39,8 @@ app.use(express_session({
     secret:config.secret,
     resave:false,
     saveUninitialized:false,
-    store: MongoStore.create({mongoUrl:`mongodb+srv://sliderDB:${encodeURIComponent(config.password)}@imgsliderdb.q6ife.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`}),
-    cookie:{maxAge:(3.6e+6)*24}
+    store: MongoStore.create({mongoUrl:`mongodb+srv://sliderDB:${encodeURIComponent(config.password)}@imgsliderdb.q6ife.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`})
+    //cookie:{maxAge:1000*60*60}
 }))
 
 const database = require('./database')();
@@ -53,14 +50,20 @@ database.db_open();
 app.use(userLogin);
 app.use(userLogout);
 app.use(userRegister);
+
 app.use(getClothes);
 app.use(getDetailData);
+
 app.use(getQnAData);
 app.use(postQnAData);
+
 app.use(getReviewData);
 app.use(postReviewData);
+
 app.use(getNotice);
 app.use(postNotice);
+app.use(clearNotice);
+
 app.use(getCart);
 app.use(postCart);
 app.use(clearCart);
