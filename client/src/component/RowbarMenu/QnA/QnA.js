@@ -64,15 +64,15 @@ function QnA(props){
         if(QnAMap!=='' && MapLength!==''){
             if (MapLength===0){
                 const trTag = document.createElement('tr');
-                trTag.className='EmptyCartTR'
+                trTag.className='EmptyQnATR'
                 QnATBodyRef.current.appendChild(trTag);
 
                 const tdTag = document.createElement('td');
                 tdTag.colSpan=9
-                const tdTagText = document.createTextNode('공지사항이 없습니다.');
+                const tdTagText = document.createTextNode('작성된 글이 없습니다.');
                 tdTag.appendChild(tdTagText);
 
-                document.getElementsByClassName('EmptyCartTR')[0].appendChild(tdTag)
+                document.getElementsByClassName('EmptyQnATR')[0].appendChild(tdTag)
             }else{
                 let cnt = 0;
                 let targetClassName='';
@@ -82,8 +82,8 @@ function QnA(props){
                     }else{
                         if (cnt!==5){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'QnA'
-                            targetClassName = 'QnA'
+                            trTag.className = 'QnATR'+cnt
+                            targetClassName = 'QnATR'+cnt
                             QnATBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{

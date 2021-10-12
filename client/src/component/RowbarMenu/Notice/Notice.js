@@ -134,7 +134,7 @@ function Notice(props){
         if(NoticeMap!=='' && MapLength!==''){
             if (MapLength===0){
                 const trTag = document.createElement('tr');
-                trTag.className='EmptyCartTR'
+                trTag.className='EmptyNoticeTR'
                 NoticeTBodyRef.current.appendChild(trTag);
 
                 const tdTag = document.createElement('td');
@@ -142,7 +142,7 @@ function Notice(props){
                 const tdTagText = document.createTextNode('공지사항이 없습니다.');
                 tdTag.appendChild(tdTagText);
 
-                document.getElementsByClassName('EmptyCartTR')[0].appendChild(tdTag)
+                document.getElementsByClassName('EmptyNoticeTR')[0].appendChild(tdTag)
             }else{
                 let cnt = 0;
                 let targetClassName='';

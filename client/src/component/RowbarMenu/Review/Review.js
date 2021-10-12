@@ -61,15 +61,15 @@ function Review(props){
         if(ReviewMap!=='' && MapLength!==''){
             if (MapLength===0){
                 const trTag = document.createElement('tr');
-                trTag.className='EmptyCartTR'
+                trTag.className='EmptyReviewTR'
                 ReviewTBodyRef.current.appendChild(trTag);
 
                 const tdTag = document.createElement('td');
                 tdTag.colSpan=9
-                const tdTagText = document.createTextNode('공지사항이 없습니다.');
+                const tdTagText = document.createTextNode('작성된 글이 없습니다.');
                 tdTag.appendChild(tdTagText);
 
-                document.getElementsByClassName('EmptyCartTR')[0].appendChild(tdTag)
+                document.getElementsByClassName('EmptyReviewTR')[0].appendChild(tdTag)
             }else{
                 let cnt = 0;
                 let targetClassName='';
@@ -79,8 +79,8 @@ function Review(props){
                     }else{
                         if (cnt!==10){
                             const trTag = document.createElement('tr');
-                            trTag.className = 'ReviewTR'
-                            targetClassName = 'ReviewTR'
+                            trTag.className = 'ReviewTR'+cnt
+                            targetClassName = 'ReviewTR'+cnt
                             ReviewTBodyRef.current.appendChild(trTag);
                             cnt=cnt+1;
                         }else{

@@ -41,4 +41,19 @@ router.get('/api/getReviewAll/',(req,res)=>{
     })
 })
 
+router.post('/api/getReviewUser/',(req,res)=>{
+    const reqData = req.body;
+    const userID = reqData.userID;
+    Review.find({userID:userID}).sort({regDate:-1}).exec(function(err,Reviews){
+        let ReviewMap={};
+        let cnt=1;
+        Reviews.forEach(function(Review){
+            ReviewMap[cnt] = Review;
+            cnt=cnt+1
+        })
+        res.json({getReviewUserData:true,ReviewMap:ReviewMap,length:Reviews.length})
+    })
+
+})
+
 module.exports = router;

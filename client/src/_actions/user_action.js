@@ -9,10 +9,12 @@ import{
     GET_QNA,
     GET_QNAONE,
     GET_QNAALL,
+    GET_QNAUSER,
     POST_QNA,
     GET_REVIEW,
     GET_REVIEWONE,
     GET_REVIEWALL,
+    GET_REVIEWUSER,
     POST_REVIEW,
     GET_NOTICE,
     GET_NOTICEONE,
@@ -101,6 +103,16 @@ export function getQnADataAll(){
     }
 }
 
+export function getQnAUser(dataToSubmit){
+    const request = axios.post('/api/getQnAUser/',dataToSubmit)
+    .then(response=>response.data);
+
+    return{
+        type:GET_QNAUSER,
+        payload:request
+    }
+}
+
 export function postQnAData(dataToSubmit){
     const request = axios.post('/api/postQnA/',dataToSubmit)
     .then(response=>response.data);
@@ -137,6 +149,16 @@ export function getReviewDataAll(){
 
     return{
         type:GET_REVIEWALL,
+        payload:request
+    }
+}
+
+export function getReviewUser(dataToSubmit){
+    const request = axios.post('/api/getReviewUser/',dataToSubmit)
+    .then(response=>response.data);
+
+    return{
+        type:GET_REVIEWUSER,
         payload:request
     }
 }
@@ -191,8 +213,6 @@ export function clearNotice(dataToSubmit){
         payload:request
     }
 }
-
-
 
 export function getCart(dataToSubmit){
     const request = axios.post('/api/getCart/',dataToSubmit)

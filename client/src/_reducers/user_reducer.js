@@ -7,10 +7,12 @@ import {
     GET_QNA,
     GET_QNAONE,
     GET_QNAALL,
+    GET_QNAUSER,
     POST_QNA,
     GET_REVIEW,
     GET_REVIEWONE,
     GET_REVIEWALL,
+    GET_REVIEWUSER,
     POST_REVIEW,
     GET_NOTICE,
     GET_NOTICEONE,
@@ -37,7 +39,9 @@ export default function (state={}, action){
         case GET_QNAONE:
             return {...state,getQnAOneData: action.payload}
         case GET_QNAALL:
-            return {...state,getQnAAllData: action.payload}   
+            return {...state,getQnAAllData: action.payload}
+        case GET_QNAUSER:
+            return {...state,getQNAUser: action.payload}   
         case POST_QNA:
             return {...state,postQnAData: action.payload}  
         case GET_REVIEW:
@@ -45,7 +49,9 @@ export default function (state={}, action){
         case GET_REVIEWONE:
             return {...state,getReviewOneData: action.payload} 
         case GET_REVIEWALL:
-            return {...state,getReviewAllData: action.payload}    
+            return {...state,getReviewAllData: action.payload}  
+        case GET_REVIEWUSER:
+            return {...state,getReviewUser: action.payload}  
         case POST_REVIEW:
             return {...state,postReviewData: action.payload}  
         case GET_NOTICE:
