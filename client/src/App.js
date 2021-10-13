@@ -23,6 +23,7 @@ import ReviewPost from "./component/Store/ReviewPost"
 import ReviewView from "./component/Store/ReviewView";
 import NoticePost from "./component/RowbarMenu/Notice/NoticePost";
 import NoticeView from "./component/RowbarMenu/Notice/NoticeView";
+import NotFound from "./component/ErrorPage/NotFound";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/ReviewOne/:idx/:_id" component={ReviewView}/>
         <Route path="/NoticePost/" component={Auth(NoticePost,true)}/>
         <Route path="/NoticeOne/:idx/:_id" component={NoticeView}/>
+        <Route component={NotFound}/>
       </Switch>
     </Router>
   );
