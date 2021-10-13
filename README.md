@@ -8,6 +8,7 @@
 * Express (Next.js 학습 예정)
 ---
 구현 사항
+0. 없는 링크 접근시 404 page route
 1. 회원가입/로그인/로그아웃
 2. Navigation Bar (사이드, 위쪽 고정)
 3. Auth hoc
