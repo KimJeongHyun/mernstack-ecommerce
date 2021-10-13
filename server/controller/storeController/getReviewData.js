@@ -34,7 +34,7 @@ router.get('/api/getReviewAll/',(req,res)=>{
         var ReviewMap={};
         var cnt = 1;
         Reviews.forEach(function(Review){
-            ReviewMap[Review.ReviewIndex] = Review;
+            ReviewMap[cnt] = Review;
             cnt=cnt+1;
         })
         res.json({getReviewAllData:true,ReviewMap:ReviewMap,length:Reviews.length})

@@ -70,17 +70,14 @@ export function MyReviewRendering(){
             deleteList:deleteList
         }
 
-        /*dispatch(clearReview(body))
+        axios.post('/api/clearReview',body)
         .then(response=>{
-            console.log(response);
-            if (response.payload.clearReviewSuccess){
+            if (response.data.clearReviewSuccess){
                 alert("선택된 글이 삭제되었습니다.")
-                window.location.replace('/Review')
             }else{
                 alert('오류가 있습니다.')
-                window.location.replace('/Review')
             }
-        })*/
+        })
     }
 
     useEffect(()=>{

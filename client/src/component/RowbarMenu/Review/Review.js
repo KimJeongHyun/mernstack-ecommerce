@@ -74,6 +74,7 @@ function Review(props){
                 let cnt = 0;
                 let targetClassName='';
                 for (let i=((PostPaging*PostNum)-PostNum)+1; i<(PostPaging*PostNum)+1; i++){
+                    console.log(ReviewMap[i]);
                     if (i>MapLength){
                         break;
                     }else{

@@ -11,8 +11,10 @@ const getClothes = require('./controller/storeController/getClothData')
 const getDetailData = require('./controller/storeController/getDetailData')
 const getQnAData = require('./controller/storeController/getQnAData');
 const postQnAData = require('./controller/storeController/postQnA');
+const clearQnA = require('./controller/storeController/clearQnA')
 const getReviewData = require('./controller/storeController/getReviewData');
 const postReviewData = require('./controller/storeController/postReview');
+const clearReview = require('./controller/storeController/clearReview');
 const getNotice = require('./controller/boardController/getNotice');
 const postNotice = require('./controller/boardController/postNotice');
 const clearNotice = require('./controller/boardController/clearNotice')
@@ -56,9 +58,11 @@ app.use(getDetailData);
 
 app.use(getQnAData);
 app.use(postQnAData);
+app.use(clearQnA);
 
 app.use(getReviewData);
 app.use(postReviewData);
+app.use(clearReview);
 
 app.use(getNotice);
 app.use(postNotice);

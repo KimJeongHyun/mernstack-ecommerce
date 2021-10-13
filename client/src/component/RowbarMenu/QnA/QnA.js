@@ -80,7 +80,7 @@ function QnA(props){
                     if (i>MapLength){
                         break;
                     }else{
-                        if (cnt!==5){
+                        if (cnt!==10){
                             const trTag = document.createElement('tr');
                             trTag.className = 'QnATR'+cnt
                             targetClassName = 'QnATR'+cnt

@@ -70,17 +70,15 @@ export function MyQnARendering(){
             deleteList:deleteList
         }
 
-        /*dispatch(clearQnA(body))
+        axios.post('/api/clearQnA',body)
         .then(response=>{
             console.log(response);
-            if (response.payload.clearQnASuccess){
+            if (response.data.clearQnASuccess){
                 alert("선택된 글이 삭제되었습니다.")
-                window.location.replace('/QnA')
             }else{
                 alert('오류가 있습니다.')
-                window.location.replace('/QnA')
             }
-        })*/
+        })
     }
 
     useEffect(()=>{
