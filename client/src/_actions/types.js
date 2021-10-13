@@ -14,7 +14,6 @@ export const GET_QNAONE="get_qnaone";
 
 export const GET_QNAALL="get_qnaall";
 
-export const GET_QNAUSER="get_qnauser";
 
 export const POST_QNA="post_qna";
 
@@ -23,8 +22,6 @@ export const GET_REVIEW="get_review";
 export const GET_REVIEWONE="get_reviewone"
 
 export const GET_REVIEWALL="get_reviewall"
-
-export const GET_REVIEWUSER="get_reviewuser"
 
 export const POST_REVIEW="post_review"
 

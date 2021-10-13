@@ -39,9 +39,7 @@ export default function (state={}, action){
         case GET_QNAONE:
             return {...state,getQnAOneData: action.payload}
         case GET_QNAALL:
-            return {...state,getQnAAllData: action.payload}
-        case GET_QNAUSER:
-            return {...state,getQNAUser: action.payload}   
+            return {...state,getQnAAllData: action.payload} 
         case POST_QNA:
             return {...state,postQnAData: action.payload}  
         case GET_REVIEW:
@@ -50,8 +48,6 @@ export default function (state={}, action){
             return {...state,getReviewOneData: action.payload} 
         case GET_REVIEWALL:
             return {...state,getReviewAllData: action.payload}  
-        case GET_REVIEWUSER:
-            return {...state,getReviewUser: action.payload}  
         case POST_REVIEW:
             return {...state,postReviewData: action.payload}  
         case GET_NOTICE:

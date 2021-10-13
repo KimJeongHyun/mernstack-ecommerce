@@ -1,7 +1,6 @@
 import React, {useEffect,useState,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import { getQnAUser } from '../../../_actions/user_action';
 
 
 export function MyQnARendering(){

@@ -103,16 +103,6 @@ export function getQnADataAll(){
     }
 }
 
-export function getQnAUser(dataToSubmit){
-    const request = axios.post('/api/getQnAUser/',dataToSubmit)
-    .then(response=>response.data);
-
-    return{
-        type:GET_QNAUSER,
-        payload:request
-    }
-}
-
 export function postQnAData(dataToSubmit){
     const request = axios.post('/api/postQnA/',dataToSubmit)
     .then(response=>response.data);
@@ -149,16 +139,6 @@ export function getReviewDataAll(){
 
     return{
         type:GET_REVIEWALL,
-        payload:request
-    }
-}
-
-export function getReviewUser(dataToSubmit){
-    const request = axios.post('/api/getReviewUser/',dataToSubmit)
-    .then(response=>response.data);
-
-    return{
-        type:GET_REVIEWUSER,
         payload:request
     }
 }

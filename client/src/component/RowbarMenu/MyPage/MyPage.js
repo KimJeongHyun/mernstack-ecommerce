@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
-import {MyQnARendering} from './MyQnA'
-import { MyReviewRendering } from './MyReview'
 import '../../../css/style.css'
 import axios from 'axios'
-import { MyCouponRendering } from './MyCoupon'
-import { MyAccumRendering } from './MyAccum'
-import { MyOrderRendering } from './MyOrder'
+import { MyCouponRendering } from './Tabs/MyCoupon'
+import { MyAccumRendering } from './Tabs/MyAccum'
+import { MyOrderRendering } from './Tabs/MyOrder'
+import { MyReviewRendering } from './Tabs/MyReview'
+import {MyQnARendering} from './Tabs/MyQnA'
 
 
 function MyPage(props){

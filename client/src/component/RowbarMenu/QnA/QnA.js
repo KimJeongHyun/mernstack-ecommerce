@@ -160,7 +160,6 @@ function QnA(props){
                                 <div ref={QnAPaginationRef}>
 
                                 </div>
-                                <button className='SubmitBtn' style={{marginLeft:'79%'}}><a href='#none'>글 쓰기</a></button>
                             </div>
                         </div>
                     </div>
