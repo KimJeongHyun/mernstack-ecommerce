@@ -14,7 +14,6 @@ export const GET_QNAONE="get_qnaone";
 
 export const GET_QNAALL="get_qnaall";
 
-
 export const POST_QNA="post_qna";
 
 export const GET_REVIEW="get_review";
@@ -38,3 +37,5 @@ export const GET_CART="get_cart"
 export const POST_CART="post_cart"
 
 export const CLEAR_CART="clear_cart"
+
+export const SEND_MAIL="send_mail"

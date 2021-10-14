@@ -17,7 +17,8 @@ import {
     GET_NOTICE,
     GET_NOTICEONE,
     POST_NOTICE,
-    CLEAR_NOTICE
+    CLEAR_NOTICE,
+    SEND_MAIL
 } from '../_actions/types'
 
 
@@ -58,6 +59,8 @@ export default function (state={}, action){
             return {...state,postNoticeData: action.payload}
         case CLEAR_NOTICE:
             return {...state,clearNoticeSuccess: action.payload}
+        case SEND_MAIL:
+            return {...state,sendMailSuccess: action.payload}
         default:
             return state;
     }

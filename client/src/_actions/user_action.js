@@ -22,7 +22,8 @@ import{
     CLEAR_NOTICE,
     GET_CART,
     POST_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    SEND_MAIL
 } from './types';
 
 export function auth(){
@@ -216,4 +217,13 @@ export function clearCart(dataToSubmit){
         type:CLEAR_CART,
         payload:request
     }
+}
+
+export function sendMail(dataToSubmit){
+    const request = axios.post('/api/sendMail/',(req,res)=>{
+        return{
+            type:SEND_MAIL,
+            payload:request
+        }
+    })
 }

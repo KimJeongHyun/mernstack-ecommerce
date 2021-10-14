@@ -49,6 +49,9 @@ export function NavBar(props){
                                     <li>
                                         <a href="/Notice">NOTICE</a>
                                     </li>
+                                    <li>
+                                        <a href="/HelpDesk">HelpDesk</a>
+                                    </li>
                                 </ul>
                             </nav>
                         )
