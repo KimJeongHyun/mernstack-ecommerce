@@ -21,7 +21,8 @@
 9. 마이페이지
  * Q&A, Review 페이지 ( View, Delete, Pagination )
 11. Notice ( Admin Only. Create, Delete, View)
-12. 장바구니 
+12. 장바구니
+13. 1:1 문의 메일 전송 (nodeMailer) 
 ---
 구현 필요사항
 1. SCSS, GSAP
@@ -39,16 +40,11 @@
 4. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
 5. 최초 랜딩 페이지 다이나믹하게 꾸미기
-6. HELP TAB
-* Only for logined user
-* 즉시 1:1 문의 PostView 렌더링
-* 이름, 제목, 내용 작성. 문의 범주 select box.
-* title: [범주][이름] 제목
-* content: 내용 + userID + userPhone
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
  * function() 부분 모듈화해서 따로 폴더로 빼기
 2. 1번 수행시 <Provider>로 wrapping되는 것 알아보기
 3. 2번 블로그 포스팅
-4. Redux 개념 심화 이해
+4. useState() -> onChange 세팅 정리하기. on~Handler 하나에 모아서 세팅하도록.    
+5. Redux 개념 심화 이해
