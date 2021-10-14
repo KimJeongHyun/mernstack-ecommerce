@@ -21,6 +21,7 @@ const clearNotice = require('./controller/boardController/clearNotice')
 const getCart = require('./controller/cartController/getCart')
 const postCart = require('./controller/cartController/postCart')
 const clearCart = require('./controller/cartController/clearCart')
+const clientMail = require('./controller/helpController/clientMail')
 
 const port = 5000;
 
@@ -71,6 +72,8 @@ app.use(clearNotice);
 app.use(getCart);
 app.use(postCart);
 app.use(clearCart);
+
+app.use(clientMail);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{

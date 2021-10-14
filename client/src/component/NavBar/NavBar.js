@@ -50,7 +50,7 @@ export function NavBar(props){
                                         <a href="/Notice">NOTICE</a>
                                     </li>
                                     <li>
-                                        <a href="/HelpDesk">HelpDesk</a>
+                                        <a href="/HelpDesk">HELP</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -81,6 +81,9 @@ export function NavBar(props){
                                     </li>
                                     <li>
                                         <a href="/Notice">NOTICE</a>
+                                    </li>
+                                    <li>
+                                        <a href="/HelpDesk">HELP</a>
                                     </li>
                                 </ul>
                             </nav>

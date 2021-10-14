@@ -220,10 +220,9 @@ export function clearCart(dataToSubmit){
 }
 
 export function sendMail(dataToSubmit){
-    const request = axios.post('/api/sendMail/',(req,res)=>{
-        return{
-            type:SEND_MAIL,
-            payload:request
-        }
-    })
+    const request = axios.post('/api/sendMail/',dataToSubmit)
+    return{
+        type:SEND_MAIL,
+        payload:request
+    }
 }

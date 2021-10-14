@@ -18,7 +18,8 @@ import {
     GET_NOTICEONE,
     POST_NOTICE,
     CLEAR_NOTICE,
-    SEND_MAIL
+    SEND_MAIL,
+    ANSWER_MAIL
 } from '../_actions/types'
 
 

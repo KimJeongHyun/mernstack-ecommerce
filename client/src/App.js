@@ -49,7 +49,7 @@ function App() {
         <Route path="/ReviewOne/:idx/:_id" component={ReviewView}/>
         <Route path="/NoticePost/" component={Auth(NoticePost,true)}/>
         <Route path="/NoticeOne/:idx/:_id" component={NoticeView}/>
-        <Route path="/HelpDesk" component={Help}/>
+        <Route path="/HelpDesk" component={Auth(Help,true)}/>
         <Route component={NotFound}/>
       </Switch>
     </Router>
