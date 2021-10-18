@@ -18,16 +18,20 @@ function ReviewPost(props){
 
     const dispatch = useDispatch()
 
-    const postTitleHandler = (event) =>{
-        setPostTitle(event.target.value);
-    }
-
-    const postPWHandler = (event) =>{
-        setPostPW(event.target.value);
-    }
-
-    const postContentHandler = (event) =>{
-        setPostContent(event.target.value);
+    const onValueHandler = (event) =>{
+        event.preventDefault();
+        const {name,value} = event.target;
+        switch (name){
+            case 'title':
+                setPostTitle(value)
+                break;
+            case 'content':
+                setPostContent(value)
+                break;
+            case 'pw':
+                setPostPW(value)
+                break;
+        }
     }
 
     const onSubmitHandler = (event) =>{
@@ -87,17 +91,17 @@ function ReviewPost(props){
                                                 <td>NAME</td>
                                                 <td><input value={userID}/></td>
                                                 <td>PASSWORD</td>
-                                                <td><input type="password" value={postPW} onChange={postPWHandler} required/></td>
+                                                <td><input type="password" value={postPW} name='pw' onChange={onValueHandler} required/></td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>TITLE</td>
-                                                <td colspan='3'><input style={{width:'430px'}} value={postTitle} onChange={postTitleHandler} required/></td>
+                                                <td colspan='3'><input style={{width:'430px'}} value={postTitle} name='title' onChange={onValueHandler} required/></td>
                                             </tr>
                                             <tr>
                                                 <td>CONTENT</td>
-                                                <td colspan='3'><textarea value={postContent} onChange={postContentHandler} required/></td>
+                                                <td colspan='3'><textarea value={postContent} name='content' onChange={onValueHandler} required/></td>
                                             </tr>
                                         </tbody>
                                     </table>

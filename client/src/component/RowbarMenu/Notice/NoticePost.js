@@ -24,6 +24,19 @@ function NoticePost(props){
         setPostContent(event.target.value);
     }
 
+    const onValueHandler = (event) =>{
+        event.preventDefault();
+        const {name,value} = event.target;
+        switch (name){
+            case 'title':
+                setPostTitle(value)
+                break;
+            case 'content':
+                setPostContent(value)
+                break;
+        }
+    }
+
     const onSubmitHandler = (event) =>{
         event.preventDefault();
         let body = {
@@ -72,11 +85,11 @@ function NoticePost(props){
                                         <tbody>
                                             <tr>
                                                 <td>TITLE</td>
-                                                <td colSpan='3'><input style={{width:'430px'}} value={postTitle} onChange={postTitleHandler} required/></td>
+                                                <td colSpan='3'><input style={{width:'430px'}} value={postTitle} name='title' onChange={onValueHandler} required/></td>
                                             </tr>
                                             <tr>
                                                 <td>CONTENT</td>
-                                                <td colSpan='3'><textarea value={postContent} onChange={postContentHandler} required/></td>
+                                                <td colSpan='3'><textarea value={postContent} name='content' onChange={onValueHandler} required/></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -15,13 +15,17 @@ function Login(props){
     const [ID, setID] = useState("")
     const [Password,setPassword] = useState("")
 
-
-    const onIDHandler = (event) =>{
-        setID(event.target.value);
-    }
-
-    const onPasswordHandler = (event) =>{
-        setPassword(event.target.value);
+    const onValueHandler = (event) =>{
+        event.preventDefault();
+        const {name,value} = event.target;
+        switch (name){
+            case 'id':
+                setID(value)
+                break;
+            case 'pw':
+                setPassword(value)
+                break;
+        }
     }
 
     const onSubmitHandler = (event) =>{
@@ -61,8 +65,8 @@ function Login(props){
                                     <fieldset style={{border:'none'}}>
                                         <legend style={{visibility:'hidden'}}>Login Form</legend>
                                         <div style={{display:'flex', flexDirection:'column'}}>
-                                            <input placeholder="ID" maxLength="20" value={ID} onChange={onIDHandler}></input>
-                                            <input type="password" placeholder="PASSWORD" value={Password} onChange={onPasswordHandler}></input>
+                                            <input placeholder="ID" maxLength="20" value={ID} name='id' onChange={onValueHandler}></input>
+                                            <input type="password" placeholder="PASSWORD" value={Password} name='pw' onChange={onValueHandler}></input>
                                             <a href="#!">Forgot?</a>
                                             <a href="/Join">Join Us</a>
                                             <button>Login</button>

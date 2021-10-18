@@ -20,29 +20,31 @@ function Join(props){
     const [Email,setEmail] = useState("")
     const [Phone,setPhone] = useState("")
 
-    const onNameHandler = (event) =>{
-        setName(event.target.value);
-    }
 
-    const onIDHandler = (event) =>{
-        setID(event.target.value);
-    }
-
-    const onPasswordHandler = (event) =>{
-        setPassword(event.target.value);
-    }
-
-    const onPassword2Handler = (event) =>{
-        setPassword2(event.target.value);
-    }
-
-    const onEmailHandler = (event) =>{
-        setEmail(event.target.value);
-    }
-
-    const onPhoneHandler = (event) =>{
-        if (event.target.value.length<=11){
-            setPhone(event.target.value);
+    const onValueHandler = (event) =>{
+        event.preventDefault();
+        const {name,value} = event.target;
+        switch (name){
+            case 'name':
+                setName(value)
+                break;
+            case 'id':
+                setID(value)
+                break;
+            case 'pw':
+                setPassword(value)
+                break;
+            case 'pw2':
+                setPassword2(value)
+                break;
+            case 'email':
+                setEmail(value)
+                break;
+            case 'phone':
+                if (event.target.value.length<=11){
+                    setPhone(event.target.value);
+                }
+                break;
         }
     }
 
@@ -107,12 +109,12 @@ function Join(props){
                                     <fieldset style={{border:'none'}}>
                                         <legend style={{visibility:'hidden'}}>Join Form</legend>
                                         <div style={{display:'flex', flexDirection:'column'}}>
-                                            <input placeholder="NAME" value={Name} onChange={onNameHandler} required></input>
-                                            <input placeholder="ID" value={ID} onChange={onIDHandler} maxLength="20" required></input>
-                                            <input type="password" value={Password} onChange={onPasswordHandler} placeholder="PASSWORD" required></input>
-                                            <input type="password" value={Password2} onChange={onPassword2Handler} placeholder="CONFIRM PASSWORD" required></input>
-                                            <input placeholder="E-mail" value={Email} onChange={onEmailHandler} required></input>
-                                            <input type="number" placeholder="PHONE" value={Phone} onChange={onPhoneHandler} required></input>
+                                            <input placeholder="NAME" value={Name} name='name' onChange={onValueHandler} required></input>
+                                            <input placeholder="ID" value={ID} name='id' onChange={onValueHandler} maxLength="20" required></input>
+                                            <input type="password" value={Password} name='pw' onChange={onValueHandler} placeholder="PASSWORD" required></input>
+                                            <input type="password" value={Password2} name='pw2' onChange={onValueHandler} placeholder="CONFIRM PASSWORD" required></input>
+                                            <input placeholder="E-mail" value={Email} name='email' onChange={onValueHandler} required></input>
+                                            <input type="number" placeholder="PHONE" value={Phone} name='phone' onChange={onValueHandler} required></input>
                                             <button className="joinBtn notEnough" ref={joinBtn} disabled>Join</button>
                                         </div>
                                     </fieldset>
