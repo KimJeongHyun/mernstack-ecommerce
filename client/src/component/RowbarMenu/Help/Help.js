@@ -46,11 +46,15 @@ function Help(props){
                 setText(value);
                 break;
             case 'attachments':
-                setAttachments((current)=>{
-                    const newList = [...current]
-                    newList.push(value)
-                    return newList
-                })
+                const reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0])
+                reader.onload = function(e){
+                    setAttachments((current)=>{
+                        const newList = current
+                        newList.push(e.target.result)
+                        return newList
+                    })
+                }
                 break;
             case 'category':
                 setCategory(value);
@@ -70,10 +74,20 @@ function Help(props){
             
         }
 
-        console.log(body);
+        const loadingRendering = () =>{
+            return(
+                <div>
+                    전송 중....
+                </div>
+            )
+        }
+
+        ReactDOM.render(loadingRendering(),writeContainerRef.current)
+
         dispatch(sendMail(body))
         .then(response=>{
-            if (response.payload.sendMailSuccess){
+            console.log(response);
+            if (response.payload.data.sendMailSuccess){
                 const completeRendering = () =>{
                     return(
                         <div>
@@ -127,6 +141,10 @@ function Help(props){
                                             <tr>
                                                 <td>CONTENT</td>
                                                 <td colSpan='3'><textarea value={text} name='text' onChange={onValueHandler} required/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>첨부파일</td>
+                                                <td colSpan='3'><input type='file' name='attachments' onChange={onValueHandler}/></td>
                                             </tr>
                                         </tbody>
                                     </table>
