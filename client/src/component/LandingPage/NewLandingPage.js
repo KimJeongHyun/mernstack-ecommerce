@@ -12,13 +12,13 @@ function NewLandingPage(props){
     const textRef = useRef();
 
     useEffect(async ()=>{
-        await gsap.to(boxRef.current,{opacity:1,duration:3})
+        await gsap.to(boxRef.current,{opacity:1,duration:2})
         setBoxReady(true)
     },[])
 
     useEffect(async()=>{
         if (boxReady){
-            gsap.to(textRef.current,{opacity:1,duration:3})
+            gsap.to(textRef.current,{left:'15%',opacity:1,duration:3})
         }
     },[boxReady])
 
@@ -26,7 +26,7 @@ function NewLandingPage(props){
         <>
         <div className="contentArea" >
             <img ref={boxRef} style={{opacity:'0'}} src="images/Coor.jpg" alt="Initial View"></img>
-            <p ref={textRef} style={{opacity:'0',position:'absolute',left:'25%', bottom:'50%', color:'white'}}> 당신을 위한 최고의 선택 </p>
+            <p ref={textRef} style={{opacity:'0',position:'absolute',left:'10%', bottom:'50%', color:'white'}}> 당신을 위한 최고의 선택 </p>
         </div>
         </>
         
