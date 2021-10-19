@@ -7,7 +7,7 @@ import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
 import { sendMail } from '../../../_actions/user_action'
 import axios from 'axios'
-
+import {AiOutlinePlusSquare} from 'react-icons/ai'
 
 function Help(props){
     const [userID, setUserID] = useState('')
@@ -18,6 +18,7 @@ function Help(props){
     const [category, setCategory] = useState('')
 
     const writeContainerRef = useRef();
+    const helpTBodyRef = useRef();
 
     const dispatch = useDispatch()
 
@@ -46,6 +47,7 @@ function Help(props){
                 setText(value);
                 break;
             case 'attachments':
+                console.log(attachments);
                 const reader = new FileReader();
                 reader.readAsDataURL(event.target.files[0])
                 reader.onload = function(e){
@@ -60,6 +62,33 @@ function Help(props){
                 setCategory(value);
                 break;
         }
+    }
+
+    const attachmentAdd = () =>{
+        const trTag = document.createElement('tr')
+        const tdTag1 = document.createElement('td')
+        const tdTextNode = document.createTextNode('첨부파일')
+
+        tdTag1.appendChild(tdTextNode);
+
+        const tdTag2 = document.createElement('td')
+        tdTag2.style.colSpan = 2
+        tdTag2.style.float = 'left'
+
+        const inputTag = document.createElement('input')
+        inputTag.type = 'file'
+        inputTag.name='attachments'
+        inputTag.accept=".gif, .jpg, .png"
+        inputTag.onchange=onValueHandler
+
+        tdTag2.appendChild(inputTag)
+
+        trTag.appendChild(tdTag1)
+        trTag.appendChild(tdTag2)
+
+        helpTBodyRef.current.appendChild(trTag)
+
+
     }
 
     const onSubmitHandler = (event) =>{
@@ -119,16 +148,16 @@ function Help(props){
                                                 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody ref={helpTBodyRef}>
                                             <tr>
                                                 <td>TITLE</td>
-                                                <td colSpan='3'><input value={subject} name='subject' style={{width:'430px'}} onChange={onValueHandler} required/></td>
+                                                <td colSpan='3'><input value={subject} name='subject' style={{float:'left',width:'430px'}} onChange={onValueHandler} required/></td>
                                             </tr>
                                             <tr>
                                                 <td>EMAIL</td>
-                                                <td><input value={email} name='email' style={{width:'275px'}} onChange={onValueHandler}></input></td>
+                                                <td><input value={email} name='email' style={{float:'left',width:'275px'}} onChange={onValueHandler}></input></td>
                                                 <td>CATEGORY</td>
-                                                <td>
+                                                <td style={{float:'left'}}>
                                                     <select value={category} name='category' onChange={onValueHandler}>
                                                         <option value="none">선택</option>
                                                         <option value="일반문의">일반문의</option>
@@ -140,15 +169,16 @@ function Help(props){
                                             </tr>
                                             <tr>
                                                 <td>CONTENT</td>
-                                                <td colSpan='3'><textarea value={text} name='text' onChange={onValueHandler} required/></td>
+                                                <td colSpan='3'><textarea value={text} style={{float:'left'}} name='text' onChange={onValueHandler} required/></td>
                                             </tr>
                                             <tr>
                                                 <td>첨부파일</td>
-                                                <td colSpan='3'><input type='file' name='attachments' onChange={onValueHandler}/></td>
+                                                <td colSpan='2' style={{float:'left'}}><input type='file' name='attachments' accept=".gif, .jpg, .png" onChange={onValueHandler}/></td>
+                                                <td><AiOutlinePlusSquare style={{width:'20px', height:'20px', cursor:'pointer'}} onClick={attachmentAdd}/></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button className='SubmitBtn' style={{left:'188px', cursor:'pointer', color:'#fff'}}>글 쓰기</button>
+                                    <button className='SubmitBtn' style={{marginTop:'50px',left:'150px', cursor:'pointer', color:'#fff'}}>글 쓰기</button>
                                 </form>
                             </div>
                         </div>

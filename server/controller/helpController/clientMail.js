@@ -12,6 +12,11 @@ router.post('/api/sendMail/',(req,res)=>{
     const category = reqData.category;
     const attachments = reqData.attachments;
 
+    const attachmentsArr = attachments.map((file)=>{
+        return {path:file};
+    })
+
+
     let transporter = nodemailer.createTransport({
         // 사용하고자 하는 서비스, gmail계정으로 전송할 예정이기에 'gmail'
         service: 'gmail',
@@ -39,11 +44,7 @@ router.post('/api/sendMail/',(req,res)=>{
             // text: 일반 text로 작성된 내용
             // html: html로 작성된 내용 html: `<b>${generatedAuthNumber}</b>`,
             text: text,
-            attachments:[
-                {
-                    path:attachments[0]
-                }
-            ]
+            attachments:attachmentsArr
         });
         res.status(200).json({
             sendMailSuccess:true,
