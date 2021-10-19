@@ -6,6 +6,7 @@ import {
 
 import Auth from './hoc/auth'
 import LandingPage from './component/LandingPage/LandingPage'
+import NewLandingPage from "./component/LandingPage/NewLandingPage"
 import About from './component/About/About'
 import Store from "./component/Store/Store";
 import Login from "./component/RowbarMenu/Login/Login";
@@ -31,7 +32,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/" component={NewLandingPage}/>
         <Route path="/About" component={About}/>
         <Route path="/Store/:idx" component={Store}/>
         <Route path="/Login" component={Login}/>
