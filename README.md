@@ -27,11 +27,15 @@
 ---
 구현 필요사항
 1. SCSS, GSAP
-2. 관리자 페이지
+ * LandingPage 접근시, Loading.... 3초
+ * 먼저 BackgroundImage FadeIn. 이후 span(또는 p) FadeIn 순차적으로.
+ * Main page button FadeIn. 버튼 클릭시 이미지 외 모든 element들 fadeout시키고 Main으로 라우팅
+ * Main page view에선 잡지를 보듯 스크롤 넘길 수 있게 만들기.
+3. 관리자 페이지
  * 물품 정리표를 업로드하면 서버에서 자동으로 DB에 넣어주는 로직. 관리자용
-3. 결제 모듈 추가(페이팔?)
+4. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
-4. 최초 랜딩 페이지 다이나믹하게 꾸미기
+5. 최초 랜딩 페이지 다이나믹하게 꾸미기
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
