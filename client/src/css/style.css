@@ -93,6 +93,7 @@ textarea:focus{
     position:relative;
     width:100%;
     right:80px;
+    z-index: 9999;
 }
 
 .uxContent{
@@ -308,6 +309,10 @@ textarea:focus{
     .productFooter{
         width:722px;
     }
+
+    #videoWrapping{
+        min-height:816px;
+    }
 }
 
 @media screen and (min-width:1500px) {
@@ -332,6 +337,10 @@ textarea:focus{
 
     .productFooter{
         width:932px;
+    }
+    
+    #videoWrapping{
+        min-height:1071px;
     }
 }
 
@@ -472,8 +481,20 @@ textarea:focus{
     height:500px;
 }
 
+#background-video{
+    width:100%;
+    height:100%;
+    position:relative;
+}
 
-
+#videoWrapping{
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:black;
+    opacity:0.2;
+    top:0px;
+}
 
 /*
 .transition {
