@@ -23,19 +23,17 @@
  * Q&A, Review 페이지 ( View, Delete, Pagination )
 11. Notice ( Admin Only. Create, Delete, View)
 12. 장바구니
-13. 1:1 문의 메일 전송 (nodeMailer) 
+13. 1:1 문의 메일 전송 (nodeMailer)
+14. gsap 활용 LandingPage 
 ---
 구현 필요사항
-1. SCSS, GSAP
- * LandingPage 접근시, Loading.... 3초
- * 먼저 BackgroundImage FadeIn. 이후 span(또는 p) FadeIn 순차적으로.
- * Main page button FadeIn. 버튼 클릭시 이미지 외 모든 element들 fadeout시키고 Main으로 라우팅
- * Main page view에선 잡지를 보듯 스크롤 넘길 수 있게 만들기.
-3. 관리자 페이지
- * 물품 정리표를 업로드하면 서버에서 자동으로 DB에 넣어주는 로직. 관리자용
-4. 결제 모듈 추가(페이팔?)
+1. 관리자 페이지
+ * 물품 정보 입력시 자동으로 DB Insert
+ * 물품 이름, 물품 이미지, 가격, 배송방법 등 입력시 알아서 업뎃되게 하면 될 듯.
+ * 엑셀 시트?
+2. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
-5. 최초 랜딩 페이지 다이나믹하게 꾸미기
+3. 최초 랜딩 페이지 다이나믹하게 꾸미기
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
