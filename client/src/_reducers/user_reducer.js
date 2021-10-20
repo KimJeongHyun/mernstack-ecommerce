@@ -7,19 +7,16 @@ import {
     GET_QNA,
     GET_QNAONE,
     GET_QNAALL,
-    GET_QNAUSER,
     POST_QNA,
     GET_REVIEW,
     GET_REVIEWONE,
     GET_REVIEWALL,
-    GET_REVIEWUSER,
     POST_REVIEW,
     GET_NOTICE,
     GET_NOTICEONE,
     POST_NOTICE,
     CLEAR_NOTICE,
     SEND_MAIL,
-    ANSWER_MAIL
 } from '../_actions/types'
 
 

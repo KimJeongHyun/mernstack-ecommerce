@@ -28,7 +28,7 @@ function Notice(props){
     useEffect(()=>{
         axios.get('/api/getSession/')
         .then(response=>{
-            if (response.data.ID=='admin'){
+            if (response.data.ID==='admin'){
                 const deleteCheckBtn = document.getElementById('deleteCheckBtn')
                 const noticePostBtn = document.getElementById('noticePostBtn')
                 deleteCheckBtn.style.display='inline-block'

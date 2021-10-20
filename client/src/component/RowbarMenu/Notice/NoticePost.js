@@ -16,14 +16,6 @@ function NoticePost(props){
 
     const dispatch = useDispatch()
 
-    const postTitleHandler = (event) =>{
-        setPostTitle(event.target.value);
-    }
-
-    const postContentHandler = (event) =>{
-        setPostContent(event.target.value);
-    }
-
     const onValueHandler = (event) =>{
         event.preventDefault();
         const {name,value} = event.target;
