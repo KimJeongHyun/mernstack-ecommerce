@@ -570,6 +570,18 @@ textarea:focus{
     font: 30px 'IBM Plex Sans KR', sans-serif,  bold 
 }
 
+#preventOnClick{
+    position:absolute;
+    width:500px;
+    height:650px;
+    left:55%;
+    top:10%;
+    bottom:0%;
+    opacity:0;
+    z-index:4;
+    overflow:hidden;
+}
+
 #wrappingImageArea{
     position:absolute;
     width:500px;
@@ -585,10 +597,25 @@ textarea:focus{
 
 #imageArea{
     display:flex;
-    transform:translate(0%);
-    transition:all 0.5s ease-in-out;
+    transition:all 1s ease-in-out;
 }
 
+#prevBtn{
+    position:absolute;
+    width:50px;
+    height:50px;
+    bottom:50%;
+    opacity:0;
+}
+
+#nextBtn{
+    position:absolute;
+    width:50px;
+    height:50px;
+    left:90%;
+    bottom:50%;
+    opacity:0;
+}
 #landingAboutUs{
     position:relative;
     width:100%;
