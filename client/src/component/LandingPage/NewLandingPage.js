@@ -51,47 +51,34 @@ function NewLandingPage(props){
         
     },[])
     /*const tick = () =>{
-        if (imgLoc+1<=clothMap.length){
             return setTimeout(()=>{
                 if (imageRef.current!=null){
-                    setImgLoc(imgLoc+1)
+                    imgLoc+1<=clothMap.length ? setImgLoc(imgLoc+1) : setImgLoc(2)
                 }
                 
             },4000)
-        }else{
-            return setTimeout(async ()=>{
-                if (imageRef.current!=null){
-                    setImgLoc(2)
-                }                
-            },4000)
         }
+        tick()
+        clearTimeout(tick)
     }*/
     useEffect(()=>{
         if (slideReady){
-            clearTimeout(tickRef.current)
-            if (imgLoc+1<=clothMap.length){
-                tickRef.current = setTimeout(()=>{
-                    if (imageRef.current!=null){
-                        setImgLoc(imgLoc+1)
-                    }
-                    
-                },4000)
-            }else{
-                tickRef.current = setTimeout(async ()=>{
-                    if (imageRef.current!=null){
-                        setImgLoc(2)
-                    }                
-                },4000)
-            }
+            clearInterval(tickRef.current)
+            tickRef.current = setInterval(()=>{
+                if (imageRef.current!=null){
+                    imgLoc+1<=clothMap.length ? setImgLoc(imgLoc+1) : setImgLoc(2)
+                }
+                
+            },4000)
             
-            //tick();
-            return ()=>clearTimeout(tickRef.current);
+            
+            return ()=>clearInterval(tickRef.current);
         }
     },[slideReady,imgLoc])
 
     const productDetail = (event) =>{
         event.preventDefault();
-        clearTimeout(tickRef.current);
+        clearInterval(tickRef.current);
         props.history.push({
             pathname:"/ProductDetail/"+imgLoc
         })
@@ -115,7 +102,7 @@ function NewLandingPage(props){
 
     const nextBtnClick = (event) =>{
         event.preventDefault();
-        clearTimeout(tickRef.current);
+        clearInterval(tickRef.current);
         if (imgLoc+1<=clothMap.length){
                 setImgLoc(imgLoc+1)
         }else{
@@ -125,7 +112,7 @@ function NewLandingPage(props){
 
     const prevBtnClick = (event) =>{
         event.preventDefault();
-        clearTimeout(tickRef.current);
+        clearInterval(tickRef.current);
         if (imgLoc-1>=2){
                 setImgLoc(imgLoc-1)
         }else{
@@ -133,25 +120,21 @@ function NewLandingPage(props){
         }
     }
 
-    useEffect(()=>{
-        console.log(imgLoc);
-    },[imgLoc])
-
     return(
         <>
         <div className="contentArea" >
-            <NewNavBar id='newNavBar'/>
+            <NewNavBar/>
             <div>
                 <video id="background-video" loop autoPlay muted>
                     <source src={videoURL} type="video/mp4"/>    
                 </video>
             </div>
-            <div id="videoWrapping" ref={boxRef}>
+            <div id="textWrapping" ref={boxRef}>
                 <div id="wrappingTextArea1" className='wrappingText' ref={textRef}>
-                    Empa : vation
+                    Empha ː vation
                 </div>
                 <div id="wrappingTextArea2" className='wrappingText' ref={textRef2}>
-                   【 공감에서 이어지는 : 새로운 영감 】
+                   【 공감에서 이어지는 ː 새로운 영감 】
                 </div>
                 <div id="wrappingTextArea3" className='wrappingText' ref={textRef3}>
                     <p>Feeling empathy on your life</p>
@@ -161,7 +144,7 @@ function NewLandingPage(props){
 
             </div>
             <div id="wrappingImageArea" className="wrappingImage" onMouseEnter={buttonAppear} onMouseLeave={buttonDisappear}>
-                <div id="imageArea" className="imageMap" ref={imageRef} style={{transform:`translate(-${imgLoc-2}00%)`}}>
+                <div id="imageArea" className="imageMap" ref={imageRef} style={{transform:`translateX(-${imgLoc-2}00%)`}}>
                     {clothMap.map((img,i)=> 
                     <img src={img} key={i} style={{width:'100%', height:'100%', float:'left'}} onClick={productDetail}/>
                     )}

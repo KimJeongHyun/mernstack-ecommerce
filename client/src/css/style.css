@@ -355,7 +355,7 @@ textarea:focus{
         width:722px;
     }
 
-    #videoWrapping{
+    #textWrapping{
         min-height:816px;
     }
 }
@@ -384,7 +384,7 @@ textarea:focus{
         width:932px;
     }
     
-    #videoWrapping{
+    #textWrapping{
         min-height:1071px;
     }
 }
@@ -533,7 +533,7 @@ textarea:focus{
     z-index:1;
 }
 
-#videoWrapping{
+#textWrapping{
     width:100%;
     height:100%;
     position:absolute;
@@ -578,7 +578,7 @@ textarea:focus{
     top:10%;
     bottom:0%;
     opacity:0;
-    z-index:4;
+    z-index:3;
     overflow:hidden;
 }
 
@@ -591,7 +591,7 @@ textarea:focus{
     bottom:0%;
     border:1px solid lightgrey;
     opacity:0;
-    z-index:3;
+    z-index:2;
     overflow:hidden;
 }
 
