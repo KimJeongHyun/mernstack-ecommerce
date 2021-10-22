@@ -24,7 +24,10 @@
 11. Notice ( Admin Only. Create, Delete, View)
 12. 장바구니
 13. 1:1 문의 메일 전송 (nodeMailer)
-14. gsap 활용 LandingPage (작업 중)
+14. gsap 활용 LandingPage
+ * gsap 적용
+ * background video auto play
+ * image slider
 ---
 구현 필요사항
 1. 관리자 페이지
