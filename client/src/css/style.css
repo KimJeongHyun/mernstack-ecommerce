@@ -571,13 +571,22 @@ textarea:focus{
 }
 
 #wrappingImageArea{
-    position:relative;
-    width:30%;
-    height:60%;
+    position:absolute;
+    width:500px;
+    height:650px;
     left:55%;
-    bottom:10%;
-    border:5px solid red;
+    top:10%;
+    bottom:0%;
+    border:1px solid lightgrey;
     opacity:0;
+    z-index:3;
+    overflow:hidden;
+}
+
+#imageArea{
+    display:flex;
+    transform:translate(0%);
+    transition:all 0.5s ease-in-out;
 }
 
 #landingAboutUs{

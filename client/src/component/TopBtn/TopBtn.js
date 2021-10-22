@@ -25,11 +25,6 @@ function TopBtn(){
         }
     })
 
-    useEffect(()=>{
-        console.log(scrollY)
-        console.log(window.outerHeight)
-    },[scrollY])
-
     const scrollTop = () =>{
         const root = document.getElementById('root');
         root.scrollIntoView({ behavior: 'smooth' })
