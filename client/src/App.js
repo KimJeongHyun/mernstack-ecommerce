@@ -7,6 +7,7 @@ import {
 import Auth from './hoc/auth'
 import LandingPage from './component/LandingPage/LandingPage'
 import NewLandingPage from "./component/LandingPage/NewLandingPage"
+import AdminLandingPage from "./component/LandingPage/AdminLandingPage"
 import About from './component/About/About'
 import Store from "./component/Store/Store";
 import Login from "./component/RowbarMenu/Login/Login";
@@ -33,6 +34,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={NewLandingPage}/>
+        <Route path='/Manage' component={Auth(AdminLandingPage,true)}/>
         <Route path='/Main' component={LandingPage}/>
         <Route path="/About" component={About}/>
         <Route path="/Store/:idx" component={Store}/>

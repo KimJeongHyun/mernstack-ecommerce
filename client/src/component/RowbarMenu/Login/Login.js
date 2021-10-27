@@ -4,6 +4,7 @@ import { loginUser } from '../../../_actions/user_action'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
+import axios from 'axios'
 import '../../../css/style.css'
 
 
@@ -40,8 +41,17 @@ function Login(props){
         .then(response=>{
             if(response.payload.loginSuccess){
                 alert('반갑습니다 ' + ID + '님!')
-                props.history.push({
-                    pathname:"/Main"
+                axios.get('/api/getSession')
+                .then(response=>{
+                    if (response.data.ID==='admin'){
+                        props.history.push({
+                            pathname:"/Manage"
+                        })
+                    }else{
+                        props.history.push({
+                            pathname:"/Main"
+                        })
+                    }
                 })
             }else{
                 alert('없는 아이디이거나 비밀번호가 일치하지 않습니다.')

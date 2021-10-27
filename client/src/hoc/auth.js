@@ -33,7 +33,7 @@ export default function (SpecificComponent, option, adminRoute = null){
                         }
                     }
 
-                    if (SpecificComponent.name==='NoticePost'){
+                    if (SpecificComponent.name==='NoticePost' || SpecificComponent.name==='AdminLandingPage'){
                         if (response.payload.ID!=='admin'){
                             alert('비정상적인 접근입니다.')
                             props.history.push({
