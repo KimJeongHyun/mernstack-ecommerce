@@ -13,6 +13,26 @@ export default function (SpecificComponent, option, adminRoute = null){
                     if (option===false){
                         alert('으악!');
                     }
+
+                    if (response.payload.ID==='admin'){
+                        switch(SpecificComponent.name){
+                            case 'Login':
+                            case 'Join':
+                            case 'MyPage':
+                            case 'Cart':
+                            case 'ProductDetail':
+                            case 'QnAPost':
+                            case 'ReviewPost':
+                            case 'QnAView':
+                            case 'ReviewView':
+                            case 'Help':
+                                alert('유저 전용 메뉴입니다.')
+                                props.history.push({
+                                    pathname:'/Main'
+                                })
+                        }
+                    }
+
                     if (SpecificComponent.name==='NoticePost'){
                         if (response.payload.ID!=='admin'){
                             alert('비정상적인 접근입니다.')

@@ -33,6 +33,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={NewLandingPage}/>
+        <Route path='/Main' component={LandingPage}/>
         <Route path="/About" component={About}/>
         <Route path="/Store/:idx" component={Store}/>
         <Route path="/Login" component={Login}/>

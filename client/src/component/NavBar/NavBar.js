@@ -35,12 +35,6 @@ export function NavBar(props){
                                         <a href="/Join">JOIN</a>
                                     </li>
                                     <li>
-                                        <a href="/MyPage">MY PAGE</a>
-                                    </li>
-                                    <li>
-                                        <a href="/Cart">SHOPPING BAG</a>
-                                    </li>
-                                    <li>
                                         <a href="/QnA">Q&amp;A</a>
                                     </li>
                                     <li>
@@ -58,7 +52,7 @@ export function NavBar(props){
                         return result;
                     }
                     ReactDOM.render(guestRendering(),rowBarRef.current)
-                }else{
+                }else if (response.data.ID!=='admin'){
                     const userRendering = () =>{
                         const result = [];
                         result.push(
@@ -91,6 +85,33 @@ export function NavBar(props){
                         return result;
                     }
                     ReactDOM.render(userRendering(),rowBarRef.current)
+                }else if(response.data.ID==='admin'){
+                    const adminRendering = () =>{
+                        const result = [];
+                        result.push(
+                            <nav>
+                                <ul className="rowBar">
+                                    <li>
+                                        <a href="#!" onClick={onLogout} style={{cursor:'pointer'}}>LOGOUT</a>
+                                    </li>
+                                    <li>
+                                        <a href="/QnA">Q&amp;A</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Review">REVIEW</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Notice">NOTICE</a>
+                                    </li>
+                                    <li>
+                                        <a href="/#!">MANAGE</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        )
+                        return result;
+                    }
+                    ReactDOM.render(adminRendering(),rowBarRef.current)
                 }
             })
         }

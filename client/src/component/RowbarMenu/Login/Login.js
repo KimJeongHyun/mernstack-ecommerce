@@ -41,7 +41,7 @@ function Login(props){
             if(response.payload.loginSuccess){
                 alert('반갑습니다 ' + ID + '님!')
                 props.history.push({
-                    pathname:"/"
+                    pathname:"/Main"
                 })
             }else{
                 alert('없는 아이디이거나 비밀번호가 일치하지 않습니다.')

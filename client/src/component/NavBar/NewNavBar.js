@@ -37,7 +37,7 @@ export function NewNavBar(props){
                 </div>
                 <ul className="newRowBar">
                     <li>
-                        <a id='rowbarA' href="/#!">MAIN</a>
+                        <a id='rowbarA' href="/Main">MAIN</a>
                     </li>
                     <li>
                         <a id='rowbarA' href="/#!" onClick={scrollToAbout}>ABOUT US</a>
