@@ -28,10 +28,12 @@
  * gsap 적용
  * background video auto play
  * image slider
+15. Admin Page
+ * GSAP Applied
+ * DB Insert ( Product image upload by multer & mongoose save )
 ---
 구현 필요사항
 1. 관리자 페이지 구현 중
- * 물품 정보 입력시 자동으로 DB Insert. Excel 또는 json 넘겼을 때의 경우를 상정해야할 듯.
  * 유저 관리창. 유저를 리스트로 관리하고, 필요한 경우 적립금을 지급할 수 있음.
 2. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
