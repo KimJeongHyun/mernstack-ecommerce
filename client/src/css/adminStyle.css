@@ -1,3 +1,5 @@
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');} @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');} @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');} @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');} @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');} @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+
 .adminArea{
     background-image:url('../images/AdminBG.jpg');
     background-size:cover;
@@ -79,6 +81,12 @@
     display:none;
 }
 
+.adminMenuHR{
+    width:90%;
+    border-top: 2px solid #878787;
+    border-bottom:0px;
+}
+
 .adminMenuDiv{
     opacity:0;
     display:none;
@@ -88,6 +96,85 @@
     height:80vh;
     background-color:#fff;
     box-shadow: 2px 2px 10px 10px rgba(0,0,0,.2);
+}
+
+.adminDBImage{
+    position:relative;
+    width:40%;
+    height:40%;
+    padding:5%;
+    display:inline-block;
+}
+
+.thumbnail{
+    position:absolute;
+    width:250px;
+    height:200px;
+    
+}
+
+#adminDBImageBtn{
+    position:relative;
+    top:200px;
+}
+
+.adminDBImageText{
+    width:40%;
+    height:40%;
+    padding:5%;
+    display:inline-block;
+}
+
+.adminDBImageText table{
+    border:3px solid #8d8d8d;
+
+}
+
+.adminDBImageText #adminDBTable #adminDBTableTR{
+    display:block;
+    float:left;
+    line-height: 25px;
+    border-left:1px solid #8d8d8d;
+
+}
+
+.adminDBImageText #adminDBTable #tr2 #tableName{
+    width:85%;
+}
+
+.adminDBImageText #adminDBTable #adminDBTableTR td{
+    display:block;
+    margin-left:5px;
+    margin-right:10px;
+}
+
+.adminDBPannel{
+    width:95%;
+    height:40%;
+    padding-top:4.4%;
+    padding-bottom:4.4%;
+    padding-left:5%;
+}
+
+.dbPannelContainer{
+    float:right;
+    margin-top:8vh;
+    margin-right:2.5vw;
+}
+
+.initializeBtn{
+    width:130px;
+    height:40px;
+    background-color:#8d8d8d;
+    border:none;
+    position:relative;
+    display:inline-block;
+    text-align: center;
+    padding-top:10px;
+    color:#fff;
+    font-size:1.5em;
+    font-family: 'Noto Sans KR', sans-serif;
+
 }
 
 .backToAdminMenus{
