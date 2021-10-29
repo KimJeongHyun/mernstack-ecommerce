@@ -146,7 +146,7 @@ function NewLandingPage(props){
             <div id="wrappingImageArea" className="wrappingImage" onMouseEnter={buttonAppear} onMouseLeave={buttonDisappear}>
                 <div id="imageArea" className="imageMap" ref={imageRef} style={{transform:`translateX(-${imgLoc-2}00%)`}}>
                     {clothMap.map((img,i)=> 
-                    <img src={img} key={i} style={{width:'100%', height:'100%', float:'left'}} onClick={productDetail}/>
+                    <img src={img} key={i} style={{width:'100%',height:'auto'}} onClick={productDetail}/>
                     )}
                 </div>
                 <BsFillArrowLeftSquareFill id="prevBtn" style={{cursor:'pointer'}} onClick={prevBtnClick}/>

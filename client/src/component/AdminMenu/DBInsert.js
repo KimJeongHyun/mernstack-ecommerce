@@ -134,15 +134,15 @@ function DBInsert(){
                 </div>
                 <div className='adminDBImageText'>
                     <h3>Type product info</h3>
-                    <table id='adminDBTable'>
-                        <tr id='adminDBTableTR'>
+                    <table id='adminTable'>
+                        <tr id='adminTableTR'>
                             <td>이름</td>
                             <td>배송업체</td>
                             <td>배송기한</td>
                             <td>가격</td>
                             <td>할인율</td>
                         </tr>
-                        <tr className='tr2' id='adminDBTableTR'>
+                        <tr className='tr2' id='adminTableTR'>
                             <td><input name='name' id='tableName' value={clothName} onChange={onValueHandler}/></td>
                             <td><input name='delParty' id='tableName' value={deliverySol} onChange={onValueHandler}/></td>
                             <td><input name='delRange' id='tableName' value={exportRange} onChange={onValueHandler}/></td>
@@ -152,8 +152,8 @@ function DBInsert(){
                     </table>
                 </div>
                 <hr className='adminMenuHR'/>
-                <div className='adminDBPannel'>
-                    <div className='dbPannelContainer'>
+                <div className='adminPannel'>
+                    <div className='PannelContainer'>
                         <div className = 'initializeBtn' style={{marginRight:'10px'}} onClick={initiateClickFunc}>
                             <span>초기화</span>
                         </div>

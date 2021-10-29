@@ -23,7 +23,7 @@ const postCart = require('./controller/cartController/postCart')
 const clearCart = require('./controller/cartController/clearCart')
 const clientMail = require('./controller/helpController/clientMail')
 const dbInsert = require('./controller/manageController/dbInsert')
-
+const userManage = require('./controller/manageController/userManage')
 
 const port = 5000;
 
@@ -78,6 +78,7 @@ app.use(clearCart);
 app.use(clientMail);
 
 app.use(dbInsert);
+app.use(userManage);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{

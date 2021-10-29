@@ -130,7 +130,7 @@
 
 }
 
-.adminDBImageText #adminDBTable #adminDBTableTR{
+.adminDBImageText #adminTable #adminTableTR{
     display:block;
     float:left;
     line-height: 25px;
@@ -138,17 +138,17 @@
 
 }
 
-.adminDBImageText #adminDBTable #tr2 #tableName{
+.adminDBImageText #adminTable #tr2 #tableName{
     width:85%;
 }
 
-.adminDBImageText #adminDBTable #adminDBTableTR td{
+.adminDBImageText #adminTable #adminTableTR td{
     display:block;
     margin-left:5px;
     margin-right:10px;
 }
 
-.adminDBPannel{
+.adminPannel{
     width:95%;
     height:40%;
     padding-top:4.4%;
@@ -156,7 +156,7 @@
     padding-left:5%;
 }
 
-.dbPannelContainer{
+.PannelContainer{
     float:right;
     margin-top:8vh;
     margin-right:2.5vw;
@@ -174,7 +174,74 @@
     color:#fff;
     font-size:1.5em;
     font-family: 'Noto Sans KR', sans-serif;
+    cursor:pointer;
+}
 
+.usersDiv{
+    position:relative;
+    overflow:scroll;
+    width:30%;
+    height:100%;
+    float:left;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.usersDiv #listTitle{
+    margin:3% 0 3% 12%;
+    font-size:2em;
+    font-weight:500;
+    padding-top:3.5%;
+    padding-bottom:3.5%;   
+}
+
+.usersDiv #usersList{
+    list-style-type: none;
+
+}
+
+.funcDiv{
+    position:relative;
+    width:60%;
+    height:100%;    
+    padding:0 5%;
+    float:left;
+}
+
+.funcDiv .accumDiv, .couponDiv{
+    display:block;
+    width:100%;
+    height:40%;
+    margin-bottom:5%;
+}
+
+.funcDiv #listTitle{
+    margin:3% 0 3% 12%;
+    font-size:2em;
+    font-weight:500;   
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.funcDiv #adminTable{
+    border:3px solid #8d8d8d;
+    margin-left:5%;
+}
+
+.funcDiv #adminTable #adminTableTR{
+    display:block;
+    float:left;
+    line-height: 25px;
+    border-left:1px solid #8d8d8d;
+
+}
+
+.funcDiv #adminTable #tr2 #tableName{
+    width:85%;
+}
+
+.funcDiv #adminTable #adminTableTR td{
+    display:block;
+    margin-left:5px;
+    margin-right:10px;
 }
 
 .backToAdminMenus{

@@ -4,6 +4,7 @@ import{
     AUTH_USER,
     LOGIN_USER,
     REGISTER_USER,
+    GET_USERS,
     GET_CLOTHES,
     GET_DETAILDATA,
     GET_QNA,
@@ -48,6 +49,16 @@ export function loginUser(dataToSubmit){
     .then(response=>response.data);
     return{
         type:LOGIN_USER,
+        payload:request
+    }
+}
+
+export function getUsers(){
+    const request = axios.get('/api/getUsers')
+    .then(response=>response.data);
+
+    return{
+        type:GET_USERS,
         payload:request
     }
 }

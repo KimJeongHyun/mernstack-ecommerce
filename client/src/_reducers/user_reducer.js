@@ -2,6 +2,7 @@ import {
     AUTH_USER,
     LOGIN_USER,
     REGISTER_USER,
+    GET_USERS,
     GET_CLOTHES,
     GET_DETAILDATA,
     GET_QNA,
@@ -29,6 +30,8 @@ export default function (state={}, action){
             return {...state, loginSuccess: action.payload}
         case REGISTER_USER:
             return {...state, registerSuccess: action.payload}
+        case GET_USERS:
+            return {...state, getUserSuccess: action.payload}
         case GET_CLOTHES:
             return {...state, getClothSuccess: action.payload}
         case GET_DETAILDATA:
