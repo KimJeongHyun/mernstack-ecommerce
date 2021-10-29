@@ -28,6 +28,9 @@ const userSchema = mongoose.Schema({
     accumVolume:[{
         type:mongoose.Schema.Types.ObjectId,ref:'accumLog'
     }],
+    coupons:[{
+        type:mongoose.Schema.Types.ObjectId,ref:'coupons'
+    }],
     salt:String,
     seq:{
         type:Number,

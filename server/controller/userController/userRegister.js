@@ -1,8 +1,10 @@
 const {users} = require('../../model/userSchema')
 const {accumLog} = require('../../model/accumLogSchema')
+const { coupons } = require('../../model/couponSchema');
 const router = require('express').Router();
 const crypto = require('crypto');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 
 router.post('/api/register',(req,res)=>{
 
@@ -31,8 +33,6 @@ router.post('/api/register',(req,res)=>{
                             salt:salt
                         })
                         
-                        
-
                         userInfo.save().then(function(product){
                             const userAccum = new accumLog({
                                 userID:userInfo._id,
@@ -41,14 +41,27 @@ router.post('/api/register',(req,res)=>{
                                 totalAccum:3000
                             })
 
+                            const userCoupon = new coupons({
+                                userID:userInfo._id,
+                                reason:'신규 가입 축하 쿠폰',
+                                couponVolume:3000
+                            })
+
                             userAccum.save().then(function(product){
-                                console.log('Registered');
-                                res.json({registerSuccess:true})
+                                console.log('userAccum saved')
                             }, function rejected(err){
                                 console.log(err);
                                 console.log('accumLog save error');
-                                res.json({registerSuccess:false})
                             })
+
+                            userCoupon.save().then(function(product){
+                                console.log('userCoupon saved')
+                            }, function rejected(err){
+                                console.log(err);
+                                console.log('coupon save error')
+                            })
+
+                            res.json({registerSuccess:true})
 
                         }, function rejected(err){
                             console.log(err);
