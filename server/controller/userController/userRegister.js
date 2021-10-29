@@ -1,7 +1,8 @@
 const {users} = require('../../model/userSchema')
-
+const {accumLog} = require('../../model/accumLogSchema')
 const router = require('express').Router();
 const crypto = require('crypto');
+const mongoose = require('mongoose')
 
 router.post('/api/register',(req,res)=>{
 
@@ -21,6 +22,7 @@ router.post('/api/register',(req,res)=>{
                         const salt= buf.toString('base64');
         
                         const userInfo = new users({
+                            _id:new mongoose.Types.ObjectId(),
                             userName:userName,
                             userID:userID,
                             password:hashedPw,
@@ -28,17 +30,33 @@ router.post('/api/register',(req,res)=>{
                             userPhone:userPhone,
                             salt:salt
                         })
-        
+                        
+                        
+
                         userInfo.save().then(function(product){
-                            console.log('Registered');
+                            const userAccum = new accumLog({
+                                userID:userInfo._id,
+                                reason:'신규 가입 축하 적립금',
+                                addAccum:3000,
+                                totalAccum:3000
+                            })
+
+                            userAccum.save().then(function(product){
+                                console.log('Registered');
+                                res.json({registerSuccess:true})
+                            }, function rejected(err){
+                                console.log(err);
+                                console.log('accumLog save error');
+                                res.json({registerSuccess:false})
+                            })
+
                         }, function rejected(err){
                             console.log(err);
-                            console.log('Something err...');
+                            console.log('userInfo save error');
+                            res.json({registerSuccess:false})
                         })
-        
                     })
                 })
-                res.json({registerSuccess:true})
             }else{
                 res.json({registerSuccess:false})
             }

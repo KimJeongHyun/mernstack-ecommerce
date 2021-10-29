@@ -3,6 +3,7 @@ var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
 
 const userSchema = mongoose.Schema({
+    _id:mongoose.Schema.Types.ObjectId,
     userName:String,
     userID:String,
     password:String,
@@ -24,7 +25,9 @@ const userSchema = mongoose.Schema({
             type:Number    
         }
     }],
-    accumVolume:Number,
+    accumVolume:[{
+        type:mongoose.Schema.Types.ObjectId,ref:'accumLog'
+    }],
     salt:String,
     seq:{
         type:Number,
