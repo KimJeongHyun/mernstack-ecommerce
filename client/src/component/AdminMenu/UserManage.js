@@ -196,7 +196,7 @@ function UserManage(){
                                 <input 
                                     type='checkbox' id='userCheck' 
                                     className='userCheck'
-                                    name={usersMap[i].seq} 
+                                    name={usersMap[i]._id} 
                                     onChange={pushList}
                                 />
                                 {usersMap[i].userName}

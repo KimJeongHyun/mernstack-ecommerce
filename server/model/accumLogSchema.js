@@ -4,8 +4,8 @@ const accumLogSchema = mongoose.Schema({
     userID:[{
         type:mongoose.Schema.Types.ObjectId,ref:'users'
     }],
-    reason:String,
-    addAccum:Number,
+    reason:[String],
+    addAccum:[Number],
     totalAccum:Number,
     regDate:{
         type:Date,
