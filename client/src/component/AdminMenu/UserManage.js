@@ -86,7 +86,10 @@ function UserManage(){
         }
         
         setCheckList([])
-        document.getElementById("userCheck").checked = false;
+        const checkBoxes = document.getElementsByClassName('userCheck')
+        for (let i = 0; i<checkBoxes.length; i++){
+            checkBoxes[i].checked = false;
+        }
     }
 
     const onInitiate = (event) =>{
@@ -147,7 +150,7 @@ function UserManage(){
                     alert('전송 성공')
                     initiate(name);
                 }else{
-                    alert('쿠폰 항목을 제대로 입력하세요.')
+                    alert('오류. 빈 칸이 없는지 확인하고 에러 로그를 확인하세요.')
                 }
             })
         }
