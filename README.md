@@ -31,20 +31,16 @@
 15. Admin Page
  * GSAP Applied
  * DB Insert ( Product image upload by multer & mongoose save )
- * User Manage ( Can add accumulate price and coupons. FE Clear, BE need. )
+ * User Manage ( Can add accumulate price and coupons. )
 ---
 구현 필요사항
 1. 관리자 페이지 구현 중
- * BE 측에서 전달받은 Reason, Value를 DB에 전송.
- * 쿠폰은 기존에 생성된 것이라면 reason을 통해 쿠폰 doc을 findOne하고 userID Array에 체크된 유저들의 _id 값을 push하자.
- * -> 쿠폰은 유효기간이 분명히 있다. 즉, 각각 생성하여 TTL을 부여할 필요가 있다.
- * 쿠폰이 신규로 생성되는 경우 명목에 따라 TTL 여부를 정하고 userID Array에 push하면 되겠다.
- * 적립금은 reason, addAccum 필드도 Array로 생성. UpdateDate 필드 Array로 생성하기.
- * 적립금 저장시 user schema ref로 accum schema에 접근하고 각 Array에 push하는 방식으로.
- * TTL은 updateDate 필드의 값과 대조해서 특정 차이가 나는 경우 각 Array의 인덱스들을 삭제하는 방식.
-2. 결제 모듈 추가(페이팔?)
+ * 적립금은 일단 TTL 적용 없음.
+ * 쿠폰은 생성된 날짜 확인해서 적용. 그냥 없애버리면 될듯.
+2. etc 페이지엔 일괄 이메일 또는 카카오톡.
+3. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
-3. 최초 랜딩 페이지 다이나믹하게 꾸미기
+4. 최초 랜딩 페이지 다이나믹하게 꾸미기
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
