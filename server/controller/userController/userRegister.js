@@ -1,6 +1,6 @@
 const {users} = require('../../model/userSchema')
 const {accumLog} = require('../../model/accumLogSchema')
-const { coupons } = require('../../model/couponSchema');
+const {coupons} = require('../../model/couponSchema');
 const router = require('express').Router();
 const crypto = require('crypto');
 const mongoose = require('mongoose');

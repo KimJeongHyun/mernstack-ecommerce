@@ -146,8 +146,8 @@ function DBInsert(){
                             <td><input name='name' id='tableName' value={clothName} onChange={onValueHandler}/></td>
                             <td><input name='delParty' id='tableName' value={deliverySol} onChange={onValueHandler}/></td>
                             <td><input name='delRange' id='tableName' value={exportRange} onChange={onValueHandler}/></td>
-                            <td><input type='number' name='selPrice' id='tableName' value={sellPrice} onChange={onValueHandler}/></td>
-                            <td><input type='number' name='disRate' id='tableName' value={discountRate} onChange={onValueHandler}/>%</td>
+                            <td><input name='selPrice' type='number' id='tableName' value={sellPrice} onChange={onValueHandler}/></td>
+                            <td><input name='disRate' type='number' id='tableName' value={discountRate} onChange={onValueHandler}/>%</td>
                         </tr>
                     </table>
                 </div>

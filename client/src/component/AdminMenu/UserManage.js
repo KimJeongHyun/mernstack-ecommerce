@@ -241,7 +241,7 @@ function UserManage(){
                             </tr>
                             <tr className='tr2' id='adminTableTR'>
                                 <td><input name='accumReason' id='tableName' value={accumReason} onChange={onValueHandler}/></td>
-                                <td><input name='accumValue' id='tableName' value={accumValue} onChange={onValueHandler}/></td>
+                                <td><input name='accumValue' type='number' id='tableName' value={accumValue} onChange={onValueHandler}/></td>
                             </tr>
                         </table>
                         <div className='PannelContainer' style={{marginTop:'3vh', marginRight:'1.5vw'}}>
@@ -263,7 +263,7 @@ function UserManage(){
                             </tr>
                             <tr className='tr2' id='adminTableTR'>
                                 <td><input name='couponReason' id='tableName' value={couponReason} onChange={onValueHandler}/></td>
-                                <td><input name='couponVolume' id='tableName' value={couponVolume} onChange={onValueHandler}/></td>
+                                <td><input name='couponVolume' type='number' id='tableName' value={couponVolume} onChange={onValueHandler}/></td>
                             </tr>
                         </table>
                         <div className='PannelContainer' style={{marginTop:'3vh', marginRight:'1.5vw'}}>
