@@ -47,7 +47,7 @@ function DBInsert(){
     const backToAdmin = (event) =>{
         event.preventDefault();
         const work = async () =>{
-            await gsap.to('.adminMenuDivContainer',{opacity:0,display:'none'})
+            await gsap.to('.adminMenu',{opacity:0,display:'none'})
             await gsap.to('.adminArea',{opacity:1,width:'100%',display:'block'})
         }
         work();

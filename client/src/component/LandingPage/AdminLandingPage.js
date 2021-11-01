@@ -43,7 +43,7 @@ function AdminLandingPage(){
             }
         }
         await work1();
-        await gsap.to('.adminMenu, .adminMenuDiv',{opacity:'1',display:'block', duration:0.5})
+        await gsap.to('.adminMenu, .adminMenuDiv',{autoAlpha:'1',display:'block', duration:0.5})
     }
 
     const adminMenuRendering = () =>{
