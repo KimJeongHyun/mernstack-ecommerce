@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React,{useEffect,useState,useRef} from 'react'
+import axios from 'axios'
 
 export function MyAccumRendering(){
 
@@ -34,32 +34,32 @@ export function MyAccumRendering(){
                 const accumText = document.createTextNode(accumList[i]);
                 accumTD.appendChild(accumText);
 
-                const totalTD = document.createElement('td');
-                const totalText = document.createTextNode(totalAccum);
-                totalTD.appendChild(totalText);
-
                 trTag.appendChild(reasonTD);
                 trTag.appendChild(accumTD);
-                trTag.appendChild(totalTD);
 
                 accumTableRef.current.appendChild(trTag);
             }
-
         }
     },[reasonList,accumList,totalAccum])
 
     return(
+        <>
+        <div className='totalAccum'>
+            총 적립금 : <span style={{color:'red'}}>{totalAccum}</span>
+        </div>
         <table className='accumTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
             <thead style={{lineHeight:'20px',borderTop:'2px solid lightgray',borderBottom:'0.5px solid lightgray'}}>
                 <tr>
                     <th>적립내용</th>
                     <th>적립내역</th>
-                    <th>총 적립금</th>
                 </tr>
             </thead>
             <tbody ref={accumTableRef} style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
+            
             </tbody>
         </table>
+        
+        </>
     )
 }
 

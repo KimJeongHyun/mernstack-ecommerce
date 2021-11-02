@@ -61,19 +61,19 @@ router.post('/api/updateAccum',(req,res)=>{
 router.post('/api/addCoupon',(req,res)=>{
     const reqData = req.body;
     const reason = reqData.reason;
-    const couponValue = reqData.couponValue;
+    const couponVolume = reqData.couponVolume;
     const checkList = reqData.checkList;
-    if (reason==='' || couponValue==='' || checkList.length===0){
+    if (reason==='' || couponVolume==='' || checkList.length===0){
         res.json({postSuccess:false})
     }
 
-    if (reason!=='' && couponValue!=='' && checkList.length!==0){
+    if (reason!=='' && couponVolume!=='' && checkList.length!==0){
         coupons.find({reason:reason},function(err,fieldReason){
             if (fieldReason.length==0){
                 const newCoupon = new coupons({
                     userID:[],
                     reason:reason,
-                    couponVolume:couponValue
+                    couponVolume:couponVolume
                 })
 
                 newCoupon.save().then(function(product){
