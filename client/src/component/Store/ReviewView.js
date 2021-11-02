@@ -55,7 +55,7 @@ function ReviewView(props){
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button className='SubmitBtn' style={{marginLeft:'380px'}}><a href={'/ProductDetail/'+productIndex}>뒤로 가기</a></button>
+                                <button className='SubmitBtn' style={{marginLeft:'380px'}}><a href='javascript:history.back()'>뒤로 가기</a></button>
                             </div>
                         </div>
                     </div>

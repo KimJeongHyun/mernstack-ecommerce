@@ -7,23 +7,32 @@ const config = require('./config/config.json')
 const userLogin = require('./controller/userController/userLogin')
 const userLogout = require('./controller/userController/userLogout')
 const userRegister = require('./controller/userController/userRegister');
+
 const getClothes = require('./controller/storeController/getClothData')
 const getDetailData = require('./controller/storeController/getDetailData')
+
 const getQnAData = require('./controller/storeController/getQnAData');
 const postQnAData = require('./controller/storeController/postQnA');
 const clearQnA = require('./controller/storeController/clearQnA')
+
 const getReviewData = require('./controller/storeController/getReviewData');
 const postReviewData = require('./controller/storeController/postReview');
 const clearReview = require('./controller/storeController/clearReview');
+
 const getNotice = require('./controller/boardController/getNotice');
 const postNotice = require('./controller/boardController/postNotice');
 const clearNotice = require('./controller/boardController/clearNotice')
+
 const getCart = require('./controller/cartController/getCart')
 const postCart = require('./controller/cartController/postCart')
 const clearCart = require('./controller/cartController/clearCart')
+
 const clientMail = require('./controller/helpController/clientMail')
+
 const dbInsert = require('./controller/manageController/dbInsert')
 const userManage = require('./controller/manageController/userManage')
+
+const getUserPage = require('./controller/userController/getUserPage')
 
 const port = 5000;
 
@@ -79,6 +88,8 @@ app.use(clientMail);
 
 app.use(dbInsert);
 app.use(userManage);
+
+app.use(getUserPage);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{

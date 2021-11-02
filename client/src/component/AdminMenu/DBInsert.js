@@ -93,14 +93,6 @@ function DBInsert(){
 
     const submitToSVR = (event) =>{
         event.preventDefault();
-        let body = {
-            imageURI:imageFile,
-            clothName:clothName,
-            deliverySol:deliverySol,
-            exportRange:exportRange,
-            sellPrice:sellPrice,
-            discountRate:discountRate
-        }
 
         const formData = new FormData;
 
