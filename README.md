@@ -21,6 +21,7 @@
 8. 제품 전체 Q&A, Review ( Create, View, Pagination )
 9. 마이페이지
  * Q&A, Review 페이지 ( View, Delete, Pagination )
+ * 적립금, 쿠폰 페이지 ( View )
 11. Notice ( Admin Only. Create, Delete, View)
 12. 장바구니
 13. 1:1 문의 메일 전송 (nodeMailer)
@@ -35,8 +36,7 @@
 ---
 구현 필요사항
 1. 관리자 페이지 구현 중
- * 적립금은 일단 TTL 적용 없음.
- * 쿠폰은 생성된 날짜 확인해서 적용. 그냥 없애버리면 될듯.
+ * MongoDB DOC TTL 적용만 되면 됨.
 2. etc 페이지엔 일괄 이메일 또는 카카오톡.
 3. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
