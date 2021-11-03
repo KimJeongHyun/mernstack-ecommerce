@@ -13,23 +13,24 @@
 1. 회원가입/로그인/로그아웃
 2. Navigation Bar (사이드, 위쪽 고정)
 3. Auth hoc
-4. 제품 리스트 출력
- * 제품 리스트 페이지네이션
-5. 제품별 상세 페이지 (사이즈 조견표, 제품별 내용 넣기 구현 필요)
-6. 제품 이미지 커서 zoom in
-7. 제품별 Q&A, Review Footer ( Create, View, Pagination )
-8. 제품 전체 Q&A, Review ( Create, View, Pagination )
-9. 마이페이지
+4. Pagination
+ * 별도 Component로 처리.
+6. 제품 리스트 
+7. 제품별 상세 페이지 (사이즈 조견표, 제품별 내용 넣기 구현 필요)
+8. 제품 이미지 커서 zoom in
+9. 제품별 Q&A, Review Footer ( Create, View, Pagination )
+10. 제품 전체 Q&A, Review ( Create, View, Pagination )
+11. 마이페이지
  * Q&A, Review 페이지 ( View, Delete, Pagination )
  * 적립금, 쿠폰 페이지 ( View )
-11. Notice ( Admin Only. Create, Delete, View)
-12. 장바구니
-13. 1:1 문의 메일 전송 (nodeMailer)
-14. gsap 활용 LandingPage
+12. Notice ( Admin Only. Create, Delete, View)
+13. 장바구니
+14. 1:1 문의 메일 전송 (nodeMailer)
+15. gsap 활용 LandingPage
  * gsap 적용
  * background video auto play
  * image slider
-15. Admin Page
+16. Admin Page
  * GSAP Applied
  * DB Insert ( Product image upload by multer & mongoose save )
  * User Manage ( Can add accumulate price and coupons. )
@@ -40,7 +41,6 @@
 2. etc 페이지엔 일괄 이메일 또는 카카오톡.
 3. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
-4. 최초 랜딩 페이지 다이나믹하게 꾸미기
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
