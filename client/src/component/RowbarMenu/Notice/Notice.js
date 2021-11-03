@@ -1,5 +1,4 @@
 import React,{useEffect,useRef,useState} from 'react'
-import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
@@ -7,6 +6,7 @@ import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
 import axios from 'axios'
 import { getNotice, clearNotice } from '../../../_actions/user_action'
+import { NoticePagination } from '../../PaginationComp/PaginationComp'
 
 
 
@@ -109,23 +109,12 @@ function Notice(props){
         })
     }
 
-    useEffect(()=>{
-        const footerRendering = () =>{
-            const result=[];
-            for (let i=0; i<MapLength/PostNum; i++){
-                result.push(
-                    <span onClick={postPagingHandler}>
-                        <a className={'PostPaging'+(i+1)} href="#none" >[{i+1}]</a>
-                    </span>
-                )
-            }
-            ReactDOM.render(result,NoticePaginationRef.current);
+    const NoticePaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <NoticePagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
         }
-        if (MapLength!==''){
-            footerRendering();
-        }
-        
-    },[MapLength])
+    }
 
     useEffect(()=>{
         while(NoticeTBodyRef.current.hasChildNodes()){
@@ -227,8 +216,8 @@ function Notice(props){
                                         
                                     </tbody>
                                 </table>
-                                <div ref={NoticePaginationRef} style={{marginTop:'10px'}}>
-
+                                <div className="paginationFooter" ref={NoticePaginationRef} style={{marginTop:'10px'}}>
+                                    {NoticePaginationRendering()}
                                 </div>
                                 <div ref={NoticeBtnRef}>
                                     <div style={{marginTop:'20px'}}>

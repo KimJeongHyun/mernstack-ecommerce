@@ -1,12 +1,11 @@
 import React,{useEffect,useRef,useState} from 'react'
-import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
 import { NavSideBar } from '../../NavBar/NavSideBar'
 import { NavBar } from '../../NavBar/NavBar'
 import { Footer } from '../../Footer/Footer'
 import '../../../css/style.css'
 import { getQnADataAll } from '../../../_actions/user_action'
-
+import { QnAPagination } from '../../PaginationComp/PaginationComp'
 
 
 function QnA(props){
@@ -37,25 +36,12 @@ function QnA(props){
         })     
     },[])
 
-    useEffect(()=>{
-        console.log(QnAMap);
-        const footerRendering = () =>{
-            const result=[];
-            for (let i=0; i<MapLength/PostNum; i++){
-                result.push(
-                    <span onClick={postPagingHandler}>
-                        <a className={'QnAPaging'+(i+1)} href="#none" >[{i+1}]</a>
-                    </span>
-                )
-            }
-            ReactDOM.render(result,QnAPaginationRef.current);
+    const QnAPaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <QnAPagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
         }
-        if (MapLength!==''){
-            footerRendering();
-        }
-        
-    },[MapLength])
-
+    }
 
     useEffect(()=>{
         while(QnATBodyRef.current.hasChildNodes()){
@@ -157,8 +143,8 @@ function QnA(props){
                                         
                                     </tbody>
                                 </table>
-                                <div ref={QnAPaginationRef}>
-
+                                <div className="paginationFooter" ref={QnAPaginationRef}>
+                                    {QnAPaginationRendering()}
                                 </div>
                             </div>
                         </div>

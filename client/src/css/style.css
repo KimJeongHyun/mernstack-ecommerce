@@ -200,15 +200,19 @@ textarea:focus{
     word-break: break-all;
 }
 
-.storePagination{
+.paginationFooter{
     position:relative;
     text-align: center;
     bottom:40%;
-    font-size:2em;
+    font-size:1.5em;
     color:#6d6d6d;
 }
 
-.storePagination a{
+.paginationFooter div{
+    display:inline;
+}
+
+.paginationFooter a{
     text-decoration: none;
     color:#6d6d6d;
 }

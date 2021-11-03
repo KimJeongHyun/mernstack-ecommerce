@@ -1,18 +1,18 @@
 import React,{useEffect,useRef,useState} from 'react'
 import { useDispatch } from 'react-redux'
-import ReactDOM from 'react-dom'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import { getClothes } from '../../_actions/user_action'
+import {StorePagination} from '../PaginationComp/PaginationComp'
 
 function Store(props){
     const Page = props.location.pathname.split('/')[2];
     const PageNum = 10;
 
     const [rendered, setRendered] = useState(false);
-
+    const [pagin,setPagin] = useState(0);
     const dispatch = useDispatch();
     
     const storeGrid = useRef();
@@ -47,21 +47,15 @@ function Store(props){
         
     },[])
 
+    const StorePaginationRendering = () =>{
+        if (mapLength!==0){
+            const finalPage = Math.ceil(mapLength/PageNum);
+            return <StorePagination currentPage={Page} finalPage={finalPage}/>
+        }
+    }
+
     useEffect(()=>{
         if (mapLength!==0){
-            const footerRendering = () =>{
-                const result=[];
-                for (let i=0; i<mapLength/PageNum; i++){
-                    const urlParam = i+1;
-                    result.push(
-                        <span key={i}>
-                            <a href={"/Store/"+urlParam}>[{i+1}]</a>
-                        </span>
-                    )
-                }
-                ReactDOM.render(result,storePaginationRef.current);
-            }
-
             const productRendering = () =>{
                 let cnt = 0;
                 let targetIndex=0;
@@ -108,7 +102,6 @@ function Store(props){
                 }   
             }
             productRendering();
-            footerRendering();
             setRendered(true);
         }
     },[clothesMap])
@@ -156,8 +149,8 @@ function Store(props){
                                 
                             </table>
                         </div>
-                        <div className="storePagination" ref={storePaginationRef}>
-
+                        <div className="paginationFooter" ref={storePaginationRef}>
+                            {StorePaginationRendering()}
                         </div>
                     </div>
                 </div>

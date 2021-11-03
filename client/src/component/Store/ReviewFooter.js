@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
 import '../../css/style.css'
 import { getReviewData } from '../../_actions/user_action'
-
+import { ReviewPagination } from '../PaginationComp/PaginationComp'
 
 function ReviewFooter(props){
     const PostNum = 5;
@@ -36,23 +36,12 @@ function ReviewFooter(props){
         }
     },[productIndex])
 
-    useEffect(()=>{
-        const footerRendering = () =>{
-            const result=[];
-            for (let i=0; i<MapLength/PostNum; i++){
-                result.push(
-                    <span onClick={postPagingHandler}>
-                        <a className={'ReviewPaging'+(i+1)} href="#none" >[{i+1}]</a>
-                    </span>
-                )
-            }
-            ReactDOM.render(result,ReviewPaginationRef.current);
+    const ReviewPaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <ReviewPagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
         }
-        if (MapLength!==''){
-            footerRendering();
-        }
-        
-    },[MapLength])
+    }
 
     useEffect(()=>{
         while(ReviewTBodyRef.current.hasChildNodes()){
@@ -134,8 +123,8 @@ function ReviewFooter(props){
                 
                 </tbody>
             </table>
-            <div ref={ReviewPaginationRef}>
-
+            <div className="paginationFooter" ref={ReviewPaginationRef}>
+                {ReviewPaginationRendering()}
             </div>
             <button className='SubmitBtn' style={{marginTop:'30px', marginLeft:'82%'}}><a href={"/ReviewPost/"+productIndex}>글 쓰기</a></button>
         </div>

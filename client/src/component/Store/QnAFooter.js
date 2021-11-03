@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
 import '../../css/style.css'
 import { getQnAData } from '../../_actions/user_action'
-
-
+import { QnAPagination } from '../PaginationComp/PaginationComp'
 
 function QnAFooter(props){
     const PostNum = 5;
@@ -38,6 +37,13 @@ function QnAFooter(props){
         }
     },[productIndex])
 
+    const QnAPaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <QnAPagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
+        }
+    }
+
     useEffect(()=>{
         const footerRendering = () =>{
             const result=[];
@@ -51,7 +57,7 @@ function QnAFooter(props){
             ReactDOM.render(result,QnAPaginationRef.current);
         }
         if (MapLength!==''){
-            footerRendering();
+            //footerRendering();
         }
         
     },[MapLength])
@@ -136,8 +142,8 @@ function QnAFooter(props){
                     
                 </tbody>
             </table>
-            <div ref={QnAPaginationRef}>
-
+            <div className="paginationFooter" ref={QnAPaginationRef}>
+                {QnAPaginationRendering()}
             </div>
             <button className='SubmitBtn' style={{marginTop:'30px', marginLeft:'82%'}}><a href={"/QnAPost/"+productIndex}>글 쓰기</a></button>
         </div>
