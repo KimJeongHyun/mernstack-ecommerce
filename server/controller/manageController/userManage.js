@@ -62,8 +62,11 @@ router.post('/api/addCoupon',(req,res)=>{
     const reqData = req.body;
     const reason = reqData.reason;
     const couponVolume = reqData.couponVolume;
+    const couponDuration = reqData.couponDuration;
+    const dtVar = new Date(Date.now()+couponDuration*24*3600*1000)
     const checkList = reqData.checkList;
-    if (reason==='' || couponVolume==='' || checkList.length===0){
+
+    if ((reason==='' || couponVolume==='') && checkList.length===0){
         res.json({postSuccess:false})
     }
 
@@ -73,7 +76,8 @@ router.post('/api/addCoupon',(req,res)=>{
                 const newCoupon = new coupons({
                     userID:[],
                     reason:reason,
-                    couponVolume:couponVolume
+                    couponVolume:couponVolume,
+                    expiredAt:dtVar
                 })
 
                 newCoupon.save().then(function(product){
@@ -85,9 +89,9 @@ router.post('/api/addCoupon',(req,res)=>{
                             if (err){
                                 console.log(checkList[i]);
                                 console.log(err);
-                                console.log('newCoupon update err')
+                                console.log('new coupon update err')
                             }else{
-                                console.log('newCoupon created');
+                                console.log('new coupon created with update users');
                             }
                         })
                     }
@@ -115,6 +119,22 @@ router.post('/api/addCoupon',(req,res)=>{
             }
         })
         res.json({postSuccess:true})
+    }else if (reason!=='' && couponVolume!=='' && checkList.length===0){
+        const newCoupon = new coupons({
+            userID:[],
+            reason:reason,
+            couponVolume:couponVolume,
+            expiredAt:dtVar
+        })
+        newCoupon.save(function(err,result){
+            if (err){
+                console.log(err);
+            }else{
+                console.log('new coupon created')    
+            }
+        })
+        
+        
     }
 })
 

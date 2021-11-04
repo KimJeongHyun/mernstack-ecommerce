@@ -40,11 +40,12 @@ router.post('/api/register',(req,res)=>{
                                 addAccum:3000,
                                 totalAccum:3000
                             })
-
+                            const dtVar = new Date(Date.now()+365*24*3600*1000)
                             const userCoupon = new coupons({
                                 userID:userInfo._id,
                                 reason:'신규 가입 축하 쿠폰',
-                                couponVolume:3000
+                                couponVolume:3000,
+                                expiredAt:dtVar
                             })
 
                             userAccum.save().then(function(product){

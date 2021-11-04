@@ -18,7 +18,8 @@ function UserManage(){
     const [accumValue,setAccumValue] = useState('')
 
     const [couponReason, setCouponReason] = useState('')
-    const [couponVolume, setCouponVolume] = useState('')
+    const [couponVolume, setCouponVolume] = useState(0)
+    const [couponDuration, setCouponDuration] = useState('')
 
     const onValueHandler = (event) =>{
         event.preventDefault();
@@ -35,6 +36,9 @@ function UserManage(){
             break;
             case 'couponVolume':
                 setCouponVolume(value)
+            break;
+            case 'couponDuration':
+                setCouponDuration(value)
             break;
         }
     }
@@ -83,6 +87,7 @@ function UserManage(){
         if (name==='couponSVR'){
             setCouponReason('')
             setCouponVolume('')
+            setCouponDuration('')
         }
         
         setCheckList([])
@@ -108,6 +113,7 @@ function UserManage(){
         if (name==='couponInitiate'){
             setCouponReason('')
             setCouponVolume('')
+            setCouponDuration('')
         }
     }
 
@@ -141,6 +147,7 @@ function UserManage(){
             let body = {
                 reason : couponReason,
                 couponVolume : couponVolume,
+                couponDuration: couponDuration,
                 checkList : checkList
             }
             
@@ -260,10 +267,12 @@ function UserManage(){
                             <tr id='adminTableTR'>
                                 <td>쿠폰 이름</td>
                                 <td>쿠폰 금액</td>
+                                <td>쿠폰 기간</td>
                             </tr>
                             <tr className='tr2' id='adminTableTR'>
                                 <td><input name='couponReason' id='tableName' value={couponReason} onChange={onValueHandler}/></td>
                                 <td><input name='couponVolume' type='number' id='tableName' value={couponVolume} onChange={onValueHandler}/></td>
+                                <td><input name='couponDuration' type='number' id='tableName' value={couponDuration} onChange={onValueHandler}/></td>
                             </tr>
                         </table>
                         <div className='PannelContainer' style={{marginTop:'3vh', marginRight:'1.5vw'}}>

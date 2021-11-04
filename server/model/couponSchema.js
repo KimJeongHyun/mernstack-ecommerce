@@ -9,6 +9,14 @@ const couponSchema = mongoose.Schema({
     regDate:{
         type:Date,
         default:Date.now
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now
+    },
+    expiredAt:{
+        type:Date,
+        expires:0
     }
 })
 
