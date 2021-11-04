@@ -33,18 +33,18 @@
 16. Admin Page
  * GSAP Applied
  * DB Insert ( Product image upload by multer & mongoose save )
- * User Manage ( Can add accumulate price and coupons. )
+ * User Manage ( Can add accumulate price and coupons )
+   *  admin can set coupon's expiration date.
 ---
 구현 필요사항
-1. 관리자 페이지 구현 중
- * MongoDB DOC TTL 적용만 되면 됨.
-2. etc 페이지엔 일괄 이메일 또는 카카오톡.
-3. 결제 모듈 추가(페이팔?)
+0. 새 랜딩페이지 decoration with gsap scrollTrigger
+1. etc 페이지엔 일괄 이메일 또는 카카오톡.
+2. 결제 모듈 추가(페이팔?)
  * 결제시 해당 유저의 적립금, 주문내역 필드 업데이트.
 ---
 개선사항
 1. ReactDOM.render(function(),ref.current)
- * function() 부분 모듈화해서 따로 폴더로 빼기
+ * function() 부분 모듈화해서 따로 폴더로 빼거나, 상태 관리가 필요한 경우 컴포넌트화해서 return 해주기.
 2. 1번 수행시 <Provider>로 wrapping되는 것 알아보기
 3. 2번 블로그 포스팅
 4. Redux 개념 심화 이해
