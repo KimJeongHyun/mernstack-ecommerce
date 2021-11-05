@@ -64,6 +64,7 @@ router.post('/api/addCoupon',(req,res)=>{
     const couponVolume = reqData.couponVolume;
     const couponDuration = reqData.couponDuration;
     const dtVar = new Date(Date.now()+couponDuration*24*3600*1000)
+    dtVar.setHours(0,0,0,0);
     const checkList = reqData.checkList;
 
     if ((reason==='' || couponVolume==='') && checkList.length===0){

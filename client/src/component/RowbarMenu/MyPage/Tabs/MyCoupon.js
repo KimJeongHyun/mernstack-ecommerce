@@ -42,6 +42,13 @@ export function MyCouponRendering(){
             for (let i=0; i<reasonList.length; i++){
                 let d = new Date(createdAtList[i]);
                 let e = new Date(expiredAtList[i]);
+                let n = new Date();
+                n.setHours(0,0,0,0);
+                e.setHours(0,0,0,0)
+                const msDay = 60*60*24*1000
+                
+                const dDay = Math.floor(e-n)/msDay;
+
                 const startStr = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDay()
                 const expireStr = e.getFullYear()+'-'+(e.getMonth()+1)+'-'+e.getDay()
                 const durationStr = startStr+' ~ '+expireStr;
@@ -60,11 +67,15 @@ export function MyCouponRendering(){
                 const durationText = document.createTextNode(durationStr)
                 durationTD.appendChild(durationText);
 
-                
+                const dDayTD = document.createElement('td');
+                const dDayText = document.createTextNode(dDay);
+                dDayTD.appendChild(dDayText);
 
                 trTag.appendChild(reasonTD);
                 trTag.appendChild(couponTD);
                 trTag.appendChild(durationTD);
+                trTag.appendChild(dDayTD);
+                
 
                 couponTableRef.current.appendChild(trTag);
             }
@@ -78,6 +89,7 @@ export function MyCouponRendering(){
                     <th>쿠폰이름</th>
                     <th>사용가능금액</th>
                     <th>사용기간</th>
+                    <th>D-Day</th>
                 </tr>
             </thead>
             <tbody ref={couponTableRef} style={{lineHeight:'30px', borderBottom:'0.5px solid lightgray'}}>
