@@ -28,13 +28,15 @@ router.get('/api/getCoupon',(req,res)=>{
             if (couponArr.length>0){
                 const reasonList = [];
                 const couponVolume = [];
-                const ttlList = [];
+                const createdAtList = [];
+                const expiredAtList = [];
                 for (let i=0; i<couponArr.length; i++){
                     reasonList.push(couponArr[i].reason)
-                    couponVolume.push(couponArr[i].couponVolume);
-                    ttlList.push(couponArr[i].regDate);
+                    couponVolume.push(couponArr[i].couponVolume)
+                    createdAtList.push(couponArr[i].createdAt)
+                    expiredAtList.push(couponArr[i].expiredAt)
                 }
-                res.json({getCouponSuccess:true, reasonList:reasonList, couponVolume:couponVolume, ttlList:ttlList})
+                res.json({getCouponSuccess:true, reasonList:reasonList, couponVolume:couponVolume, createdAtList:createdAtList, expiredAtList:expiredAtList})
             }else{
                 res.json({getCouponSuccess:false})
             }

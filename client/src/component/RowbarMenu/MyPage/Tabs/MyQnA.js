@@ -1,7 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-
+import { QnAPagination } from '../../../PaginationComp/PaginationComp';
 
 export function MyQnARendering(){
     const PostNum = 10;
@@ -102,24 +102,12 @@ export function MyQnARendering(){
         }
     },[userID])
 
-    useEffect(()=>{
-        const footerRendering = () =>{
-            const result=[];
-            for (let i=0; i<MapLength/PostNum; i++){
-                result.push(
-                    <span onClick={postPagingHandler}>
-                        <a className={'PostPaging'+(i+1)} href="#none" >[{i+1}]</a>
-                    </span>
-                )
-            }
-            ReactDOM.render(result,QnAPaginationRef.current);
+    const QnAPaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <QnAPagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
         }
-        if (MapLength!==''){
-            footerRendering();
-        }
-        
-    },[MapLength])
-
+    }
 
     useEffect(()=>{
         while(QnATBodyRef.current.hasChildNodes()){
@@ -222,8 +210,8 @@ export function MyQnARendering(){
                 
             </tbody>
         </table>
-        <div ref={QnAPaginationRef} style={{marginTop:'10px', marginLeft:'40%'}}>
-
+        <div className="paginationFooter" ref={QnAPaginationRef} style={{marginRight:'20%'}}>
+            {QnAPaginationRendering()}
         </div>
         <div ref={QnABtnRef}>
             <div style={{marginTop:'20px'}}>

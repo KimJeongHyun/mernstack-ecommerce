@@ -1,7 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-
+import { ReviewPagination } from '../../../PaginationComp/PaginationComp';
 
 export function MyReviewRendering(){
     const PostNum = 10;
@@ -101,24 +101,12 @@ export function MyReviewRendering(){
         }
     },[userID])
 
-    useEffect(()=>{
-        const footerRendering = () =>{
-            const result=[];
-            for (let i=0; i<MapLength/PostNum; i++){
-                result.push(
-                    <span onClick={postPagingHandler}>
-                        <a className={'PostPaging'+(i+1)} href="#none" >[{i+1}]</a>
-                    </span>
-                )
-            }
-            ReactDOM.render(result,ReviewPaginationRef.current);
+    const ReviewPaginationRendering = () =>{
+        if (MapLength!==0){
+            const finalPage = Math.ceil(MapLength/PostNum);
+            return <ReviewPagination pagingHandler={postPagingHandler} finalPage={finalPage}/>
         }
-        if (MapLength!==''){
-            footerRendering();
-        }
-        
-    },[MapLength])
-
+    }
 
     useEffect(()=>{
         while(ReviewTBodyRef.current.hasChildNodes()){
@@ -221,8 +209,8 @@ export function MyReviewRendering(){
                 
             </tbody>
         </table>
-        <div ref={ReviewPaginationRef} style={{marginTop:'10px', marginLeft:'40%'}}>
-
+        <div className="paginationFooter" ref={ReviewPaginationRef} style={{marginRight:'20%'}}>
+            {ReviewPaginationRendering()}
         </div>
         <div ref={ReviewBtnRef}>
             <div style={{marginTop:'20px'}}>

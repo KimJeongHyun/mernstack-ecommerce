@@ -1,12 +1,12 @@
 import React,{useEffect,useState,useRef} from 'react'
 import axios from 'axios'
-import InternalPreviewGroup from 'antd/lib/image/PreviewGroup'
 
 export function MyCouponRendering(){
 
     const [reasonList,setReasonList] = useState([])
     const [couponVolumeList,setCouponVolumeList] = useState([])
-    const [ttlList,setTtlList] = useState([])
+    const [createdAtList,setCreatedAtList] = useState([])
+    const [expiredAtList,setExpiredAtList] = useState([])
     const couponTableRef = useRef();
 
     const setSTR = (dt) =>{
@@ -29,27 +29,23 @@ export function MyCouponRendering(){
         axios.get('/api/getCoupon')
         .then(response=>{
             const resData = response.data;
+            console.log(resData);
             setReasonList(resData.reasonList);
             setCouponVolumeList(resData.couponVolume);
-            setTtlList((current)=>{
-                const newList = [];
-                for (let i=0; i<resData.ttlList.length; i++){
-                    const originDT = new Date(resData.ttlList[i]);
-                    const originDTSTR = setSTR(originDT)
-
-                    const newDT = new Date(resData.ttlList[i])
-                    newDT.setDate(newDT.getDate()+30)
-                    const newDTSTR = setSTR(newDT);
-                    newList.push(originDTSTR+' ~ ' +newDTSTR);
-                }
-                return newList;
-            })
+            setCreatedAtList(resData.createdAtList);
+            setExpiredAtList(resData.expiredAtList);
         })
     },[])
 
     useEffect(()=>{
-        if (reasonList.length!=0 && couponVolumeList.length!=0 && ttlList.length!=0){
+        if (reasonList.length!=0 && couponVolumeList.length!=0 && createdAtList.length!=0 && expiredAtList.length!=0){
             for (let i=0; i<reasonList.length; i++){
+                let d = new Date(createdAtList[i]);
+                let e = new Date(expiredAtList[i]);
+                const startStr = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDay()
+                const expireStr = e.getFullYear()+'-'+(e.getMonth()+1)+'-'+e.getDay()
+                const durationStr = startStr+' ~ '+expireStr;
+                
                 const trTag = document.createElement('tr');
                 
                 const reasonTD = document.createElement('td');
@@ -60,18 +56,20 @@ export function MyCouponRendering(){
                 const couponText = document.createTextNode(couponVolumeList[i]);
                 couponTD.appendChild(couponText);
 
-                const ttlTD = document.createElement('td');
-                const ttlText = document.createTextNode(ttlList[i])
-                ttlTD.appendChild(ttlText);
+                const durationTD = document.createElement('td');
+                const durationText = document.createTextNode(durationStr)
+                durationTD.appendChild(durationText);
+
+                
 
                 trTag.appendChild(reasonTD);
                 trTag.appendChild(couponTD);
-                trTag.appendChild(ttlTD);
+                trTag.appendChild(durationTD);
 
                 couponTableRef.current.appendChild(trTag);
             }
         }
-    },[reasonList,couponVolumeList,ttlList])
+    },[reasonList,couponVolumeList,createdAtList,expiredAtList])
 
     return(
         <table className='couponTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
