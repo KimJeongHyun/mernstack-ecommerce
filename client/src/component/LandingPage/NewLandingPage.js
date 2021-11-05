@@ -122,6 +122,18 @@ function NewLandingPage(props){
         }
     }
 
+    const btnUnderline = (event) =>{
+        event.preventDefault();
+        document.getElementById('underline').style.opacity='1';
+        document.getElementById('underline').style.width='100%';
+    }
+
+    const btnUnderlineHide = (event) =>{
+        event.preventDefault();
+        document.getElementById('underline').style.width='0';
+        document.getElementById('underline').style.opacity='0';
+    }
+
     return(
         <>
         <div className="contentArea" >
@@ -158,6 +170,17 @@ function NewLandingPage(props){
                 <div id='aboutUsImageArea'>
                     
                 </div>
+                <div id='aboutUsContent'>
+                    <span id='aboutUsHeader'>
+                        <p>Easy Lifestyle</p>
+                        <p>For Your Personality</p>
+                    </span>
+                    <div id='aboutUsBody'>
+                        
+                    </div>
+                    <span id='StoreBtn' onMouseOver={btnUnderline} onMouseOut={btnUnderlineHide}><a id='StoreBtnA' href='/Store/1'>Go to Store</a></span>
+                    <hr id='underline'/>
+                </div>
             </div>
             <div id="landingFooter">
                 
@@ -165,7 +188,6 @@ function NewLandingPage(props){
             <TopBtn/>
         </div>
         </>
-        
     )
 }
 

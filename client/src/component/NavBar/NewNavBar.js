@@ -12,8 +12,12 @@ export function NewNavBar(props){
             
         }else{
             gsap.to('.newRowBar li a',{color:'black'})
-            document.getElementById('aboutUsImageArea').style.transform='translateX(-8%)'
-            
+            const tl = gsap.timeline();
+            tl.add('start')
+            .to('#aboutUsImageArea',{width:'150%',duration:'1.2'},'start')
+            .to('#aboutUsHeader',{bottom:'60px',duration:'1.2'},'start')
+            .to('#StoreBtnA',{marginTop:'250px',duration:'1.2'},'start')
+            .to('#aboutUsBody',{opacity:'1',display:'block',autoAlpha:'1'})
         }
     }
 

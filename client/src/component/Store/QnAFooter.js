@@ -10,7 +10,7 @@ function QnAFooter(props){
     
     const QnAFooterRef = useRef();
     const QnATBodyRef = useRef();
-    const QnAPaginationRef = useRef();
+    const QnAPaginationRef = useRef() ;
     const productIndex = props.clothMapNum;
     const clothName = props.clothName;
 
