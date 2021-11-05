@@ -44,7 +44,9 @@ function NewLandingPage(props){
             await gsap.to(textRef3.current,{opacity:1,duration:1})
             await gsap.to('.wrappingText',{right:'20%',duration:1})
             await gsap.to('.wrappingImage',{opacity:1})
-            document.getElementById('preventOnClick').remove();
+            if (document.getElementById('preventOnClick')!==null){
+                document.getElementById('preventOnClick').remove();
+            }
             setSlideReady(true)
         }
         worker();
@@ -152,7 +154,12 @@ function NewLandingPage(props){
                 <BsFillArrowLeftSquareFill id="prevBtn" style={{cursor:'pointer'}} onClick={prevBtnClick}/>
                 <BsFillArrowRightSquareFill id="nextBtn" style={{cursor:'pointer'}} onClick={nextBtnClick}/>
             </div>
-            <div id="landingAboutUs">
+            <div id="landingAboutUs" style={{overflow:'hidden'}}>
+                <div id='aboutUsImageArea'>
+                    
+                </div>
+            </div>
+            <div id="landingFooter">
                 
             </div>
             <TopBtn/>

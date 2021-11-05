@@ -630,10 +630,26 @@ textarea:focus{
     bottom:50%;
     opacity:0;
 }
+
 #landingAboutUs{
     position:relative;
     width:100%;
-    height:1000px;
+    height:700px;
+    z-index:1;
+}
+
+#landingAboutUs #aboutUsImageArea{
+    width:150%;
+    height:100%;
+    background-image:url('../images/woman_blueJacket.jpg');
+    background-size:cover;
+    transition:1s ease;
+}
+
+#landingFooter{
+    position:relative;
+    width:100%;
+    height:700px;
 }
 
 .TopBtn{

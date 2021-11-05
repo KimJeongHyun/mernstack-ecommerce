@@ -9,8 +9,11 @@ export function NewNavBar(props){
         setScrollY(window.scrollY);
         if (scrollY<window.outerHeight){
             gsap.to('.newRowBar li a', {color:'white'})
+            
         }else{
             gsap.to('.newRowBar li a',{color:'black'})
+            document.getElementById('aboutUsImageArea').style.transform='translateX(-8%)'
+            
         }
     }
 
