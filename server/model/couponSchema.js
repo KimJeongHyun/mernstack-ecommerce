@@ -11,8 +11,7 @@ const couponSchema = mongoose.Schema({
         default:Date.now
     },
     createdAt:{
-        type:Date,
-        default:Date.now
+        type:Date
     },
     expiredAt:{
         type:Date,
@@ -21,5 +20,6 @@ const couponSchema = mongoose.Schema({
 })
 
 const coupons = mongoose.model('coupons',couponSchema);
+
 
 module.exports={coupons}

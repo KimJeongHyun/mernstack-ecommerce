@@ -19,7 +19,7 @@ export function MyCouponRendering(){
             dtMonth=dt.getMonth()+1
         }
 
-        const dtDay = dt.getDay();
+        const dtDay = dt.getDate();
 
         let result = dtYear+'-'+dtMonth+'-'+dtDay;
         return result;
@@ -29,11 +29,12 @@ export function MyCouponRendering(){
         axios.get('/api/getCoupon')
         .then(response=>{
             const resData = response.data;
-            console.log(resData);
-            setReasonList(resData.reasonList);
-            setCouponVolumeList(resData.couponVolume);
-            setCreatedAtList(resData.createdAtList);
-            setExpiredAtList(resData.expiredAtList);
+            if (resData.reasonList!==undefined){
+                setReasonList(resData.reasonList);
+                setCouponVolumeList(resData.couponVolume);
+                setCreatedAtList(resData.createdAtList);
+                setExpiredAtList(resData.expiredAtList);
+            }
         })
     },[])
 
@@ -43,14 +44,15 @@ export function MyCouponRendering(){
                 let d = new Date(createdAtList[i]);
                 let e = new Date(expiredAtList[i]);
                 let n = new Date();
-                n.setHours(0,0,0,0);
-                e.setHours(0,0,0,0)
+                n.setUTCHours(0,0,0,0);
+                e.setUTCHours(0,0,0,0);
+
                 const msDay = 60*60*24*1000
                 
                 const dDay = Math.floor(e-n)/msDay;
 
-                const startStr = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDay()
-                const expireStr = e.getFullYear()+'-'+(e.getMonth()+1)+'-'+e.getDay()
+                const startStr = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
+                const expireStr = e.getFullYear()+'-'+(e.getMonth()+1)+'-'+e.getDate()
                 const durationStr = startStr+' ~ '+expireStr;
                 
                 const trTag = document.createElement('tr');

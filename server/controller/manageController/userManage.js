@@ -63,8 +63,11 @@ router.post('/api/addCoupon',(req,res)=>{
     const reason = reqData.reason;
     const couponVolume = reqData.couponVolume;
     const couponDuration = reqData.couponDuration;
+    const dtNow = new Date()
+    dtNow.setUTCHours(0,0,0,0)
     const dtVar = new Date(Date.now()+couponDuration*24*3600*1000)
-    dtVar.setHours(0,0,0,0);
+    dtVar.setUTCHours(0,0,0,0);
+    
     const checkList = reqData.checkList;
 
     if ((reason==='' || couponVolume==='') && checkList.length===0){
@@ -78,6 +81,7 @@ router.post('/api/addCoupon',(req,res)=>{
                     userID:[],
                     reason:reason,
                     couponVolume:couponVolume,
+                    createdAt:dtNow,
                     expiredAt:dtVar
                 })
 
@@ -125,6 +129,7 @@ router.post('/api/addCoupon',(req,res)=>{
             userID:[],
             reason:reason,
             couponVolume:couponVolume,
+            createdAt:dtNow,
             expiredAt:dtVar
         })
         newCoupon.save(function(err,result){
