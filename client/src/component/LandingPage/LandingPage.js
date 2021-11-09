@@ -9,7 +9,12 @@ function LandingPage(props){
         <>
         <NavSideBar/>
         <div className="contentArea">
-            <img src="images/Coor.jpg" alt="Initial View"></img>
+            <div className='mainImage'>
+                
+            </div>
+            <div className='mainIntroArea'>
+                
+            </div>
         </div>
         </>
         

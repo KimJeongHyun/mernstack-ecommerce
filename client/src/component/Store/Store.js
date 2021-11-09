@@ -114,16 +114,19 @@ function Store(props){
                 list.className='sub';
                 const a = document.createElement('a');
                 a.href='#'
+                a.style.color='black'
                 const textNode = document.createTextNode('Arrival');
                 a.appendChild(textNode);
-                list.appendChild(a);    
                 
+                list.appendChild(a);    
+                list.style.color='black'
                 // Arrival List
 
                 const list2 = document.createElement('li');
                 list2.className='sub';
                 const a2 = document.createElement('a');
                 a2.href='#'
+                a2.style.color='black'
                 const textNode2 = document.createTextNode('2021 F / W');
                 a2.appendChild(textNode2);
                 list2.appendChild(a2);

@@ -17,6 +17,8 @@ export function NewNavBar(props){
             .to('#aboutUsImageArea',{width:'150%',duration:'1.2'},'start')
             .to('#aboutUsHeader',{bottom:'60px',duration:'1.2'},'start')
             .to('#StoreBtnA',{marginTop:'250px',duration:'1.2'},'start')
+            .to('#aboutUsHeader',{opacity:'1',autoAlpha:'1',duration:'1.2'},'start')
+            .to('#StoreBtnA',{opacity:'1',autoAlpha:'1', duration:'1.2'},'start')
             .to('#aboutUsBody',{opacity:'1',display:'block',autoAlpha:'1'})
         }
     }

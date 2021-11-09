@@ -136,13 +136,13 @@ function NewLandingPage(props){
 
     return(
         <>
+        <NewNavBar/>
+        <div>
+            <video id="background-video" loop autoPlay muted>
+                <source src={videoURL} type="video/mp4"/>    
+            </video>
+        </div>
         <div className="contentArea" >
-            <NewNavBar/>
-            <div>
-                <video id="background-video" loop autoPlay muted>
-                    <source src={videoURL} type="video/mp4"/>    
-                </video>
-            </div>
             <div id="textWrapping" ref={boxRef}>
                 <div id="wrappingTextArea1" className='wrappingText' ref={textRef}>
                     Empha ː vation
