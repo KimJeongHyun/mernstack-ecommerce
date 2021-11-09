@@ -78,6 +78,7 @@ input::-webkit-inner-spin-button {
 #buttonArea{
     position:relative;
     font-size:2em;
+    top:40%;
 }
 
 .adminMenu{

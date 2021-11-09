@@ -13,7 +13,7 @@ function AdminLandingPage(){
     metaTag.contenr = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     document.getElementsByTagName('head')[0].appendChild(metaTag);
 
-    const mouseEnterFunc = (event) =>{
+    const mouseOverFunc = (event) =>{
         event.preventDefault();
         event.target.classList.add('active')
         gsap.to(event.target.querySelector('#buttonArea'),{top:'30%'})
@@ -61,17 +61,29 @@ function AdminLandingPage(){
         <>
         <div className='adminArea'>
             <div className='contentWrapper'>
-                <div className='content1' name='1'  onMouseOver={mouseEnterFunc} onMouseLeave={mouseLeaveFunc}  onClick={containerFold}>
+                <div className='content1' 
+                    onMouseOver={mouseOverFunc} 
+                    onMouseLeave={mouseLeaveFunc}  
+                    onClick={containerFold}>
+
                     <div id='buttonArea'>
                         <span>Product Update</span>
                     </div>
                 </div>
-                <div className='content2' name='2' onMouseOver={mouseEnterFunc} onMouseLeave={mouseLeaveFunc}  onClick={containerFold}>
+                <div className='content2' 
+                    onMouseOver={mouseOverFunc} 
+                    onMouseLeave={mouseLeaveFunc}  
+                    onClick={containerFold}>
+
                     <div id='buttonArea'>
                         <span>User Management</span>
                     </div>
                 </div>
-                <div className='content3' name='3' onMouseOver={mouseEnterFunc} onMouseLeave={mouseLeaveFunc}  onClick={containerFold}>
+                <div className='content3' 
+                    onMouseOver={mouseOverFunc} 
+                    onMouseLeave={mouseLeaveFunc}  
+                    onClick={containerFold}>
+
                     <div id='buttonArea'>
                         <span>ETC</span>
                     </div>

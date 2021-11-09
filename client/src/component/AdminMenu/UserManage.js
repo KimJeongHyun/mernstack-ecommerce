@@ -176,8 +176,8 @@ function UserManage(){
     const backToAdmin = (event) =>{
         event.preventDefault();
         const work = async () =>{
-            await gsap.to('.adminMenu',{opacity:0,display:'none'})
-            await gsap.to('.adminArea',{opacity:1,width:'100%',display:'block'})
+            await gsap.to('.adminMenu',{autoAlpha:'0',display:'none'})
+            await gsap.to('.adminArea',{autoAlpha:'1',width:'100%',display:'block'})
         }
         work();
     }
@@ -287,7 +287,10 @@ function UserManage(){
                 </div>
             </div>
             <div className='backToAdminMenus'>
-                <BsArrowLeftCircleFill id='backArrow' onClick={backToAdmin} onMouseOver={textFloating} onMouseOut={textHiding}/> 
+                <BsArrowLeftCircleFill id='backArrow' 
+                    onClick={backToAdmin} 
+                    onMouseOver={textFloating} 
+                    onMouseLeave={textHiding}/> 
                 <span id='backToText'>
                     Back to Admin menus
                 </span>
