@@ -1,8 +1,11 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import {gsap} from 'gsap'
 
 export function NavBar(props){
+
+    const [scrollY,setScrollY] = useState(0);
 
     const rowBarRef = useRef();
 
@@ -13,6 +16,27 @@ export function NavBar(props){
             window.location.href='/';
         })
     }
+
+    const handleScrollY = () =>{
+        if (scrollY>window.scrollY){
+            console.log('scroll up')
+            gsap.to('.rowBar',{height:'40', opacity:'1'})
+        }else{
+            console.log('scroll down')
+            gsap.to('.rowBar',{height:'0',opacity:'0'})
+        }
+        setScrollY(window.scrollY);
+    }
+
+    useEffect(()=>{
+        const watch = () =>{
+            window.addEventListener('scroll',handleScrollY)
+        }
+        watch();
+        return () =>{
+            window.removeEventListener('scroll',handleScrollY)
+        }
+    })
 
 
     useEffect(()=>{
