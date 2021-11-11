@@ -8,7 +8,7 @@ import {Footer} from '../Footer/Footer'
 import { getDetailData, postCart } from '../../_actions/user_action'
 import QnAFooter from './QnAFooter'
 import ReviewFooter from './ReviewFooter'
-import { MdAddShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart, MdOutlineSubscriptions } from "react-icons/md";
 import axios from 'axios'
 
 
@@ -40,6 +40,19 @@ function ProductDetail(props){
         cursorX:0,
         cursorY:0
     })
+
+    const [selectedColors,setSelectedColors] = useState([])
+    const [selectedColor, setSelectedColor] = useState('')
+
+    const [selectedSizes, setSelectedSizes] = useState([])
+    const [selectedSize, setSelectedSize] = useState('')
+
+    const [selectedVols, setSelectedVols] = useState([])
+    const [selectedIndex, setSelectedIndex] = useState(-1)
+    const [selected,setSelected] = useState(false);
+    const [btnClicked,setBtnClicked] = useState(false);
+
+    const [totalPrice,setTotalPrice] = useState(0);
 
     const dispatch = useDispatch()
 
@@ -182,6 +195,208 @@ function ProductDetail(props){
         })
     }
 
+    const setSelect = (event) =>{
+        event.preventDefault();
+        const {name, value} = event.target;
+        const colorSelectTag = document.getElementsByName('colorSelect')[0]
+        if (name==='colorSelect'){
+            if (value.length>0){
+                setSelectedColor(value);
+            }
+        }
+
+        if (name==='sizeSelect'){
+            if (colorSelectTag.value.length===0){
+                alert('먼저 색상을 선택해주세요.');
+            }
+            else if (value.length>0){
+                setSelectedSize(value);
+            }
+        }
+    }
+
+    const volMinus = (event) =>{
+        event.preventDefault();
+        const index = event.target.name;
+        const volSpan = document.getElementsByClassName(index)[0]
+        const priceSpan = document.getElementsByClassName(index)[1]
+        const price = clothMap.sellPrice*(100-clothMap.discountRate)*0.01;
+        if (parseInt(volSpan.innerHTML)>1){
+            volSpan.innerHTML = parseInt(volSpan.innerHTML)-1
+            priceSpan.innerHTML = parseInt(price*volSpan.innerHTML)+' ₩';
+        }
+        
+        setBtnClicked('minus'+index);
+    }
+
+    const volPlus = (event) =>{
+        event.preventDefault();
+        const index = event.target.name;
+        const volSpan = document.getElementsByClassName(index)[0]
+        const priceSpan = document.getElementsByClassName(index)[1]
+        const price = clothMap.sellPrice*(100-clothMap.discountRate)*0.01;
+        volSpan.innerHTML = parseInt(volSpan.innerHTML)+1
+        priceSpan.innerHTML = parseInt(price*volSpan.innerHTML)+' ₩';
+        setBtnClicked('plus'+index);
+    }
+
+    useEffect(()=>{
+        if (btnClicked!==false){
+            if (btnClicked.length===6){
+                const index = btnClicked[btnClicked.length-1]
+                if (selectedVols[index]>1){
+                    setSelectedVols((current)=>{
+                        const newList = [...selectedVols];
+                        newList[index] = newList[index]-1;
+                        return newList;
+                    })
+                }
+            }else if (btnClicked.length===5){
+                const index = btnClicked[btnClicked.length-1]
+                setSelectedVols((current)=>{
+                    const newList = [...selectedVols];
+                    newList[index] = newList[index]+1;
+                    return newList;
+                })
+            }
+            setBtnClicked(true);
+        }
+    },[btnClicked])
+
+    useEffect(()=>{
+        if (selectedColor!=='' && selectedSize!==''){
+            const selectProps = {selectedColor,selectedSize}
+            if (selectedSizes.length>0){
+                let index=-1;
+                for (let i=0; i<selectedSizes.length; i++){
+                    if (selectedSize===selectedSizes[i]){
+                        index=i;
+                    }
+                }
+                if (index>-1){
+                    setSelectedVols((current)=>{
+                        const newList = [...selectedVols];
+                        newList[index] = newList[index] +1;
+                        return newList;
+                    })
+                    setSelectedIndex(index);
+                    setSelected(true);
+                }else{
+                    setSelectedColors((current)=>{
+                        const newList = [...selectedColors,selectedColor];
+                        return newList;
+                    })
+    
+                    setSelectedSizes((current)=>{
+                        const newList = [...selectedSizes,selectedSize];
+                        return newList;
+                    })
+    
+                    setSelectedVols((current)=>{
+                        const newList = [...selectedVols,1];
+                        return newList
+                    })
+                    setSelectedIndex(selectedSizes.length)
+                    setSelected(false);
+                }
+            }else{
+                setSelectedColors((current)=>{
+                    const newList = [...selectedColors,selectedColor];
+                    return newList;
+                })
+
+                setSelectedSizes((current)=>{
+                    const newList = [...selectedSizes,selectedSize];
+                    return newList;
+                })
+
+                setSelectedVols((current)=>{
+                    const newList = [...selectedVols,1];
+                    return newList
+                })
+                setSelectedIndex(selectedIndex+1)
+                setSelected(false);
+            }
+            setSelectedColor('');
+            setSelectedSize(''); 
+            setBtnClicked(false);
+        }
+    },[selectedColor,selectedSize])
+
+    useEffect(()=>{
+        if (!btnClicked){
+            if (selectedIndex>-1){
+                if (selected){
+                    const selectedTag = document.getElementsByClassName(selectedIndex)[0];
+                    selectedTag.innerHTML = selectedVols[selectedIndex];
+                }else{
+                    const size = selectedSizes[selectedIndex]
+                    const color = selectedColors[selectedIndex]
+                    const price = clothMap.sellPrice*(100-clothMap.discountRate)*0.01;
+                    
+                    const trTag = document.createElement('tr');
+    
+                    const sizeTD = document.createElement('td');
+                    const sizeTDText = document.createTextNode(size);
+                    sizeTD.appendChild(sizeTDText);
+    
+                    const colorTD = document.createElement('td');
+                    const colorTDText = document.createTextNode(color);
+                    colorTD.appendChild(colorTDText);
+    
+                    const btnTD = document.createElement('td');
+    
+                    const minusBtn = document.createElement('button')
+                    minusBtn.innerHTML='-'
+                    minusBtn.onclick=volMinus;
+                    minusBtn.classList.add('selectBtn')
+                    minusBtn.name=selectedIndex
+                    minusBtn.style.marginRight = '10px'
+    
+                    const volumeSpan = document.createElement('span')
+                    volumeSpan.classList.add(selectedIndex)
+                    const volumeSpanText = document.createTextNode(1)
+                    volumeSpan.appendChild(volumeSpanText);
+                    
+                    const plusBtn = document.createElement('button')
+                    plusBtn.innerHTML='+'
+                    plusBtn.onclick=volPlus;
+                    plusBtn.classList.add('selectBtn')
+                    plusBtn.name=selectedIndex;
+                    plusBtn.style.marginLeft='10px'
+    
+                    btnTD.appendChild(minusBtn);
+                    btnTD.appendChild(volumeSpan);
+                    btnTD.appendChild(plusBtn);
+    
+                    const priceTD = document.createElement('td');
+                    priceTD.classList.add(selectedIndex);
+                    const priceTDText = document.createTextNode(price+' ₩');
+                    priceTD.appendChild(priceTDText);
+    
+                    trTag.appendChild(sizeTD);
+                    trTag.appendChild(colorTD);
+                    trTag.appendChild(btnTD);
+                    trTag.appendChild(priceTD);
+                    
+                    document.getElementById('resultTable').appendChild(trTag);
+                }
+            }
+        }
+    },[selectedColors,selectedVols,selectedIndex,selected,btnClicked])
+
+    useEffect(() =>{
+        if (selectedVols.length>0){
+            let sum = 0;
+            const price = clothMap.sellPrice*(100-clothMap.discountRate)*0.01;
+            for (let i=0; i<selectedVols.length; i++){
+                sum+=price*selectedVols[i];
+            }
+            setTotalPrice(sum);
+        }
+    },[selectedVols])
+
+
     return(
         <div id='container'>
             <NavSideBar/>
@@ -189,12 +404,12 @@ function ProductDetail(props){
             <div className="uxArea">
                 <div className="contentContainer" style={{maxHeight:'1200px'}}>
                     <div className="uxContent" style={{paddingTop:'20px',textAlign:'left'}}>
-                        <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}}>
+                        <div className="productContainer" style={{paddingLeft:'10%', height:'1200px',display:'inline-block'}} onMouseEnter={imgMouseLeaveFunc}>
                             <div className="productHeader" style={{width:'100%',height:'600px'}}>
 
                                 <div className="productImage" ref={productImageRef} 
-                                style={{width:'300px', display:'inline-block', padding:'10px 10px'}} 
-                                onMouseOver={imgMouseLeaveFunc}>
+                                style={{width:'250px', display:'inline-block'}} 
+                                onMouseEnter={imgMouseLeaveFunc}>
                                     
                                 </div>
                                 <div ref = {imageZoomRef} className='imageZoom' style={{visibility:'hidden'}}>
@@ -303,7 +518,29 @@ function ProductDetail(props){
                         </div>
                         <nav className='payBox'>
                             <div className='payContainer'>
+                                <p style={{marginTop:'0'}}>색상 선택</p>
+                                <select name='colorSelect' id='sizeSelect' value={selectedColor} onChange={setSelect}>
+                                    <option name='D'></option>
+                                    <option name='brick'>brick</option>
+                                </select>
+                                <p>사이즈 선택</p>
+                                <select name='sizeSelect' id='sizeSelect' value={selectedSize} onChange={setSelect}>
+                                    <option name='D'></option>
+                                    <option name='S'>S</option>
+                                    <option name='M'>M</option>
+                                    <option name='L'>L</option>
+                                    <option name='XL'>XL</option>
+                                </select>
+                                <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
+                                <div id='selectResult'>
+                                    <table id='resultTable'>
 
+                                    </table>
+                                </div>
+                                <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
+                                <span id='payPrice'>총 금액 : {totalPrice+' ₩'}</span>
+                                <br/><br/>
+                                <button id="payBtn">구매하기</button>
                             </div>
                         </nav>
                     </div>
