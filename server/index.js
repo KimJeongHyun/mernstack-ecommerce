@@ -34,6 +34,8 @@ const userManage = require('./controller/manageController/userManage')
 
 const getUserPage = require('./controller/userController/getUserPage')
 
+const order = require('./controller/payController/order');
+
 const port = 5000;
 
 app.use(express.json({
@@ -43,8 +45,8 @@ app.use(express.urlencoded({
     limit:'50mb',extended : true
 })) 
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
+app.set('views',path.join(__dirname,'./views/inicisPay'));
 
 const express_session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -90,6 +92,7 @@ app.use(dbInsert);
 app.use(userManage);
 
 app.use(getUserPage);
+app.use(order);
 
 app.get('/api/hello',(req,res)=>res.send('hello'))
 app.get('/api/getSession',(req,res)=>{
@@ -100,7 +103,10 @@ app.get('/api/getSession',(req,res)=>{
     }
 })
 
+
+
+
 const server = http.createServer(app);
 server.listen(port, ()=>console.log(`Server Start. Port : ${port}`))
-
+process.on('uncaughtException', (err) => {})
 
