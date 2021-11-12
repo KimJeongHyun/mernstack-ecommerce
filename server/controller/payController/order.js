@@ -21,7 +21,7 @@ router.post('/api/getOrder',(req,res)=>{
         const dataset = {
             version: '1.0',
             gopaymethod: 'VBank',
-            mid: 'test',
+            mid: 'INIpayTest',
             signature: encryptSha256(`oid=${orderId}&price=${price}&timestamp=${timestamp}`),
             mKey: encryptSha256('SU5JTElURV9UUklQTEVERVNfS0VZU1RS'), // 개발용, 배포용에서는 발급된 key를 사용
             price,
@@ -42,9 +42,7 @@ router.post('/api/getOrder',(req,res)=>{
 })
 
 const openInicisModule = (req,res) =>{
-    console.log('hi');
     const {orderId} = req.params;
-    console.log(orderId);
     const price=100;
     const timestamp = new Date().getTime();
     const host = config.host;
@@ -52,7 +50,7 @@ const openInicisModule = (req,res) =>{
     const dataset = {
         version: '1.0',
         gopaymethod: 'VBank',
-        mid: 'test',
+        mid: 'INIpayTest',
         signature: encryptSha256(`oid=${orderId}&price=${price}&timestamp=${timestamp}`),
         mKey: encryptSha256('SU5JTElURV9UUklQTEVERVNfS0VZU1RS'), // 개발용, 배포용에서는 발급된 key를 사용
         price,
@@ -72,25 +70,23 @@ const openInicisModule = (req,res) =>{
 }
 
 router.get('/api/v1/inicis/popup/open/:orderId',(req,res)=>{
-    console.log('router');
     return openInicisModule(req,res);
 })
 
 const onSavePaymentInfo = async (req, res) => {
-    console.log('hi!!!');
     const { authUrl, authToken, orderNumber, mid, charset, resultCode } = req.body;
 
     // 0000이면 결제성공
     if (resultCode === '0000') {
         // 결제 관련 데이터 처리
-        return res.redirect(getClientDomain() + `/payment/close`);
+        return res.redirect('http://localhost:3000' + `/payment/close`);
     } else {
         // 결제 실패 처리
-        return res.redirect(getClientDomain() + `/payment/close`);
+        return res.redirect('http://localhost:3000' + `/payment/close`);
     }
 };
 
-router.get('/api/v1/inicis/pay/after',(req,res)=>{
+router.post('/api/v1/inicis/pay/after',(req,res)=>{
     return onSavePaymentInfo(req,res);
 })
 

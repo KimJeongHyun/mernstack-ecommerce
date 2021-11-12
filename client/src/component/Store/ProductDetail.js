@@ -400,6 +400,7 @@ function ProductDetail(props){
     },[selectedVols])
 
     const orderRequest = (event) =>{
+        event.preventDefault();
         let body = {
             colors:selectedColors,
             sizes:selectedSizes,
