@@ -459,7 +459,7 @@ textarea:focus{
     margin-top: 30px;
 }
 
-.productBtn #payBtn{
+.productBtn .payBtn{
     float:left;
     margin-right:15px;
     width:45%;
@@ -467,7 +467,9 @@ textarea:focus{
     background-color:#8d8d8d;
     border:none;
     color:#fff;
+    cursor:pointer; 
 }
+
 
 .productBtn #CartBtn{
     float:left;
@@ -546,12 +548,23 @@ textarea:focus{
     display:block;
 }
 
-.payBox .payContainer #payBtn{
+.payBox .payContainer .orderBtn.active{
     float:right;
     margin-top:0.2vh;
     width:45%;
     height:40px;
     background-color:#8d8d8d;
+    border:none;
+    color:#fff;
+    cursor:pointer;
+}
+
+.payBox .payContainer .orderBtn{
+    float:right;
+    margin-top:0.2vh;
+    width:45%;
+    height:40px;
+    background-color:#fff;
     border:none;
     color:#fff;
 }
@@ -589,6 +602,23 @@ textarea:focus{
 .productSize table tbody .sizeRow{
     background:#c9c9c9;
     width:5%;
+}
+
+.orderArea{
+    width:70vw;
+    height:100%;
+    padding-left:10vw;
+    padding-right:10vw;
+}
+
+.orderArea table{
+    width:100%;
+    border-collapse: collapse; 
+}
+
+.orderArea table tr td img{
+    width:80px;
+    height:110px;
 }
 
 .writeContainer{

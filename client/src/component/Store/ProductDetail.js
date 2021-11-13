@@ -8,9 +8,10 @@ import {Footer} from '../Footer/Footer'
 import { getDetailData, postCart } from '../../_actions/user_action'
 import QnAFooter from './QnAFooter'
 import ReviewFooter from './ReviewFooter'
-import { MdAddShoppingCart, MdOutlineSubscriptions } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 import axios from 'axios'
-
+import ProductOrder from './ProductOrder'
+import { Link } from 'react-router-dom'
 
 function ProductDetail(props){
 
@@ -55,6 +56,7 @@ function ProductDetail(props){
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const [selected,setSelected] = useState(false);
     const [btnClicked,setBtnClicked] = useState(false);
+    const [btnStatus,setBtnStatus] = useState(false);
 
     const [totalPrice,setTotalPrice] = useState(0);
 
@@ -396,19 +398,25 @@ function ProductDetail(props){
                 sum+=price*selectedVols[i];
             }
             setTotalPrice(sum);
+            document.getElementsByClassName('orderBtn')[0].classList.add('active')
+            setBtnStatus(false);
+        }else{
+            setBtnStatus(true);
         }
     },[selectedVols])
 
     const orderRequest = (event) =>{
         event.preventDefault();
         let body = {
+            goodname:clothMap.clothName,
             colors:selectedColors,
             sizes:selectedSizes,
             vols:selectedVols,
             price:totalPrice
         }
         orderNumber='test';
-        axios.post('/api/getOrder',body)
+        
+        /*axios.post('/api/getOrder',body)
         .then(resolve=>{
             if (!resolve.data.status){
                 alert('옵션을 모두 선택해주시기 바랍니다.')
@@ -435,7 +443,7 @@ function ProductDetail(props){
                 inicisFormStatus = setInterval(checkInicisFormStatus, 1000);     
             }
             
-        })
+        })*/
     }
 
     const checkInicisFormStatus = () => {
@@ -456,7 +464,6 @@ function ProductDetail(props){
         if (!orderNumber && !orderId) return props.history.push('/payment/failed');
         else props.history.push(`/payment/result/${orderNumber || orderId}`);
     };
-
 
     return(
         <div id='container'>
@@ -501,7 +508,7 @@ function ProductDetail(props){
                                     <span ref={productAccumRef}></span> 원<br/>
                                     <hr style={{marginTop:'10px',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
                                     <div className="productBtn">
-                                        <button id="payBtn">구매하기</button>
+                                        <button className="payBtn">구매하기</button>
                                         <MdAddShoppingCart id="CartBtn" onClick={cartClick}/>
                                     </div>
                                 </div>
@@ -601,7 +608,16 @@ function ProductDetail(props){
                                 <hr style={{height:'2px' ,border:'none', backgroundColor:'#676767'}}/>
                                 <span id='payPrice'>총 금액 : {totalPrice+' ₩'}</span>
                                 <br/><br/>
-                                <button id="payBtn" onClick={orderRequest}>구매하기</button>
+                                <Link to ={{
+                                        pathname:'/ProductOrder',
+                                        clothMap:clothMap,
+                                        colors:selectedColors,
+                                        sizes:selectedSizes,
+                                        vols:selectedVols,
+                                        totalPrice:totalPrice
+                                    }} >
+                                    <button className="orderBtn" disabled={btnStatus}>구매하기</button>
+                                </Link>
                             </div>
                         </nav>
                     </div>
