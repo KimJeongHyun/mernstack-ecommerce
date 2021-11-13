@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const https = require('https');
 const path = require('path');
 const config = require('./config/config.json')
 
@@ -32,6 +33,7 @@ const clientMail = require('./controller/helpController/clientMail')
 const dbInsert = require('./controller/manageController/dbInsert')
 const userManage = require('./controller/manageController/userManage')
 
+const getUser = require('./controller/userController/getUser')
 const getUserPage = require('./controller/userController/getUserPage')
 
 const order = require('./controller/payController/order');
@@ -91,6 +93,7 @@ app.use(clientMail);
 app.use(dbInsert);
 app.use(userManage);
 
+app.use(getUser);
 app.use(getUserPage);
 app.use(order);
 

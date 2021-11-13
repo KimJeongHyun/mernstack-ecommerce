@@ -5,6 +5,7 @@ import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
 import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
+import axios from 'axios'
 
 
 function ProductOrder(props){
@@ -15,6 +16,8 @@ function ProductOrder(props){
     const [volList,setVolList] = useState([])
     const [totalVol,setTotalVol] = useState(0);
     const [totalPrice,setTotalPrice] = useState(0);
+    const [userData, setUserData] = useState([]);
+    const [totalAccum, setTotalAccum] = useState([]);
 
     useEffect(() =>{
         if ((loc.colors===undefined || loc.colors.length===0) ||
@@ -36,9 +39,28 @@ function ProductOrder(props){
                 return sum;
             })
             setTotalPrice(loc.totalPrice);
+            axios.get('/api/getSession')
+            .then(response=>{
+                const userID = response.data.ID;
+                let body = {
+                    userID:userID
+                }
+                axios.post('/api/getUser',body)
+                .then(response=>{
+                    const resData = response.data.userData;
+                    setUserData(resData);
+
+                })
+
+                axios.get('/api/getAccumLog')
+                .then(response=>{
+                    setTotalAccum(response.data.totalAccum);
+                })
+
+            })
         }
     },[])
-    
+    console.log(userData.userName);
     return(
         <div id='container'>
             <NavSideBar/>
@@ -49,15 +71,23 @@ function ProductOrder(props){
                         <h2>주문자 정보</h2>
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
                         <div className='orderClientInfo'>
-                            orderClientInfoArea. 이름, 이메일, 연락처
+                            <p>이름 : {userData.userName}</p>
+                            <p>이메일 : <input type='text' value={userData.userEmail} /></p>
+                            <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
                         </div>
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                         <div className='addressInfo'>
-                            addressInfoArea. 이름, 전화, 배송지 선택, 주소, 주문메세지, 입금자명
+                            <p>이름 : {userData.userName}</p>
+                            <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
+                            <p>배송 주소 : <input type='text'/> <button>주소 찾기</button></p>
+                            <p>주문 메시지 : <textarea /></p>
+                            <p>입금자명 : <input type='text' placeholder='무통장입금시 기입바랍니다.'/></p>
                         </div>
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                         <div className='discountApply'>
-                            discountApplyArea. 적립금 사용 및 쿠폰 조회
+                            <p>적립금 : {totalAccum}<button style={{marginLeft:'1vw'}}>적립금 적용</button></p>
+                            <p>쿠폰 확인</p>
+                            
                         </div>
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                         <div style={{marginTop:'10px',textAlign:'center'}}>
@@ -105,7 +135,7 @@ function ProductOrder(props){
                         </div>
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                         <div className='total'>
-                            totalArea. 총 금액 및 요약
+                            총 금액 : {totalPrice} 원
                         </div>
                                
                         <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
