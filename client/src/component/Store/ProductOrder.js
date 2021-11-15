@@ -3,9 +3,12 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router'
 import { NavSideBar } from '../NavBar/NavSideBar'
 import '../../css/style.css'
+import '../../css/popupCSS.css'
 import { NavBar } from '../NavBar/NavBar'
 import { Footer } from '../Footer/Footer'
 import axios from 'axios'
+import PopupDom from './PopupDom'
+import PopupContent from './PopupContent'
 
 
 function ProductOrder(props){
@@ -18,6 +21,39 @@ function ProductOrder(props){
     const [totalPrice,setTotalPrice] = useState(0);
     const [userData, setUserData] = useState([]);
     const [totalAccum, setTotalAccum] = useState([]);
+    const [selectedCoupon, setSelectedCoupon] = useState(0);
+    const [selectedCouponVolume, setSelectedCouponVolume] = useState(0);
+
+    const [reasonList,setReasonList] = useState([]);
+    const [couponVolume,setCouponVolume] = useState([]);
+    const [createdAtList, setCreatedAtList] = useState([]);
+    const [expiredAtList, setExpiredAtList] = useState([]);
+
+    const [isOpenPopup, setIsOpenPopup] = useState(false);
+
+    const handleCouponVolume = (value) =>{
+        setSelectedCoupon(value);
+        setSelectedCouponVolume(value.split(' ')[0])
+    }
+
+    const openPopup = (event) =>{
+        event.preventDefault();
+        setIsOpenPopup(true);
+        const blindDiv = document.getElementById('blindDiv')
+        blindDiv.style.width = document.body.scrollWidth+'px';
+        blindDiv.style.height = document.body.scrollHeight+'px';
+        blindDiv.style.filter = "alpha(opacity=30)"
+        blindDiv.style.opacity="0.3";
+        blindDiv.style.display='block'
+    }
+
+    const closePopup = (event) =>{
+        event.preventDefault();
+        setIsOpenPopup(false);
+        document.getElementById('blindDiv').classList.remove('blind');
+        const blindDiv = document.getElementById('blindDiv')
+        blindDiv.style.display='none'
+    }
 
     useEffect(() =>{
         if ((loc.colors===undefined || loc.colors.length===0) ||
@@ -58,93 +94,121 @@ function ProductOrder(props){
                 })
 
             })
+
+            axios.get('/api/getCoupon')
+            .then(response=>{
+                if (response.data.getCouponSuccess){
+                    setReasonList(response.data.reasonList);
+                    setCouponVolume(response.data.couponVolume);
+                    setCreatedAtList(response.data.createdAtList);
+                    setExpiredAtList(response.data.expiredAtList);
+                }
+            })
         }
     },[])
-    console.log(userData.userName);
+
     return(
         <div id='container'>
+            <div id='blindDiv'>
+
+            </div>
             <NavSideBar/>
-                <NavBar/>
-                <div className="uxArea">
-                    <div className="contentContainer">
-                    <div className='orderArea'>
-                        <h2>주문자 정보</h2>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
-                        <div className='orderClientInfo'>
-                            <p>이름 : {userData.userName}</p>
-                            <p>이메일 : <input type='text' value={userData.userEmail} /></p>
-                            <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
-                        </div>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div className='addressInfo'>
-                            <p>이름 : {userData.userName}</p>
-                            <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
-                            <p>배송 주소 : <input type='text'/> <button>주소 찾기</button></p>
-                            <p>주문 메시지 : <textarea /></p>
-                            <p>입금자명 : <input type='text' placeholder='무통장입금시 기입바랍니다.'/></p>
-                        </div>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div className='discountApply'>
-                            <p>적립금 : {totalAccum}<button style={{marginLeft:'1vw'}}>적립금 적용</button></p>
-                            <p>쿠폰 확인</p>
-                            
-                        </div>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div style={{marginTop:'10px',textAlign:'center'}}>
-                            <table>
-                                <tr style={{lineHeight:'5vh', backgroundColor:'lightgrey', fontSize:'1.2em'}}>
-                                    <td colSpan='2' style={{width:'50%'}}>
-                                        상품 정보
-                                    </td>
-                                    <td>
-                                        적립금
-                                    </td>
-                                    <td>
-                                        수량
-                                    </td>
-                                    <td>
-                                        총 금액
-                                    </td>
-                                </tr>
-                                <tr style={{backgroundColor:'#EFEFEF'}}>
-                                    <td>
-                                        <img src={clothMap.clothImgPath}/>
-                                    </td>
-                                    <td>
-                                        {clothMap.clothName}
-                                    </td>
-                                    <td>
-                                        {clothMap.sellPrice*(clothMap.discountRate)*0.01} 원
-                                    </td>
-                                    <td>
-                                        {totalVol} 개
-                                    </td>
-                                    <td>
-                                        {totalPrice} 원
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <hr style={{marginTop:'2vh',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div className='paymentMethod'>
-                            paymentMethodArea. 결제방법 확인, 현금영수증
-                        </div>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div className='clientPermit'>
-                            clientPermitArea. 주문자 동의 체크박스.
-                        </div>
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        <div className='total'>
-                            총 금액 : {totalPrice} 원
-                        </div>
-                               
-                        <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                        
+            <NavBar/>
+            <div className="uxArea">
+                
+                <div className="contentContainer">
+                <div className='orderArea'>
+                    <h2>주문자 정보</h2>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>
+                    <div className='orderClientInfo'>
+                        <p>이름 : {userData.userName}</p>
+                        <p>이메일 : <input type='text' value={userData.userEmail} /></p>
+                        <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
                     </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='addressInfo'>
+                        <p>이름 : {userData.userName}</p>
+                        <p>전화번호 : <input type='number' value={userData.userPhone}/></p>
+                        <p>배송 주소 : <input type='text'/> <button>주소 찾기</button></p>
+                        <p>주문 메시지 : <textarea /></p>
+                        <p>입금자명 : <input type='text' placeholder='무통장입금시 기입바랍니다.'/></p>
+                    </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='discountApply'>
+                        <p>적립금 : {totalAccum}<button style={{marginLeft:'1vw'}}>적립금 적용</button></p>
+                        <p>쿠폰 적용 : {selectedCoupon}</p>
+                        <div>
+                            <button type="button" id="popupDom" onClick={openPopup}>
+                                Click
+                            </button>
+                            {isOpenPopup && 
+                            <PopupDom>
+                                <PopupContent onClose={closePopup}
+                                    reasonList={reasonList}
+                                    couponVolume={couponVolume}
+                                    createdAtList={createdAtList}
+                                    expiredAtList={expiredAtList}
+                                    handleCouponVolume={handleCouponVolume}
+                                />    
+                            </PopupDom>}
+                        </div>
+                    </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div style={{marginTop:'10px',textAlign:'center'}}>
+                        <table>
+                            <tr style={{lineHeight:'5vh', backgroundColor:'lightgrey', fontSize:'1.2em'}}>
+                                <td colSpan='2' style={{width:'50%'}}>
+                                    상품 정보
+                                </td>
+                                <td>
+                                    적립금
+                                </td>
+                                <td>
+                                    수량
+                                </td>
+                                <td>
+                                    총 금액
+                                </td>
+                            </tr>
+                            <tr style={{backgroundColor:'#EFEFEF'}}>
+                                <td>
+                                    <img src={clothMap.clothImgPath}/>
+                                </td>
+                                <td>
+                                    {clothMap.clothName}
+                                </td>
+                                <td>
+                                    {clothMap.sellPrice*(clothMap.discountRate)*0.01} 원
+                                </td>
+                                <td>
+                                    {totalVol} 개
+                                </td>
+                                <td>
+                                    {totalPrice} 원
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr style={{marginTop:'2vh',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='paymentMethod'>
+                        paymentMethodArea. 결제방법 확인, 현금영수증
+                    </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='clientPermit'>
+                        clientPermitArea. 주문자 동의 체크박스.
+                    </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='total'>
+                        총 금액 : {totalPrice} 원
+                    </div>
+                            
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    
                 </div>
             </div>
-            <Footer/>
         </div>
+        <Footer/>
+    </div>
         
     )
 }
