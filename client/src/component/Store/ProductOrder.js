@@ -171,10 +171,9 @@ function ProductOrder(props){
 
     const fetchOrderInfo = () => {
         clearInterval(inicisFormStatus);
-        console.log(orderNumber)
-        console.log(orderId);
-        if (!orderNumber && !orderId) return props.history.push('/payment/failed');
-        else props.history.push(`/payment/result/${orderNumber || orderId}`);
+        if (!orderNumber && !orderId) console.log('payment failed')//return props.history.push('/payment/failed');
+        else console.log('payment success')//props.history.push(`/payment/result/${orderNumber || orderId}`);
+        // 여기서 상태에 따라 주문완료 또는 주문실패 페이지로 라우팅.
     };
 
 
