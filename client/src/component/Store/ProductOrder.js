@@ -13,9 +13,11 @@ import PopupContent from './PopupContent'
 
 function ProductOrder(props){
 
-    let orderNumber = null;
-    let orderId='test';
     let inicisFormStatus = null;
+
+    const [orderNumber,setOrderNumber] = useState();
+    const [orderId,setOrderId] = useState();
+
 
     const loc = useLocation();
     const [clothMap,setClothMap] = useState({});
@@ -116,9 +118,18 @@ function ProductOrder(props){
 
     const orderRequest = (event) =>{
         event.preventDefault();
-        orderNumber='test';
-        
-        /*axios.post('/api/getOrder',body)
+        setOrderNumber(clothMap.clothName+'_'+userData.userPhone+'_'+userData.userEmail+'_'+inputAccum+'_'+couponID+'_'+selectedCouponVolume+'_'+totalPrice)
+        setOrderId(clothMap.clothName+'_'+userData.userPhone+'_'+userData.userEmail+'_'+inputAccum+'_'+couponID+'_'+selectedCouponVolume+'_'+totalPrice);
+        let body = {
+            clothName:clothMap.clothName,
+            userPhone:userData.userPhone,
+            userEmail:userData.userEmail,
+            accum:inputAccum,
+            couponID:couponID,
+            couponVolume:selectedCouponVolume,
+            totalPrice:totalPrice
+        }
+        axios.post('/api/getOrder',body)
         .then(resolve=>{
             if (!resolve.data.status){
                 alert('옵션을 모두 선택해주시기 바랍니다.')
@@ -138,14 +149,12 @@ function ProductOrder(props){
                     input.hidden = true;
                     form.appendChild(input);
                 }
-                console.log(form);
                 document.querySelector('#shop-page').appendChild(form);
-                console.log(window);
                 window.INIStdPay.pay('pay_form');
                 inicisFormStatus = setInterval(checkInicisFormStatus, 1000);     
             }
             
-        })*/
+        })
     }
 
     const checkInicisFormStatus = () => {
@@ -162,7 +171,8 @@ function ProductOrder(props){
 
     const fetchOrderInfo = () => {
         clearInterval(inicisFormStatus);
-
+        console.log(orderNumber)
+        console.log(orderId);
         if (!orderNumber && !orderId) return props.history.push('/payment/failed');
         else props.history.push(`/payment/result/${orderNumber || orderId}`);
     };
@@ -350,9 +360,12 @@ function ProductOrder(props){
                     <div className='clientPermit'>
                         clientPermitArea. 주문자 동의 체크박스.
                     </div>
-                    <button className='SubmitBtn' style={{float:'right'}}><a>결제하기</a></button>
+                    <button className='SubmitBtn' style={{float:'right'}} onClick={orderRequest}><a>결제하기</a></button>
                 </div>
             </div>
+        </div>
+        <div id='shop-page'>
+                
         </div>
         <Footer/>
     </div>
