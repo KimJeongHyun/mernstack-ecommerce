@@ -12,15 +12,27 @@ import PopupContent from './PopupContent'
 
 
 function ProductOrder(props){
+
+    let orderNumber = null;
+    let orderId='test';
+    let inicisFormStatus = null;
+
     const loc = useLocation();
     const [clothMap,setClothMap] = useState({});
     const [colorList,setColorList] = useState([]);
     const [sizeList,setSizeList] = useState([]);
     const [volList,setVolList] = useState([])
     const [totalVol,setTotalVol] = useState(0);
+
     const [totalPrice,setTotalPrice] = useState(0);
+    const [originPrice,setOriginPrice] = useState(0);
+    
     const [userData, setUserData] = useState([]);
-    const [totalAccum, setTotalAccum] = useState([]);
+    
+    const [totalAccum, setTotalAccum] = useState(0);
+    const [originAccum, setOriginAccum] = useState(0);
+    const [inputAccum, setInputAccum] = useState(0);
+
     const [selectedCoupon, setSelectedCoupon] = useState(0);
     const [selectedCouponVolume, setSelectedCouponVolume] = useState(0);
 
@@ -28,12 +40,59 @@ function ProductOrder(props){
     const [couponVolume,setCouponVolume] = useState([]);
     const [createdAtList, setCreatedAtList] = useState([]);
     const [expiredAtList, setExpiredAtList] = useState([]);
+    const [couponIDList, setCouponIDList] = useState([]);
+    const [couponID,setCouponID] = useState('');
 
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
     const handleCouponVolume = (value) =>{
         setSelectedCoupon(value);
         setSelectedCouponVolume(value.split(' ')[0])
+        setTotalPrice(totalPrice-value.split(' ')[0])
+    }
+
+    const handleCouponID = (value) =>{
+        setCouponID(value);
+        console.log(value);
+    }
+
+    const handleAccum = (event) =>{
+        event.preventDefault();
+        setInputAccum(event.target.value);
+    }
+
+    const handleCouponPrice = (value)=>{
+        setTotalPrice(totalPrice-parseInt(value));
+    }
+
+    const applyAccum = (event) =>{
+        event.preventDefault();
+        if (totalAccum-inputAccum>=0){
+            setTotalAccum(totalAccum-inputAccum);
+            setTotalPrice(totalPrice-inputAccum);
+            document.getElementById('accumValue').setAttribute('readOnly',true)
+            document.getElementById('applyAccumBtn').style.display='none'
+            document.getElementById('rollbackAccumBtn').style.display='inline-block'
+        }
+    }
+
+    const rollbackAccum = (event) =>{
+        event.preventDefault();
+        setTotalAccum(originAccum);
+        setTotalPrice(totalPrice+parseInt(inputAccum));
+        setInputAccum(0);
+        document.getElementById('accumValue').removeAttribute('readOnly');
+        document.getElementById('rollbackAccumBtn').style.display='none'
+        document.getElementById('applyAccumBtn').style.display='inline-block'
+    }
+
+    const rollbackCoupon = (event) =>{
+        event.preventDefault();
+        setTotalPrice(totalPrice+parseInt(selectedCouponVolume));
+        setCouponID('');
+        setSelectedCoupon('');
+        setSelectedCouponVolume(0);
+
     }
 
     const openPopup = (event) =>{
@@ -55,6 +114,60 @@ function ProductOrder(props){
         blindDiv.style.display='none'
     }
 
+    const orderRequest = (event) =>{
+        event.preventDefault();
+        orderNumber='test';
+        
+        /*axios.post('/api/getOrder',body)
+        .then(resolve=>{
+            if (!resolve.data.status){
+                alert('옵션을 모두 선택해주시기 바랍니다.')
+            }else{
+                const { data: info } = resolve; 
+                const { status, data } = info;
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.acceptCharset = 'UTF-8';
+                form.hidden = true;
+                form.id = 'pay_form';
+
+                for (let o in data) {
+                    const input = document.createElement('input');
+                    input.name = o;
+                    input.value = data[o];
+                    input.hidden = true;
+                    form.appendChild(input);
+                }
+                console.log(form);
+                document.querySelector('#shop-page').appendChild(form);
+                console.log(window);
+                window.INIStdPay.pay('pay_form');
+                inicisFormStatus = setInterval(checkInicisFormStatus, 1000);     
+            }
+            
+        })*/
+    }
+
+    const checkInicisFormStatus = () => {
+        const node = document.querySelector('.inipay_modal-backdrop');
+        if (node) return true;
+        else {
+            const form_node = document.querySelector('#pay_form');
+            if (form_node) form_node.remove();
+
+            fetchOrderInfo();
+            return false;
+        }
+    };
+
+    const fetchOrderInfo = () => {
+        clearInterval(inicisFormStatus);
+
+        if (!orderNumber && !orderId) return props.history.push('/payment/failed');
+        else props.history.push(`/payment/result/${orderNumber || orderId}`);
+    };
+
+
     useEffect(() =>{
         if ((loc.colors===undefined || loc.colors.length===0) ||
             (loc.sizes===undefined || loc.sizes.length===0) ||
@@ -75,6 +188,7 @@ function ProductOrder(props){
                 return sum;
             })
             setTotalPrice(loc.totalPrice);
+            setOriginPrice(loc.totalPrice);
             axios.get('/api/getSession')
             .then(response=>{
                 const userID = response.data.ID;
@@ -91,6 +205,7 @@ function ProductOrder(props){
                 axios.get('/api/getAccumLog')
                 .then(response=>{
                     setTotalAccum(response.data.totalAccum);
+                    setOriginAccum(response.data.totalAccum);
                 })
 
             })
@@ -102,11 +217,14 @@ function ProductOrder(props){
                     setCouponVolume(response.data.couponVolume);
                     setCreatedAtList(response.data.createdAtList);
                     setExpiredAtList(response.data.expiredAtList);
+                    setCouponIDList(response.data.couponIDList);
                 }
             })
         }
     },[])
 
+
+    
     return(
         <div id='container'>
             <div id='blindDiv'>
@@ -115,7 +233,6 @@ function ProductOrder(props){
             <NavSideBar/>
             <NavBar/>
             <div className="uxArea">
-                
                 <div className="contentContainer">
                 <div className='orderArea'>
                     <h2>주문자 정보</h2>
@@ -135,12 +252,18 @@ function ProductOrder(props){
                     </div>
                     <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                     <div className='discountApply'>
-                        <p>적립금 : {totalAccum}<button style={{marginLeft:'1vw'}}>적립금 적용</button></p>
-                        <p>쿠폰 적용 : {selectedCoupon}</p>
-                        <div>
-                            <button type="button" id="popupDom" onClick={openPopup}>
-                                Click
+                        <p>
+                            적립금 : <input type='number' id='accumValue' value={inputAccum} onChange={handleAccum} style={{width:'100px', marginRight:'2vw'}}/> 
+                            총액 : {totalAccum} 
+                            <button id='applyAccumBtn' style={{marginLeft:'1vw', marginRight:'1vw'}} onClick={applyAccum}>적립금 적용</button>
+                            <button id='rollbackAccumBtn' style={{marginLeft:'1vw', marginRight:'1vw', display:'none'}} onClick={rollbackAccum}>적용 취소</button>
+                        </p>
+                        <p>쿠폰 적용 : {selectedCoupon}
+                        <div style={{display:'inline-block', marginLeft:'4.3vw'}}>
+                            <button id="popupDom" style={{marginRight:'1vw'}} onClick={openPopup}>
+                                쿠폰 확인
                             </button>
+                            <button onClick={rollbackCoupon}>적용 취소</button>
                             {isOpenPopup && 
                             <PopupDom>
                                 <PopupContent onClose={closePopup}
@@ -148,10 +271,15 @@ function ProductOrder(props){
                                     couponVolume={couponVolume}
                                     createdAtList={createdAtList}
                                     expiredAtList={expiredAtList}
+                                    couponIDList={couponIDList}
                                     handleCouponVolume={handleCouponVolume}
+                                    handleCouponID={handleCouponID}
+                                    handleCouponPrice={handleCouponPrice}
                                 />    
                             </PopupDom>}
                         </div>
+                        </p>
+                        
                     </div>
                     <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
                     <div style={{marginTop:'10px',textAlign:'center'}}>
@@ -189,7 +317,32 @@ function ProductOrder(props){
                             </tr>
                         </table>
                     </div>
-                    <hr style={{marginTop:'2vh',border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
+                    <div className='total' style={{marginTop:'10px',textAlign:'center'}}>
+                        <table>
+                            <tr style={{lineHeight:'8vh', backgroundColor:'lightgrey', fontSize:'1.5em'}}> 
+                                <td>
+                                    전체 금액
+                                </td>
+                                <td>
+                                    적립금
+                                </td>
+                                <td>
+                                    쿠폰
+                                </td>
+                                <td>
+                                    최종 결제금액
+                                </td>
+                            </tr>
+                            <tr style={{lineHeight:'5vh', fontSize:'1.3em',backgroundColor:'#EFEFEF'}}>
+                                <td>{originPrice}</td>
+                                <td>{inputAccum}</td>
+                                <td>{selectedCouponVolume}</td>
+                                <td>{totalPrice} 원</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>     
                     <div className='paymentMethod'>
                         paymentMethodArea. 결제방법 확인, 현금영수증
                     </div>
@@ -197,13 +350,7 @@ function ProductOrder(props){
                     <div className='clientPermit'>
                         clientPermitArea. 주문자 동의 체크박스.
                     </div>
-                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                    <div className='total'>
-                        총 금액 : {totalPrice} 원
-                    </div>
-                            
-                    <hr style={{border:'none',backgroundColor:'lightgray', width:'40%', height:'1px', margin:'0'}}/>    
-                    
+                    <button className='SubmitBtn' style={{float:'right'}}><a>결제하기</a></button>
                 </div>
             </div>
         </div>

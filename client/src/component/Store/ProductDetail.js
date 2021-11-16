@@ -14,11 +14,6 @@ import ProductOrder from './ProductOrder'
 import { Link } from 'react-router-dom'
 
 function ProductDetail(props){
-
-    let orderNumber = null;
-    let orderId='test';
-    let inicisFormStatus = null;
-
     const boxRef = useRef();
     const cursorBoxRef = useRef();
     const imageZoomRef = useRef();
@@ -404,66 +399,6 @@ function ProductDetail(props){
             setBtnStatus(true);
         }
     },[selectedVols])
-
-    const orderRequest = (event) =>{
-        event.preventDefault();
-        let body = {
-            goodname:clothMap.clothName,
-            colors:selectedColors,
-            sizes:selectedSizes,
-            vols:selectedVols,
-            price:totalPrice
-        }
-        orderNumber='test';
-        
-        /*axios.post('/api/getOrder',body)
-        .then(resolve=>{
-            if (!resolve.data.status){
-                alert('옵션을 모두 선택해주시기 바랍니다.')
-            }else{
-                const { data: info } = resolve; 
-                const { status, data } = info;
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.acceptCharset = 'UTF-8';
-                form.hidden = true;
-                form.id = 'pay_form';
-
-                for (let o in data) {
-                    const input = document.createElement('input');
-                    input.name = o;
-                    input.value = data[o];
-                    input.hidden = true;
-                    form.appendChild(input);
-                }
-                console.log(form);
-                document.querySelector('#shop-page').appendChild(form);
-                console.log(window);
-                window.INIStdPay.pay('pay_form');
-                inicisFormStatus = setInterval(checkInicisFormStatus, 1000);     
-            }
-            
-        })*/
-    }
-
-    const checkInicisFormStatus = () => {
-        const node = document.querySelector('.inipay_modal-backdrop');
-        if (node) return true;
-        else {
-            const form_node = document.querySelector('#pay_form');
-            if (form_node) form_node.remove();
-
-            fetchOrderInfo();
-            return false;
-        }
-    };
-
-    const fetchOrderInfo = () => {
-        clearInterval(inicisFormStatus);
-
-        if (!orderNumber && !orderId) return props.history.push('/payment/failed');
-        else props.history.push(`/payment/result/${orderNumber || orderId}`);
-    };
 
     return(
         <div id='container'>
