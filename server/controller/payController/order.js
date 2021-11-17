@@ -121,14 +121,19 @@ router.get('/api/v1/inicis/popup/open/:orderId',(req,res)=>{
 const onSavePaymentInfo = async (req, res) => {
     const { authUrl, authToken, orderNumber, mid, charset, resultCode } = req.body;
     // 0000이면 결제성공
-
+    
     if (resultCode === '0000') {
+        const expireTTL = new Date(Date.now()+365*24*3600*1000)
+        orders.findOneAndUpdate({orderID:orderNumber},
+            {confirmWhether:true,expiredAt:expireTTL},function(err){
+                if (err) console.log(err)
+                else return res.redirect('http://localhost:3000' + `/payment/close`);
+            })
         // 결제 관련 데이터 처리
         // 여기서 DB confirm을 true로 돌린다.
         // TTL 범위를 현재 시각으로부터 1년 뒤로 지정한다.
         // 약관에 구매내역은 1년 유지된다고 올려야한다. 
         // orderNumber로 DB 조회하면 된다.
-        return res.redirect('http://localhost:3000' + `/payment/close`);
     } else {
         // 결제 실패 처리
         return res.redirect('http://localhost:3000' + `/payment/close`);
