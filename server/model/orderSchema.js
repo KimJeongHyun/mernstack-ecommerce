@@ -10,6 +10,7 @@ const orderSchema = mongoose.Schema({
     usedAccum:Number,
     usedCoupon:Number,
     couponID:String,
+    couponName:String,
     totalPrice:Number,
 
     confirmWhether:{

@@ -44,6 +44,7 @@ function ProductOrder(props){
     const [expiredAtList, setExpiredAtList] = useState([]);
     const [couponIDList, setCouponIDList] = useState([]);
     const [couponID,setCouponID] = useState('');
+    const [couponName,setCouponName] = useState('');
 
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
@@ -65,6 +66,10 @@ function ProductOrder(props){
 
     const handleCouponPrice = (value)=>{
         setTotalPrice(totalPrice-parseInt(value));
+    }
+
+    const handleCouponName = (value)=>{
+        setCouponName(value);
     }
 
     const applyAccum = (event) =>{
@@ -126,6 +131,7 @@ function ProductOrder(props){
             userEmail:userData.userEmail,
             accum:inputAccum,
             couponID:couponID,
+            couponName:couponName,
             couponVolume:selectedCouponVolume,
             totalPrice:totalPrice
         }
@@ -284,6 +290,7 @@ function ProductOrder(props){
                                     handleCouponVolume={handleCouponVolume}
                                     handleCouponID={handleCouponID}
                                     handleCouponPrice={handleCouponPrice}
+                                    handleCouponName={handleCouponName}
                                 />    
                             </PopupDom>}
                         </div>

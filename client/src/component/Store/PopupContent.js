@@ -15,6 +15,7 @@ function PopupContent(props){
         props.handleCouponVolume(event.target.getAttribute('name'));
         props.handleCouponID(event.target.className);
         props.handleCouponPrice(event.target.getAttribute('name'))
+        props.handleCouponName(event.target.getAttribute('name').split(' ')[1])
     }
 
     useEffect(()=>{

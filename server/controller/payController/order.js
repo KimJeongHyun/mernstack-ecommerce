@@ -13,6 +13,7 @@ router.post('/api/getOrder',(req,res)=>{
     const userID = req.session.userID;
     const accum = reqData.accum;
     const couponID = reqData.couponID;
+    const couponName = reqData.couponName;
     const couponVolume = reqData.couponVolume;
     const price = reqData.totalPrice;
 
@@ -35,6 +36,7 @@ router.post('/api/getOrder',(req,res)=>{
             usedAccum:accum,
             usedCoupon:couponVolume,
             couponID:couponID,
+            couponName:couponName,
             totalPrice:price,
             expiredAt:tempTTL
         })

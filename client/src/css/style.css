@@ -318,6 +318,19 @@ textarea:focus{
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.MyPageOrderDetail{
+    text-align: center;
+}
+
+.MyPageOrderDetail tr{
+    display:block;
+    float:left;
+}
+
+.MyPageOrderDetail td{
+    display:block;
+}
+
 .myPageContent .selectTable tbody tr{
     border-bottom:0.5px solid lightgray;
 }

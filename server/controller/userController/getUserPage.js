@@ -1,6 +1,7 @@
 const {users} = require('../../model/userSchema')
 const {accumLog} = require('../../model/accumLogSchema')
 const {coupons} = require('../../model/couponSchema')
+const {orders} = require('../../model/orderSchema')
 
 const router = require('express').Router();
 
@@ -44,6 +45,14 @@ router.get('/api/getCoupon',(req,res)=>{
             }
             
         })
+    })
+})
+
+router.get('/api/getOrderLog',(req,res)=>{
+    const ID = req.session.userID;
+    orders.find({userID:ID, confirmWhether:true},function(err,orderList){
+        if (err) console.log(err);
+        res.send({status:true, orderList:orderList})
     })
 })
 

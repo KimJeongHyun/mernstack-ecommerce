@@ -190,10 +190,6 @@ export function MyReviewRendering(){
         }
     },[ReviewMap,MapLength,PostPaging])
 
-    useEffect(()=>{
-        console.log(deleteList);
-    },[deleteList])
-
     return(
         <>
         <table className='ReviewTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>

@@ -9,7 +9,7 @@ import { MyCouponRendering } from './Tabs/MyCoupon'
 import { MyAccumRendering } from './Tabs/MyAccum'
 import { MyOrderRendering } from './Tabs/MyOrder'
 import { MyReviewRendering } from './Tabs/MyReview'
-import {MyQnARendering} from './Tabs/MyQnA'
+import { MyQnARendering } from './Tabs/MyQnA'
 
 
 function MyPage(props){
@@ -25,6 +25,7 @@ function MyPage(props){
 
 
     const classChange = (e) =>{
+        e.preventDefault();
         if (e.target===selectRef.current){
             selectRef.current.classList.add('active');
             accumRef.current.classList.remove('active');
@@ -127,6 +128,9 @@ function MyPage(props){
     return(
         <div id='container'>
             <>
+                <div id='blindDiv'>
+
+                </div>
                 <NavSideBar/>
                 <NavBar/>
                 <div className="uxArea">

@@ -191,10 +191,6 @@ export function MyQnARendering(){
         }
     },[QnAMap,MapLength,PostPaging])
 
-    useEffect(()=>{
-        console.log(deleteList);
-    },[deleteList])
-
     return(
         <>
         <table className='qnaTable' style={{width:'80%', textAlign:'center', borderCollapse:'collapse'}}>
