@@ -21,6 +21,7 @@
 9. 제품별 Q&A, Review Footer ( Create, View, Pagination )
 10. 제품 전체 Q&A, Review ( Create, View, Pagination )
 11. 마이페이지
+ * 주문내역 페이지 ( View, recall )
  * Q&A, Review 페이지 ( View, Delete, Pagination )
  * 적립금, 쿠폰 페이지 ( View )
 12. Notice ( Admin Only. Create, Delete, View)
@@ -53,7 +54,7 @@
 2. 반품 및 환불
   * 만약 사용자가 반품 또는 환불을 원하는 경우, 관리자에게 선 Alert 후 처리가 되면 그 때 주문내역 삭제, 적립금 및 쿠폰 등 롤백이 되어야한다.
   * 따라서 관리자 페이지에 주문내역 관리 페이지, 반품 및 환불 페이지가 추가되어야한다.
-  * 사용자 MyPage 주문 내역 추가. 환불/반품 버튼 및 기능 추가
+  * 사용자 MyPage 주문 내역 추가. 환불/반품 버튼 적용 완료. recall to true 기능 추가 예정.
   * 관리자 환불/반품 관리 페이지 추가. 
 
 2. iamport로 결제 모듈 추가하는 방법도 알아둘 것.
