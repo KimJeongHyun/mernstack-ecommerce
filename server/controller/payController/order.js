@@ -2,7 +2,10 @@ const router = require('express').Router();
 const encryptSha256 = require('../../libs/encrypt')
 const config = require('../../config/config.json')
 const {orders} = require('../../model/orderSchema')
+const {users} = require('../../model/userSchema')
 const crypto = require('crypto');
+const { accumLog } = require('../../model/accumLogSchema');
+const { refundReq } = require('../../model/refundReqSchema');
 
 router.post('/api/getOrder',(req,res)=>{
     const reqData = req.body;
@@ -126,16 +129,52 @@ const onSavePaymentInfo = async (req, res) => {
     
     if (resultCode === '0000') {
         const expireTTL = new Date(Date.now()+365*24*3600*1000)
-        orders.findOneAndUpdate({orderID:orderNumber},
-            {confirmWhether:true,expiredAt:expireTTL},function(err){
-                if (err) console.log(err)
-                else return res.redirect('http://localhost:3000' + `/payment/close`);
-            })
-        // 결제 관련 데이터 처리
-        // 여기서 DB confirm을 true로 돌린다.
-        // TTL 범위를 현재 시각으로부터 1년 뒤로 지정한다.
-        // 약관에 구매내역은 1년 유지된다고 올려야한다. 
-        // orderNumber로 DB 조회하면 된다.
+        if (req.session.userID!==undefined){
+            orders.findOneAndUpdate({orderID:orderNumber},
+                {confirmWhether:true,expiredAt:expireTTL},function(err){
+                    if (err) console.log(err)
+                    else {
+                        orders.findOne({orderID:orderNumber},function(err,result){
+                            if (result.usedAccum>0){
+                                const usedAccum=result.usedAccum;
+                                console.log(req.session.userID);
+                                users.findOne({userID:req.session.userID},function(err,result){
+                                    if (err) console.log(err)
+                                    else{
+                                        const userID = result._id;
+                                        accumLog.findOne({userID:{'$in':[userID]}},
+                                            function(err,accum){
+                                                const sumAccum=parseInt(accum.totalAccum)-parseInt(usedAccum);
+                                                accumLog.updateOne(
+                                                    {userID:{'$in':[userID]}},
+                                                    {'$push':{
+                                                        reason:'적립금 사용',
+                                                        addAccum:usedAccum*-1
+                                                    },totalAccum:sumAccum},
+                                                    function(err){
+                                                        if (err){
+                                                            console.log('accum update err');
+                                                            res.send({status:false})
+                                                        }else{
+                                                            console.log('accum Updated')
+                                                            res.send({status:true})
+                                                        }
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }    
+                                })
+                            }else{
+                                res.send({status:true})
+                            }
+                        })
+                    }
+                }
+            )
+        }else{
+            res.send({status:false})
+        }
     } else {
         // 결제 실패 처리
         return res.redirect('http://localhost:3000' + `/payment/close`);
@@ -145,6 +184,28 @@ const onSavePaymentInfo = async (req, res) => {
 
 router.post('/api/v1/inicis/pay/after',(req,res)=>{
     return onSavePaymentInfo(req,res);
+})
+
+router.post('/api/refundRequest',(req,res)=>{
+    const reqData = req.body;   
+    const orderID = reqData.orderID;
+    const recallReason = reqData.recallReason;
+
+    orders.findOneAndUpdate({orderID:orderID},
+        {refundWhether:true},function(err){
+            if (err) res.send({status:false})
+            else{
+                const refundInfo = new refundReq({
+                    orderID:orderID,
+                    recallReason:recallReason
+                })
+                refundInfo.save(function(err,result){
+                    if (err) res.send({status:false})
+                    else res.send({status:true})
+                })
+            }
+        }
+    )
 })
 
 module.exports = router;

@@ -58,9 +58,17 @@ export function MyOrderRendering(){
                 payDateTD.appendChild(payDateText);
 
                 const goodnameTD = document.createElement('td');
-                const goodnameText = document.createTextNode(goodname);
-                goodnameTD.appendChild(goodnameText);
+                
+                if (orderLog[i].refundWhether){
+                    const goodnameText = document.createTextNode(goodname+' (환불 예정)')
+                    goodnameTD.appendChild(goodnameText);
+                    goodnameTD.style.color='red'
+                }else{
+                    const goodnameText = document.createTextNode(goodname);
+                    goodnameTD.appendChild(goodnameText);
+                }
 
+                
                 const totalPriceTD = document.createElement('td');
                 const totalPriceText = document.createTextNode(totalPrice);
                 totalPriceTD.appendChild(totalPriceText);
@@ -108,6 +116,7 @@ export function MyOrderRendering(){
             isOpenPopup && 
                 <PopupDom>
                     <PopupContent onClose={closePopup}
+                        orderID={orderLog[orderIndex].orderID}
                         goodname={orderLog[orderIndex].goodname}
                         createdAt={orderLog[orderIndex].createdAt.split('T')[0]}
                         usedAccum={orderLog[orderIndex].usedAccum}

@@ -32,6 +32,7 @@ const clientMail = require('./controller/helpController/clientMail')
 
 const dbInsert = require('./controller/manageController/dbInsert')
 const userManage = require('./controller/manageController/userManage')
+const refundManage = require('./controller/manageController/refundManage')
 
 const getUser = require('./controller/userController/getUser')
 const getUserPage = require('./controller/userController/getUserPage')
@@ -92,6 +93,7 @@ app.use(clientMail);
 
 app.use(dbInsert);
 app.use(userManage);
+app.use(refundManage);
 
 app.use(getUser);
 app.use(getUserPage);

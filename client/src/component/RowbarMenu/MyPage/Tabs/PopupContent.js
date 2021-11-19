@@ -4,16 +4,59 @@ import ReactDOM from 'react-dom'
  
 function PopupContent(props){
     let couponName = 'none';
+
     if (props.couponName!==undefined){
         couponName=props.couponName;
     }
 
-    const test = () =>{
+    const recall = (event) =>{
+        event.preventDefault();
+        let recallReason=document.getElementById('recallField').value
         if (window.confirm('취소하시겠습니까?')){
-            console.log('hi');
+            let body = {
+                orderID:props.orderID,
+                recallReason:recallReason
+            }
+            axios.post('/api/refundRequest',body)
+            .then(response=>{
+                if (response.data.status){
+                    alert('취소 요청이 진행되었습니다.')
+                    window.location.href='http://localhost:3000/MyPage'
+                    
+                }else{
+                    alert('오류가 발생했습니다. 1:1 문의를 이용하시기 바랍니다.')
+                    window.location.href='http://localhost:3000/MyPage'
+                }
+            })
+
         }else{
-            console.log('bye');
+            
         }
+    }
+
+    const recallView = (event) =>{
+        event.preventDefault();
+        const recallViewRendering = () =>{
+            const result = [];
+            result.push(
+                <>
+                <table style={{margin:'0', textAlign:'center'}}>
+                    <tr>
+                        <td>취소 사유 입력</td>
+                    </tr>
+                    <tr>
+                        <td><input id='recallField'></input></td>
+                    </tr>
+                </table>
+                <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={recall}><a>제출</a></button>
+                <br/>
+                <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw'}} onClick={props.onClose}><a>닫기</a></button>
+                </>
+
+            )
+            return result;
+        }
+        ReactDOM.render(recallViewRendering(),document.querySelector('.common_alert'))
     }
 
     return(
@@ -38,7 +81,7 @@ function PopupContent(props){
                             <td>{props.totalPrice} 원</td>
                         </tr>
                     </table>
-                    <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={test}><a>취소 요청</a></button>
+                    <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={recallView}><a>취소 요청</a></button>
                     <br/>
                     <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw'}} onClick={props.onClose}><a>닫기</a></button>
                 </div>

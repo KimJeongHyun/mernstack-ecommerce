@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { gsap } from 'gsap'
 import DBInsert from '../AdminMenu/DBInsert'
 import UserManage from '../AdminMenu/UserManage'
+import RefundManage from '../AdminMenu/RefundManage'
 import '../../css/adminStyle.css'
 
 function AdminLandingPage(){
@@ -52,7 +53,8 @@ function AdminLandingPage(){
                 return <DBInsert/>
             case 'UserManage':
                 return <UserManage/>
-            case 'ETC':
+            case 'ETC': 
+                return <RefundManage/>
             default:
                 return 
         }
@@ -85,7 +87,7 @@ function AdminLandingPage(){
                     onClick={containerFold}>
 
                     <div id='buttonArea'>
-                        <span>ETC</span>
+                        <span>Refund Manage</span>
                     </div>
                 </div>
             </div>

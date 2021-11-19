@@ -34,6 +34,7 @@ function ProductOrder(props){
     const [totalAccum, setTotalAccum] = useState(0);
     const [originAccum, setOriginAccum] = useState(0);
     const [inputAccum, setInputAccum] = useState(0);
+    const [appliedAccum, setAppliedAccum] = useState(0);
 
     const [selectedCoupon, setSelectedCoupon] = useState(0);
     const [selectedCouponVolume, setSelectedCouponVolume] = useState(0);
@@ -77,6 +78,7 @@ function ProductOrder(props){
         if (totalAccum-inputAccum>=0){
             setTotalAccum(totalAccum-inputAccum);
             setTotalPrice(totalPrice-inputAccum);
+            setAppliedAccum(inputAccum);
             document.getElementById('accumValue').setAttribute('readOnly',true)
             document.getElementById('applyAccumBtn').style.display='none'
             document.getElementById('rollbackAccumBtn').style.display='inline-block'
@@ -352,7 +354,7 @@ function ProductOrder(props){
                             </tr>
                             <tr style={{lineHeight:'5vh', fontSize:'1.3em',backgroundColor:'#EFEFEF'}}>
                                 <td>{originPrice}</td>
-                                <td>{inputAccum}</td>
+                                <td>{appliedAccum}</td>
                                 <td>{selectedCouponVolume}</td>
                                 <td>{totalPrice} 원</td>
                             </tr>
