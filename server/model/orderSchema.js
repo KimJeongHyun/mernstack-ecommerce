@@ -11,6 +11,7 @@ const orderSchema = mongoose.Schema({
     usedCoupon:Number,
     couponID:String,
     couponName:String,
+    couponTTL:Date,
     totalPrice:Number,
 
     confirmWhether:{

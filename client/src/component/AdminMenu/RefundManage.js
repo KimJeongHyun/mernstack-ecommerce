@@ -25,6 +25,11 @@ function RefundManage(){
 
     useEffect(()=>{
         if (refundList.length>0){
+            if (document.getElementById('usersList').hasChildNodes()){
+                while (document.getElementById('usersList').hasChildNodes()){
+                    document.getElementById('usersList').remove(document.getElementById('usersList').firstChild)
+                }
+            }
             const refundRendering = () =>{
                 const result = [];
                 for (let i=0 ; i<refundList.length; i++){
@@ -43,10 +48,8 @@ function RefundManage(){
 
     const viewRequest = (event) =>{
         event.preventDefault();
+        document.querySelector('.funcDiv').style.display='block'
         if (indexRef.current !== event.target.id.split('refund')[1]){
-            while(document.querySelector('.funcDiv').hasChildNodes()){
-                document.querySelector('.funcDiv').removeChild(document.querySelector('#funcDiv').firstChild)
-            }
             setSelectedIndex(event.target.id.split('refund')[1])
             let body = {
                 orderID:event.target.getAttribute('name')
@@ -117,6 +120,7 @@ function RefundManage(){
 
     const recallProgress = (event) =>{
         event.preventDefault();
+        document.querySelector('.funcDiv').style.display='none'
         let couponName = '';
         if (refundList[selectedIndex].couponName.length===0){
             couponName='none'
@@ -129,8 +133,28 @@ function RefundManage(){
             buyeremail:refundList[selectedIndex].buyeremail,
             usedAccum:refundList[selectedIndex].usedAccum,
             couponName:couponName,
-            couponVolume:refundList[selectedIndex].usedCoupon
+            couponVolume:refundList[selectedIndex].usedCoupon,
+            couponTTL:refundList[selectedIndex].couponTTL
         }
+
+        axios.post('/api/recallRequest',body)
+        .then(response=>{
+            if (response.data.status){
+                alert('처리되었습니다.')    
+            }else{
+                alert('오류 : ' + response.data.flag)
+            }
+            axios.get('/api/getRefund')
+            .then(response=>{
+                if (response.data.status){
+                    setRefundList(response.data.refundList);
+                }else{
+                    console.log('something err..')
+                }
+            })
+            
+        })
+
         // 1. 적립금 롤백
         // 2. 쿠폰 사용했으면 롤백. 
         // 3. 고객에게 반품 처리 진행 이메일 보내기
@@ -167,7 +191,7 @@ function RefundManage(){
 
                     </ul>
                 </div>
-                <div className='funcDiv'>
+                <div className='funcDiv' style={{display:'none'}}>
             
                 </div>
             </div>

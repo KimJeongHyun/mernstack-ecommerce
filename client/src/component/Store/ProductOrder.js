@@ -46,13 +46,14 @@ function ProductOrder(props){
     const [couponIDList, setCouponIDList] = useState([]);
     const [couponID,setCouponID] = useState('');
     const [couponName,setCouponName] = useState('');
+    const [couponTTL,setCouponTTL] = useState('');
 
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
     const handleCouponVolume = (value) =>{
         setSelectedCoupon(value);
-        setSelectedCouponVolume(value.split(' ')[0])
-        setTotalPrice(totalPrice-value.split(' ')[0])
+        setSelectedCouponVolume(value)
+        setTotalPrice(totalPrice-value)
     }
 
     const handleCouponID = (value) =>{
@@ -71,6 +72,10 @@ function ProductOrder(props){
 
     const handleCouponName = (value)=>{
         setCouponName(value);
+    }
+
+    const handleCouponTTL = (value)=>{
+        setCouponTTL(value);
     }
 
     const applyAccum = (event) =>{
@@ -135,6 +140,7 @@ function ProductOrder(props){
             couponID:couponID,
             couponName:couponName,
             couponVolume:selectedCouponVolume,
+            couponTTL:couponTTL,
             totalPrice:totalPrice
         }
         axios.post('/api/getOrder',body)
@@ -293,6 +299,7 @@ function ProductOrder(props){
                                     handleCouponID={handleCouponID}
                                     handleCouponPrice={handleCouponPrice}
                                     handleCouponName={handleCouponName}
+                                    handleCouponTTL={handleCouponTTL}
                                 />    
                             </PopupDom>}
                         </div>

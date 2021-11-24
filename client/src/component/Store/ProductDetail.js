@@ -144,7 +144,7 @@ function ProductDetail(props){
                 result.push(
                     <img ref={productImageTagRef} 
                     src={'../'+clothMap.clothImgPath} 
-                    style={{maxWidth:'250px'}} onMouseMove={imgMouseMoveFunc}
+                    style={{maxWidth:'250px',height:'378px'}} onMouseMove={imgMouseMoveFunc}
                     alt='productImage'
                     />
                 )

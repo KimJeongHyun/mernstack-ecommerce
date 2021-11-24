@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
  
 function PopupContent(props){
     let couponName = 'none';
-
-    if (props.couponName!==undefined){
+    console.log();
+    if (props.couponName!==undefined && props.couponName.length!==0){
         couponName=props.couponName;
     }
 
@@ -59,6 +59,13 @@ function PopupContent(props){
         ReactDOM.render(recallViewRendering(),document.querySelector('.common_alert'))
     }
 
+    useEffect(()=>{
+        if (props.refundWhether || ((props.refundWhether===false) && props.goodname.split('(반품 처리)').length>1)){
+            document.getElementById('recallBtn').style.display='none'
+        }
+        
+    },[])
+
     return(
         <div className="dimmed_layer_wrapper">
             <div className="full_layer" style={{top:'20vh'}}>
@@ -73,7 +80,7 @@ function PopupContent(props){
                             <td>결제 금액</td>
                         </tr>
                         <tr>
-                            <td>{props.goodname}</td>
+                            <td>{props.goodname.split('(반품 처리)')[0]}</td>
                             <td>{props.createdAt.split('T')[0]}</td>
                             <td>{props.usedAccum}</td>
                             <td>{couponName}</td>
@@ -81,7 +88,7 @@ function PopupContent(props){
                             <td>{props.totalPrice} 원</td>
                         </tr>
                     </table>
-                    <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={recallView}><a>취소 요청</a></button>
+                    <button id='recallBtn' className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={recallView}><a>취소 요청</a></button>
                     <br/>
                     <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw'}} onClick={props.onClose}><a>닫기</a></button>
                 </div>

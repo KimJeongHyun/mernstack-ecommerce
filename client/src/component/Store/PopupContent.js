@@ -12,10 +12,12 @@ function PopupContent(props){
 
     const setCouponVolume = (event) =>{
         event.preventDefault();
-        props.handleCouponVolume(event.target.getAttribute('name'));
-        props.handleCouponID(event.target.className);
-        props.handleCouponPrice(event.target.getAttribute('name'))
-        props.handleCouponName(event.target.getAttribute('name').split(' ')[1])
+        const index = event.target.getAttribute('name').split('index')[1]
+        props.handleCouponVolume(couponVolume[index]);
+        props.handleCouponID(couponIDList[index]);
+        props.handleCouponPrice(couponVolume[index])
+        props.handleCouponName(reasonList[index])
+        props.handleCouponTTL(expiredAtList[index])
     }
 
     useEffect(()=>{
@@ -24,10 +26,10 @@ function PopupContent(props){
             const result = [];
             for (let i=0; i<length; i++){
                 result.push(
-                    <li name={couponVolume[i]+'  '+reasonList[i]} className={couponIDList[i]} onClick={(e)=>{ setCouponVolume(e) }}>
-                        <span name={couponVolume[i]+'  '+reasonList[i]} className={couponIDList[i]}>{reasonList[i]}</span>
+                    <li name={'index'+i} onClick={(e)=>{ setCouponVolume(e) }}>
+                        <span name={'index'+i}>{reasonList[i]}</span>
                         <br/>
-                        <span style={{marginRight:'10px'}} name={couponVolume[i]+'  '+reasonList[i]} className={couponIDList[i]}>{couponVolume[i]}</span>
+                        <span name={'index'+i} style={{marginRight:'10px'}}>{couponVolume[i]}</span>
                     </li>
                 )
             }

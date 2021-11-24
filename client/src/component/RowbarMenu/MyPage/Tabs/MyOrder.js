@@ -121,7 +121,9 @@ export function MyOrderRendering(){
                         createdAt={orderLog[orderIndex].createdAt.split('T')[0]}
                         usedAccum={orderLog[orderIndex].usedAccum}
                         usedCoupon={orderLog[orderIndex].usedCoupon}
+                        couponName={orderLog[orderIndex].couponName}
                         totalPrice={orderLog[orderIndex].totalPrice}
+                        refundWhether={orderLog[orderIndex].refundWhether}
                     />    
                 </PopupDom>
             }
