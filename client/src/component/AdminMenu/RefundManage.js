@@ -27,12 +27,9 @@ function RefundManage(){
 
     useEffect(()=>{
         if (refundList.length>0){
-            if (refundList.length!==volumeRef.current){
-                volumeRef.current = refundList.length;
-            }
             const refundRendering = () =>{
                 const result = [];
-                for (let i=0 ; i<volumeRef.current; i++){
+                for (let i=0 ; i<refundList.length; i++){
                     result.push(
                         <li key={i} id={'refund'+i} name={refundList[i].orderID} onClick={viewRequest}>
                             {refundList[i].orderID}
@@ -43,7 +40,7 @@ function RefundManage(){
                 
             }
             
-            ReactDOM.render(refundRendering(),document.querySelector('#usersList'))
+            ReactDOM.render(refundRendering(),document.getElementById('usersList'))
         }
     },[refundList])
 
@@ -157,20 +154,10 @@ function RefundManage(){
             })
             
         })
-
-        // 1. 적립금 롤백
-        // 2. 쿠폰 사용했으면 롤백. 
-        // 3. 고객에게 반품 처리 진행 이메일 보내기
-        // 4. 주문 내역 DB에서 삭제하거나, 환불 필드 새로 만들어서 환불된 걸로 보여주기.
-        // 5. refund whether false로 돌리기.
-        // 6. 만약 환불된 걸로 보여준다면... 5를 한 뒤에 해당 필드 값에 따라
-        // 7. 상세 페이지의 환불 처리 버튼을 안보이게끔 해야겠지?
     }
 
     const removeAllChildNodes = (parent) =>{
-        while (parent.firstChild){
-            parent.removeChild(parent.firstChild);
-        }
+        ReactDOM.unmountComponentAtNode(parent);
     }
 
     const textFloating = (event) =>{

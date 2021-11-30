@@ -174,7 +174,7 @@ router.post('/api/recallRequest',(req,res)=>{
                 // 보내는 메일의 내용을 입력
                 // text: 일반 text로 작성된 내용
                 // html: html로 작성된 내용 html: `<b>${generatedAuthNumber}</b>`,
-                text: `안녕하세요 ${userID} 고객님! \\n\\n 요청하신 주문번호 ${orderID}의 반품 처리가 완료되었습니다. \\n\\n적립금 또는 쿠폰 반환에 문제가 있는 경우, 홈페이지 상단 Help 탭을 통해 1:1 문의 부탁드립니다.
+                text: `안녕하세요 ${userID} 고객님!\n\n요청하신 주문번호 ${orderID}의 반품 처리가 완료되었습니다.\n\n적립금 또는 쿠폰 반환에 문제가 있는 경우, 홈페이지 상단 Help 탭을 통해 1:1 문의 부탁드립니다.
                 `
             });
 
