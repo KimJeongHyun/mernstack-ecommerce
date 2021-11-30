@@ -25,6 +25,7 @@ select{
     border: 2px solid black;
     border-radius:10px;
     font-family:'Noto Sans KR', sans-serif;
+    text-indent:-15px;
 }
 
 select::-ms-expand { 
@@ -122,6 +123,7 @@ textarea:focus{
     display:flex;
     flex-direction:row;
     margin:0;
+    top:0px;
     padding-top:2.5px;
     padding-left:2.5vw;
     background:#fff;
@@ -505,7 +507,7 @@ textarea:focus{
 .payBox{
     position:fixed;
     width:20.5vw;
-    right:9vw;
+    right:2vw;
     font-size:1.2em;
     display:inline-block;
 
@@ -641,7 +643,7 @@ textarea:focus{
 
 .writeContainer table{
     margin-top:50px;
-    width:515px;
+    width:550px;
     margin:auto;
     text-align: center;
     border-spacing:0;

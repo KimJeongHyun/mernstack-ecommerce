@@ -11,7 +11,6 @@ router.post('/api/sendMail/',(req,res)=>{
     const text = reqData.text;
     const category = reqData.category;
     const attachments = reqData.attachments;
-
     const attachmentsArr = attachments.map((file)=>{
         return {path:file};
     })

@@ -11,12 +11,14 @@ function RefundManage(){
     const [selectedIndex,setSelectedIndex] = useState(-1);
 
     const indexRef = useRef(-1);
+    const volumeRef = useRef(0);
 
     useEffect(()=>{
         axios.get('/api/getRefund')
         .then(response=>{
             if (response.data.status){
                 setRefundList(response.data.refundList);
+                volumeRef.current = response.data.refundList.length;
             }else{
                 console.log('something err..')
             }
@@ -25,14 +27,12 @@ function RefundManage(){
 
     useEffect(()=>{
         if (refundList.length>0){
-            if (document.getElementById('usersList').hasChildNodes()){
-                while (document.getElementById('usersList').hasChildNodes()){
-                    document.getElementById('usersList').remove(document.getElementById('usersList').firstChild)
-                }
+            if (refundList.length!==volumeRef.current){
+                volumeRef.current = refundList.length;
             }
             const refundRendering = () =>{
                 const result = [];
-                for (let i=0 ; i<refundList.length; i++){
+                for (let i=0 ; i<volumeRef.current; i++){
                     result.push(
                         <li key={i} id={'refund'+i} name={refundList[i].orderID} onClick={viewRequest}>
                             {refundList[i].orderID}
@@ -42,6 +42,7 @@ function RefundManage(){
                 return result;
                 
             }
+            
             ReactDOM.render(refundRendering(),document.querySelector('#usersList'))
         }
     },[refundList])
@@ -140,7 +141,9 @@ function RefundManage(){
         axios.post('/api/recallRequest',body)
         .then(response=>{
             if (response.data.status){
-                alert('처리되었습니다.')    
+                alert('처리되었습니다.')
+                const parent = document.getElementById('usersList');
+                removeAllChildNodes(parent)
             }else{
                 alert('오류 : ' + response.data.flag)
             }
@@ -162,6 +165,12 @@ function RefundManage(){
         // 5. refund whether false로 돌리기.
         // 6. 만약 환불된 걸로 보여준다면... 5를 한 뒤에 해당 필드 값에 따라
         // 7. 상세 페이지의 환불 처리 버튼을 안보이게끔 해야겠지?
+    }
+
+    const removeAllChildNodes = (parent) =>{
+        while (parent.firstChild){
+            parent.removeChild(parent.firstChild);
+        }
     }
 
     const textFloating = (event) =>{

@@ -155,11 +155,11 @@ function Help(props){
                                             </tr>
                                             <tr>
                                                 <td>EMAIL</td>
-                                                <td><input value={email} name='email' style={{float:'left',width:'275px'}} onChange={onValueHandler}></input></td>
+                                                <td style={{width:'250px'}}><input value={email} name='email' style={{float:'left',width:'250px'}} onChange={onValueHandler}></input></td>
                                                 <td>CATEGORY</td>
                                                 <td style={{float:'left'}}>
-                                                    <select value={category} name='category' onChange={onValueHandler}>
-                                                        <option value="none">선택</option>
+                                                    <select value={category} name='category' onChange={onValueHandler} style={{width:'100px'}}>
+                                                        <option value="none"></option>
                                                         <option value="일반문의">일반문의</option>
                                                         <option value="배송문의">배송문의</option>
                                                         <option value="반품/환불">반품/환불</option>

@@ -69,7 +69,7 @@ function PopupContent(props){
     return(
         <div className="dimmed_layer_wrapper">
             <div className="full_layer" style={{top:'20vh'}}>
-                <div className="common_alert" style={{minWidth:'400px',padding:'6vh 6.8vw 12vh 6vw'}}>
+                <div className="common_alert" style={{minWidth:'400px',padding:'6vh 6vw 12vh 6vw'}}>
                     <table className='MyPageOrderDetail'>
                         <tr>
                             <td>품명</td>
@@ -88,9 +88,9 @@ function PopupContent(props){
                             <td>{props.totalPrice} 원</td>
                         </tr>
                     </table>
-                    <button id='recallBtn' className='SubmitBtn' style={{top:'5vh',left:'1.8vw', display:'block'}} onClick={recallView}><a>취소 요청</a></button>
+                    <button id='recallBtn' className='SubmitBtn' style={{top:'5vh',left:'2.5vw', display:'block'}} onClick={recallView}><a>취소 요청</a></button>
                     <br/>
-                    <button className='SubmitBtn' style={{top:'5vh',left:'1.8vw'}} onClick={props.onClose}><a>닫기</a></button>
+                    <button className='SubmitBtn' style={{top:'5vh',left:'2.5vw'}} onClick={props.onClose}><a>닫기</a></button>
                 </div>
             </div>
         </div>
