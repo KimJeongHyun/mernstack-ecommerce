@@ -39,7 +39,7 @@ function NewLandingPage(props){
             })
 
             await gsap.to(boxRef.current,{opacity:0.7,duration:1})
-            await gsap.to(textRef.current,{top:'25%',duration:1})
+            await gsap.to(textRef.current,{top:'35%',duration:1})
             await gsap.to(textRef2.current,{opacity:1,duration:1})
             await gsap.to(textRef3.current,{opacity:1,duration:1})
             await gsap.to('.wrappingText',{right:'20%',duration:1})
