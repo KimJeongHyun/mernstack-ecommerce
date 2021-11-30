@@ -201,8 +201,8 @@ router.post('/api/recallRequest',(req,res)=>{
 
         
     }
-    res.send({status:true})
-    //totalWork();
+
+    totalWork();
     
 })
 
