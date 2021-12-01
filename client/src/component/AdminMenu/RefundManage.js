@@ -140,18 +140,26 @@ function RefundManage(){
             if (response.data.status){
                 alert('처리되었습니다.')
                 const parent = document.getElementById('usersList');
-                removeAllChildNodes(parent)
+                const getAgain = () =>{
+                    axios.get('/api/getRefund')
+                    .then(response=>{
+                        if (response.data.status){
+                            setRefundList(response.data.refundList);
+                        }else{
+                            console.log('something err..')
+                        }
+                    })
+                }
+                const totalWork = async () =>{
+                    await removeAllChildNodes(parent)
+                    await getAgain();
+                }
+
+                totalWork();
             }else{
                 alert('오류 : ' + response.data.flag)
             }
-            axios.get('/api/getRefund')
-            .then(response=>{
-                if (response.data.status){
-                    setRefundList(response.data.refundList);
-                }else{
-                    console.log('something err..')
-                }
-            })
+            
             
         })
     }
