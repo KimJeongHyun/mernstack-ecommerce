@@ -42,7 +42,7 @@ export function NavSideBar(){
     return(
         <div>
             <div id="commerceTitle">
-                <h1><a href="/"><img src='../images/sympst.png'></img></a></h1>
+                <h1><a href="/"><div id='logoImage'></div></a></h1>
             </div>
             <nav>
                 <ul className="sideBar">

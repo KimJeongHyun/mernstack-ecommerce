@@ -44,8 +44,8 @@ function ReviewFooter(props){
     }
 
     useEffect(()=>{
-        while(ReviewTBodyRef.current.hasChildNodes()){
-            ReviewTBodyRef.current.removeChild(ReviewTBodyRef.current.firstChild)
+        if(ReviewTBodyRef.current.hasChildNodes()){
+            ReactDOM.unmountComponentAtNode(ReviewTBodyRef.current)
         }
         if(ReviewMap!=='' && MapLength!=='' & clothName!==undefined){
             let cnt = 0;

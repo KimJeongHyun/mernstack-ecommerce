@@ -85,23 +85,23 @@ function ReviewPost(props){
                             <p style={{fontSize:'20px', color:'#676767'}}> Review </p>
                             <div className="writeContainer">
                                 <form onSubmit={onSubmitHandler}>
-                                    <table>
+                                    <table style={{marginLeft:'400px'}}>
                                         <thead>
                                             <tr>
                                                 <td>NAME</td>
-                                                <td><input value={userID}/></td>
-                                                <td>PASSWORD</td>
-                                                <td><input type="password" value={postPW} name='pw' onChange={onValueHandler} required/></td>
+                                                <td style={{width:'172px', paddingLeft:'0.5px'}}><input value={userID}/></td>
+                                                <td style={{width:'90px'}}>PASSWORD</td>
+                                                <td style={{width:'172px'}}><input type="password" value={postPW} style={{marginLeft:'0'}} name='pw' onChange={onValueHandler} required/></td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>TITLE</td>
-                                                <td colspan='3'><input style={{width:'430px'}} value={postTitle} name='title' onChange={onValueHandler} required/></td>
+                                                <td colSpan='3'><input style={{width:'430px'}} value={postTitle} name='title' onChange={onValueHandler} required/></td>
                                             </tr>
                                             <tr>
                                                 <td>CONTENT</td>
-                                                <td colspan='3'><textarea value={postContent} name='content' onChange={onValueHandler} required/></td>
+                                                <td colSpan='3'><textarea value={postContent} name='content' onChange={onValueHandler} required/></td>
                                             </tr>
                                         </tbody>
                                     </table>

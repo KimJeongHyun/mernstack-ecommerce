@@ -14,6 +14,8 @@ body{
     font:0.75em Arial,Dotum,AppleGothic,sans-serif;
 }
 
+
+
 select{
     -webkit-appearance: none;
     -moz-appearance:none;
@@ -83,10 +85,17 @@ textarea:focus{
     position:fixed;
     font:3em Times New Roman;
     font-weight:bold;
-    width:95px;
+    width:135px;
     height:40px;
-    top:20px;
-    left:40px;
+    top:40px;
+    left:35px;
+}
+
+#logoImage{
+    background-image: url('../images/sympst.png');
+    background-size:contain;
+    width:135px;
+    height:48px;
 }
 
 .sideBar{

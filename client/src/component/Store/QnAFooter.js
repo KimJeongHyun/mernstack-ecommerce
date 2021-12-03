@@ -63,8 +63,8 @@ function QnAFooter(props){
     },[MapLength])
 
     useEffect(()=>{
-        while(QnATBodyRef.current.hasChildNodes()){
-            QnATBodyRef.current.removeChild(QnATBodyRef.current.firstChild)
+        if(QnATBodyRef.current.hasChildNodes()){
+            ReactDOM.unmountComponentAtNode(QnATBodyRef.current)
         }
         if(QnAMap!=='' && MapLength!=='' & clothName!==undefined){
             let cnt = 0;
