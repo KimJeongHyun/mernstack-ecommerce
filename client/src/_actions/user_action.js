@@ -25,8 +25,10 @@ import{
     SEND_MAIL
 } from './types';
 
+const BASE_URL = 'https://mernecommerce-jh.herokuapp.com'
+
 export function auth(){
-    const request=axios.get('https://mernecommerce-jh.herokuapp.com/api/getSession')
+    const request=axios.get(`${BASE_URL}/api/getSession`)
     .then(response=>response.data);
 
     return {
@@ -36,7 +38,7 @@ export function auth(){
 }
 
 export function registerUser(dataToSubmit){
-    const request = axios.post('/api/register',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/register`,dataToSubmit)
     .then(response=>response.data);
     return {
         type:REGISTER_USER,
@@ -45,7 +47,7 @@ export function registerUser(dataToSubmit){
 }
 
 export function loginUser(dataToSubmit){
-    const request = axios.post('/api/login', dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/login`, dataToSubmit)
     .then(response=>response.data);
     return{
         type:LOGIN_USER,
@@ -54,7 +56,7 @@ export function loginUser(dataToSubmit){
 }
 
 export function getUsers(){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getUsers')
+    const request = axios.get(`${BASE_URL}/api/getUsers`)
     .then(response=>response.data);
 
     return{
@@ -64,7 +66,7 @@ export function getUsers(){
 }
 
 export function getClothes(){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getClothes')
+    const request = axios.get(`${BASE_URL}/api/getClothes`)
     .then(response=>response.data);
 
     return{
@@ -74,7 +76,7 @@ export function getClothes(){
 }
 
 export function getDetailData(dataParam){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getDetailData/'+dataParam)
+    const request = axios.get(`${BASE_URL}/api/getDetailData/`+dataParam)
     .then(response=>response.data);
 
     return{
@@ -84,7 +86,7 @@ export function getDetailData(dataParam){
 }
 
 export function getQnAData(dataParam){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnA/'+dataParam)
+    const request = axios.get(`${BASE_URL}/api/getQnA/`+dataParam)
     .then(response=>response.data);
 
     return{
@@ -94,7 +96,7 @@ export function getQnAData(dataParam){
 }
 
 export function getQnADataOne(dataParam1,dataParam2){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnAOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get(`${BASE_URL}/api/getQnAOne/`+dataParam1+'/'+dataParam2)
     .then(response=>response.data);
 
     return{
@@ -104,7 +106,7 @@ export function getQnADataOne(dataParam1,dataParam2){
 }
 
 export function getQnADataAll(){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnAAll/')
+    const request = axios.get(`${BASE_URL}/api/getQnAAll/`)
     .then(response=>response.data);
 
     return{
@@ -114,7 +116,7 @@ export function getQnADataAll(){
 }
 
 export function postQnAData(dataToSubmit){
-    const request = axios.post('/api/postQnA/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/postQnA/`,dataToSubmit)
     .then(response=>response.data);
 
     return{
@@ -124,7 +126,7 @@ export function postQnAData(dataToSubmit){
 }
 
 export function getReviewData(dataParam){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReview/'+dataParam)
+    const request = axios.get(`${BASE_URL}/api/getReview/`+dataParam)
     .then(response=>response.data);
 
     return{
@@ -134,7 +136,7 @@ export function getReviewData(dataParam){
 }
 
 export function getReviewDataOne(dataParam1,dataParam2){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReviewOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get(`${BASE_URL}/api/getReviewOne/`+dataParam1+'/'+dataParam2)
     .then(response=>response.data);
     
     return{
@@ -144,7 +146,7 @@ export function getReviewDataOne(dataParam1,dataParam2){
 }
 
 export function getReviewDataAll(){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReviewAll/')
+    const request = axios.get(`${BASE_URL}/api/getReviewAll/`)
     .then(response=>response.data);
 
     return{
@@ -155,7 +157,7 @@ export function getReviewDataAll(){
 
 
 export function postReviewData(dataToSubmit){
-    const request = axios.post('/api/postReview/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/postReview/`,dataToSubmit)
     .then(response=>response.data);
 
     return{
@@ -165,7 +167,7 @@ export function postReviewData(dataToSubmit){
 }
 
 export function getNotice(){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getNotice/')
+    const request = axios.get(`${BASE_URL}/api/getNotice/`)
     .then(response=>response.data)
 
     return{
@@ -175,7 +177,7 @@ export function getNotice(){
 }
 
 export function getNoticeOne(dataParam1,dataParam2){
-    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getNoticeOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get(`${BASE_URL}/api/getNoticeOne/`+dataParam1+'/'+dataParam2)
     .then(response=>response.data)
 
     return{
@@ -185,7 +187,7 @@ export function getNoticeOne(dataParam1,dataParam2){
 }
 
 export function postNotice(dataToSubmit){
-    const request = axios.post('/api/postNotice/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/postNotice/`,dataToSubmit)
     .then(response=>response.data)
 
     return{
@@ -195,7 +197,7 @@ export function postNotice(dataToSubmit){
 }
 
 export function clearNotice(dataToSubmit){
-    const request = axios.post('/api/clearNotice/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/clearNotice/`,dataToSubmit)
     .then(response=>response.data)
 
     return{
@@ -205,7 +207,7 @@ export function clearNotice(dataToSubmit){
 }
 
 export function getCart(dataToSubmit){
-    const request = axios.post('/api/getCart/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/getCart/`,dataToSubmit)
     return{
         type:GET_CART,
         payload:request
@@ -213,7 +215,7 @@ export function getCart(dataToSubmit){
 }
 
 export function postCart(dataToSubmit){
-    const request = axios.post('/api/postCart/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/postCart/`,dataToSubmit)
     return{
         type:POST_CART,
         payload:request
@@ -221,7 +223,7 @@ export function postCart(dataToSubmit){
 }
 
 export function clearCart(dataToSubmit){
-    const request = axios.post('/api/clearCart',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/clearCart`,dataToSubmit)
     return{
         type:CLEAR_CART,
         payload:request
@@ -229,7 +231,7 @@ export function clearCart(dataToSubmit){
 }
 
 export function sendMail(dataToSubmit){
-    const request = axios.post('/api/sendMail/',dataToSubmit)
+    const request = axios.post(`${BASE_URL}/api/sendMail/`,dataToSubmit)
     return{
         type:SEND_MAIL,
         payload:request

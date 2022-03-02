@@ -10,7 +10,7 @@ export function NavBar(props){
     const rowBarRef = useRef();
 
     const onLogout = () =>{
-        axios.get("/api/logout")
+        axios.get("https://mernecommerce-jh.herokuapp.com/api/logout")
         .then(response=>{
             alert('로그아웃 되었습니다.');
             window.location.href='/';
@@ -40,7 +40,7 @@ export function NavBar(props){
     useEffect(()=>{
         const getSession = () =>{
             let len='';
-            axios.get('/api/getSession')
+            axios.get('https://mernecommerce-jh.herokuapp.com/api/getSession')
             .then(response=>{
                 len = response.data.length;
                 
