@@ -26,7 +26,7 @@ import{
 } from './types';
 
 export function auth(){
-    const request=axios.get('/api/getSession')
+    const request=axios.get('https://mernecommerce-jh.herokuapp.com/api/getSession')
     .then(response=>response.data);
 
     return {
@@ -54,7 +54,7 @@ export function loginUser(dataToSubmit){
 }
 
 export function getUsers(){
-    const request = axios.get('/api/getUsers')
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getUsers')
     .then(response=>response.data);
 
     return{
@@ -64,7 +64,7 @@ export function getUsers(){
 }
 
 export function getClothes(){
-    const request = axios.get('/api/getClothes')
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getClothes')
     .then(response=>response.data);
 
     return{
@@ -74,7 +74,7 @@ export function getClothes(){
 }
 
 export function getDetailData(dataParam){
-    const request = axios.get('/api/getDetailData/'+dataParam)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getDetailData/'+dataParam)
     .then(response=>response.data);
 
     return{
@@ -84,7 +84,7 @@ export function getDetailData(dataParam){
 }
 
 export function getQnAData(dataParam){
-    const request = axios.get('/api/getQnA/'+dataParam)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnA/'+dataParam)
     .then(response=>response.data);
 
     return{
@@ -94,7 +94,7 @@ export function getQnAData(dataParam){
 }
 
 export function getQnADataOne(dataParam1,dataParam2){
-    const request = axios.get('/api/getQnAOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnAOne/'+dataParam1+'/'+dataParam2)
     .then(response=>response.data);
 
     return{
@@ -104,7 +104,7 @@ export function getQnADataOne(dataParam1,dataParam2){
 }
 
 export function getQnADataAll(){
-    const request = axios.get('/api/getQnAAll/')
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getQnAAll/')
     .then(response=>response.data);
 
     return{
@@ -124,7 +124,7 @@ export function postQnAData(dataToSubmit){
 }
 
 export function getReviewData(dataParam){
-    const request = axios.get('/api/getReview/'+dataParam)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReview/'+dataParam)
     .then(response=>response.data);
 
     return{
@@ -134,7 +134,7 @@ export function getReviewData(dataParam){
 }
 
 export function getReviewDataOne(dataParam1,dataParam2){
-    const request = axios.get('/api/getReviewOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReviewOne/'+dataParam1+'/'+dataParam2)
     .then(response=>response.data);
     
     return{
@@ -144,7 +144,7 @@ export function getReviewDataOne(dataParam1,dataParam2){
 }
 
 export function getReviewDataAll(){
-    const request = axios.get('/api/getReviewAll/')
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getReviewAll/')
     .then(response=>response.data);
 
     return{
@@ -165,7 +165,7 @@ export function postReviewData(dataToSubmit){
 }
 
 export function getNotice(){
-    const request = axios.get('/api/getNotice/')
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getNotice/')
     .then(response=>response.data)
 
     return{
@@ -175,7 +175,7 @@ export function getNotice(){
 }
 
 export function getNoticeOne(dataParam1,dataParam2){
-    const request = axios.get('/api/getNoticeOne/'+dataParam1+'/'+dataParam2)
+    const request = axios.get('https://mernecommerce-jh.herokuapp.com/api/getNoticeOne/'+dataParam1+'/'+dataParam2)
     .then(response=>response.data)
 
     return{

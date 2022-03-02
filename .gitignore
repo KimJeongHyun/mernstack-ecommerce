@@ -1,2 +1,4 @@
 node_modules
 attachments
+# Local Netlify folder
+.netlify

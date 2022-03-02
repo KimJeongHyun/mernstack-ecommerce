@@ -4,6 +4,9 @@ const http = require('http');
 const https = require('https');
 const path = require('path');
 const config = require('./config/config.json')
+const cors = require('cors');
+
+
 
 const userLogin = require('./controller/userController/userLogin')
 const userLogout = require('./controller/userController/userLogout')
@@ -40,6 +43,8 @@ const getUserPage = require('./controller/userController/getUserPage')
 const order = require('./controller/payController/order');
 
 const port = process.env.PORT || 5000
+
+app.use(cors());
 
 app.use(express.json({
     limit:'50mb'
