@@ -19,10 +19,8 @@ export function NavBar(props){
 
     const handleScrollY = () =>{
         if (scrollY>window.scrollY){
-            console.log('scroll up')
             gsap.to('.rowBar',{height:'35', opacity:'1'})
         }else{
-            console.log('scroll down')
             gsap.to('.rowBar',{height:'0',opacity:'0'})
         }
         setScrollY(window.scrollY);
