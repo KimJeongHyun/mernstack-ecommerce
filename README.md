@@ -5,7 +5,7 @@
 * Redux
 * MongoDB + Mongoose
 * Node.js
-* Express (Next.js 학습 예정)
+* Express
 ---
 구현 사항
 
