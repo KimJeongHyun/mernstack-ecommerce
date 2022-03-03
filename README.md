@@ -39,6 +39,7 @@
  * Refund Manage ( Can operate refund process )
    * if accumulate and coupon used, it rollbacks.
    * user can receive refund email.
+17. 결제모듈 (KG Inicis)
 ---
 구현 필요사항
 0. 새 랜딩페이지 decoration with gsap scrollTrigger
